@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐾 阿爪知识库</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --accent: #ff6b35;
+  --accent2: #ffd700;
+  --accent3: #00d4aa;
+  --text: #e8e8e8;
+  --muted: #888;
+  --border: #1e1e2e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Noto Sans SC', 'PingFang SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 50px 0 40px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 40px;
+}
+.header .logo { font-size: 3em; margin-bottom: 10px; }
+.header h1 {
+  font-size: 1.8em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header .subtitle { color: var(--muted); margin-top: 8px; font-size: 0.95em; }
+
+/* Category */
+.category {
+  margin-bottom: 35px;
+}
+.category-title {
+  font-size: 1.15em;
+  color: var(--accent2);
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Cards */
+.card {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255,107,53,0.1);
+}
+.card .title {
+  font-size: 1.05em;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.card .desc {
+  font-size: 0.85em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.card .meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 0.78em;
+  color: var(--muted);
+}
+.card .tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+}
+.tag.health { background: rgba(0,212,170,0.15); color: var(--accent3); }
+.tag.business { background: rgba(255,107,53,0.15); color: var(--accent); }
+.tag.learning { background: rgba(255,215,0,0.15); color: var(--accent2); }
+.tag.tool { background: rgba(100,149,237,0.15); color: #6495ed; }
+.tag.family { background: rgba(255,100,200,0.15); color: #ff7ec3; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  color: var(--muted);
+  font-size: 0.82em;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header { padding: 30px 0 25px; }
+  .header h1 { font-size: 1.4em; }
+  .card { padding: 15px 18px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="logo">🐾</div>
+    <h1>阿爪知识库</h1>
+    <div class="subtitle">运哥的 AI 伙伴 — 手册 · 指南 · 工具</div>
+  </div>
+
+  <!-- 家庭 & 健康 -->
+  <div class="category">
+    <div class="category-title">👨‍👩‍👧‍👦 家庭 & 健康</div>
+
+    <a class="card" href="taleb-adhd-playbook.html">
+      <div class="title">🏋️ 塔勒布思维 × ADHD 实践手册</div>
+      <div class="desc">将塔勒布的反脆弱理论与 ADHD 特质深度融合，为浩然和闺女量身定制的行动指南。包含杠铃策略、凸性试错、反PUA免疫力、阅读路线图。</div>
+      <div class="meta">
+        <span class="tag family">家庭定制</span>
+        <span class="tag health">ADHD</span>
+        <span>2026-03-28</span>
+      </div>
+    </a>
+
+    <a class="card" href="adhd-diet-guide.html">
+      <div class="title">🚦 ADHD 红绿灯饮食指南</div>
+      <div class="desc">基于最新研究为 ADHD 儿童设计的饮食指导，绿灯食物（多吃）、黄灯食物（适量）、红灯食物（避免）。</div>
+      <div class="meta">
+        <span class="tag health">健康</span>
+        <span class="tag family">育儿</span>
+        <span>2026-03-18</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- 商业 & 业务 -->
+  <div class="category">
+    <div class="category-title">💼 商业 & 业务</div>
+
+    <a class="card" href="pakistan-shoe-customers.html">
+      <div class="title">🇵🇰 巴基斯坦鞋材辅料大客户开发指南</div>
+      <div class="desc">拉合尔鞋类市场深度调研，顶级客户名录、采购联系方式、展会信息。</div>
+      <div class="meta">
+        <span class="tag business">外贸</span>
+        <span>2026-03-18</span>
+      </div>
+    </a>
+
+    <a class="card" href="shoe-ecommerce-strategy.html">
+      <div class="title">👟 鞋材电商策略</div>
+      <div class="desc">鞋材辅料线上销售策略分析与平台选择。</div>
+      <div class="meta">
+        <span class="tag business">电商</span>
+        <span>2026-03-18</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- 学习 & 成长 -->
+  <div class="category">
+    <div class="category-title">📚 学习 & 成长</div>
+
+    <a class="card" href="ai-concepts-carousel.html">
+      <div class="title">🤖 AI 核心概念轮播</div>
+      <div class="desc">AI 关键概念可视化卡片，适合快速学习和回顾。</div>
+      <div class="meta">
+        <span class="tag learning">AI学习</span>
+        <span>2026-03-18</span>
+      </div>
+    </a>
+
+    <a class="card" href="upgrade-plan.html">
+      <div class="title">🔄 个人升级蓝图</div>
+      <div class="desc">基于《有限与无限的游戏》的个人 OS 升级计划 — 识别角色、力量与权力、拥抱意外。</div>
+      <div class="meta">
+        <span class="tag learning">读书笔记</span>
+        <span>2026-03-15</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- 工具 & Dashboard -->
+  <div class="category">
+    <div class="category-title">🔧 工具 & 面板</div>
+
+    <a class="card" href="super-dashboard.html">
+      <div class="title">📊 超级仪表盘</div>
+      <div class="desc">阿爪系统运行状态、任务追踪、快捷操作面板。</div>
+      <div class="meta">
+        <span class="tag tool">工具</span>
+        <span>2026-03-29</span>
+      </div>
+    </a>
+
+    <a class="card" href="dashboard.html">
+      <div class="title">📋 基础面板</div>
+      <div class="desc">快捷信息面板。</div>
+      <div class="meta">
+        <span class="tag tool">工具</span>
+        <span>2026-03-18</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer">
+    🐾 阿爪出品 | <a href="https://github.com/iatnit/claw-pages">GitHub</a><br>
+    持续更新中 — 每次产出新内容自动同步
+  </div>
+
+</div>
+</body>
+</html>

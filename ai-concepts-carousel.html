@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI概念速通 轮播图</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #ff2442;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .controls button:hover { background: #e0203a; transform: scale(1.03); }
+  .controls button.secondary { background: #333; }
+  .controls button.secondary:hover { background: #555; }
+
+  .page-indicator {
+    font-size: 14px;
+    color: #999;
+    font-weight: 500;
+  }
+
+  .card-wrapper {
+    width: 360px;
+    height: 480px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 36px 32px;
+    position: relative;
+    text-align: center;
+  }
+  .card.active { display: flex; }
+
+  /* 封面 */
+  .card.cover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+  }
+  .cover .emoji-big { font-size: 56px; margin-bottom: 20px; }
+  .cover h1 { font-size: 28px; font-weight: 900; line-height: 1.4; margin-bottom: 12px; }
+  .cover .subtitle { font-size: 15px; opacity: .85; line-height: 1.6; }
+
+  /* 概念卡 */
+  .card.concept {
+    color: #1a1a1a;
+    justify-content: flex-start;
+    padding-top: 44px;
+  }
+  .concept .tag {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+  }
+  .concept .number {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .concept .icon { font-size: 48px; margin-bottom: 12px; }
+  .concept .term {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: var(--accent);
+  }
+  .concept .term-en {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .concept .divider {
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-bottom: 18px;
+    opacity: .6;
+  }
+  .concept .desc {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 14px;
+  }
+  .concept .detail {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #888;
+    padding: 0 4px;
+  }
+  .concept .detail strong { color: #555; }
+
+  /* 总结卡 */
+  .card.summary {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #fff;
+    padding: 32px 28px;
+    justify-content: flex-start;
+    padding-top: 36px;
+  }
+  .summary h2 { font-size: 20px; font-weight: 900; margin-bottom: 20px; }
+  .summary .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    text-align: left;
+  }
+  .summary .chain-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    padding: 6px 0;
+  }
+  .summary .chain-item .ci-icon { font-size: 20px; flex-shrink: 0; width: 28px; text-align: center; }
+  .summary .chain-item .ci-text { color: rgba(255,255,255,.9); }
+  .summary .chain-item .ci-text strong { color: #a5b4fc; }
+  .summary .arrow { text-align: center; color: rgba(255,255,255,.3); font-size: 14px; }
+
+  /* 尾页 */
+  .card.ending {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%);
+    color: #333;
+  }
+  .ending .emoji-big { font-size: 48px; margin-bottom: 16px; }
+  .ending h2 { font-size: 22px; font-weight: 900; margin-bottom: 12px; color: #c0392b; }
+  .ending .credit { font-size: 14px; color: #666; line-height: 1.8; margin-bottom: 20px; }
+  .ending .tags { font-size: 12px; color: #999; line-height: 1.8; padding: 0 12px; }
+
+  .watermark {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 11px;
+    opacity: .3;
+    font-weight: 500;
+  }
+
+  .tip {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    max-width: 360px;
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="secondary" onclick="prev()">← 上一页</button>
+  <span class="page-indicator" id="pageNum">1 / 12</span>
+  <button class="secondary" onclick="next()">下一页 →</button>
+  <button onclick="downloadAll()">📥 一键下载全部</button>
+</div>
+
+<div class="card-wrapper" id="cardWrapper">
+
+  <!-- 封面 -->
+  <div class="card cover active" data-idx="0">
+    <div class="emoji-big">⚡</div>
+    <h1>AI 概念速通<br>9个词搞懂整个AI</h1>
+    <div class="subtitle">LLM · Token · Context · Prompt<br>Tool · MCP · Agent · Skill<br><br>📌 保存这组图 比刷100篇文章都有用</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 1. LLM -->
+  <div class="card concept" data-idx="1" style="--accent:#667eea;">
+    <div class="tag" style="background:linear-gradient(90deg,#667eea,#764ba2);"></div>
+    <div class="number">01 / 09</div>
+    <div class="icon">🧠</div>
+    <div class="term">LLM</div>
+    <div class="term-en">Large Language Model · 大语言模型</div>
+    <div class="divider"></div>
+    <div class="desc">本质就是一个<br>「文字接龙游戏」</div>
+    <div class="detail">你给它开头，它猜下一个词<br>一个接一个往下写<br><br><strong>GPT · Claude · Gemini</strong><br>全都是这么干的</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 2. Token -->
+  <div class="card concept" data-idx="2" style="--accent:#f093fb;">
+    <div class="tag" style="background:linear-gradient(90deg,#f093fb,#f5576c);"></div>
+    <div class="number">02 / 09</div>
+    <div class="icon">🔤</div>
+    <div class="term">Token</div>
+    <div class="term-en">模型处理文本的最小单位</div>
+    <div class="divider"></div>
+    <div class="desc">模型不认字！<br>要先把文字切成小块</div>
+    <div class="detail">1 Token ≈ <strong>1.5-2个汉字</strong><br><br>"程序员" → "程序" + "员"<br>"helpful" → "help" + "ful"<br><br>切法由模型自己学会<br>≠ 按词切分</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 3. Context -->
+  <div class="card concept" data-idx="3" style="--accent:#4facfe;">
+    <div class="tag" style="background:linear-gradient(90deg,#4facfe,#00f2fe);"></div>
+    <div class="number">03 / 09</div>
+    <div class="icon">💭</div>
+    <div class="term">Context</div>
+    <div class="term-en">上下文 · 模型的临时记忆</div>
+    <div class="divider"></div>
+    <div class="desc">AI 的「工作记忆」</div>
+    <div class="detail">每次对话，程序会自动把<br><strong>聊天历史 + 你的问题 + 系统规则</strong><br>全部打包发给模型<br><br>所以它才能"记住"<br>你之前说过的话</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 4. Context Window -->
+  <div class="card concept" data-idx="4" style="--accent:#43e97b;">
+    <div class="tag" style="background:linear-gradient(90deg,#43e97b,#38f9d7);"></div>
+    <div class="number">04 / 09</div>
+    <div class="icon">📐</div>
+    <div class="term">Context Window</div>
+    <div class="term-en">上下文窗口 · 记忆上限</div>
+    <div class="divider"></div>
+    <div class="desc">记忆有容量限制！</div>
+    <div class="detail">主流模型：<strong>~100万 Token</strong><br>≈ 150万汉字<br>≈ 一整套《哈利波特》📚<br><br>GPT-5.4 → 105万<br>Gemini 3.1 Pro → 100万<br>Claude Opus 4.6 → 100万</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 5. Prompt -->
+  <div class="card concept" data-idx="5" style="--accent:#fa709a;">
+    <div class="tag" style="background:linear-gradient(90deg,#fa709a,#fee140);"></div>
+    <div class="number">05 / 09</div>
+    <div class="icon">📝</div>
+    <div class="term">Prompt</div>
+    <div class="term-en">提示词 · 给AI的指令</div>
+    <div class="divider"></div>
+    <div class="desc">你对AI说的话<br>就是 Prompt</div>
+    <div class="detail"><strong>User Prompt</strong><br>→ 你输入的问题<br><br><strong>System Prompt</strong><br>→ 开发者偷偷设的「人设」<br>　你看不到，但一直在生效<br><br>说得越清楚 → 结果越好</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 6. Tool -->
+  <div class="card concept" data-idx="6" style="--accent:#f7971e;">
+    <div class="tag" style="background:linear-gradient(90deg,#f7971e,#ffd200);"></div>
+    <div class="number">06 / 09</div>
+    <div class="icon">🔧</div>
+    <div class="term">Tool</div>
+    <div class="term-en">工具 · AI的双手</div>
+    <div class="divider"></div>
+    <div class="desc">光靠脑子不够<br>还得有「双手」</div>
+    <div class="detail">AI 自己查不了天气、发不了邮件<br><br>Tool = 给AI接上的<strong>外挂函数</strong><br>查天气、搜店铺、读文件…<br><br>⚠️ 模型只发指令<br>真正调用工具的是平台</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 7. MCP -->
+  <div class="card concept" data-idx="7" style="--accent:#6a11cb;">
+    <div class="tag" style="background:linear-gradient(90deg,#6a11cb,#2575fc);"></div>
+    <div class="number">07 / 09</div>
+    <div class="icon">🔌</div>
+    <div class="term">MCP</div>
+    <div class="term-en">Model Context Protocol · 统一接口</div>
+    <div class="divider"></div>
+    <div class="desc">工具界的「Type-C」</div>
+    <div class="detail">以前：每个AI平台接口都不同<br>同一个工具要写3遍代码 😩<br><br>现在：<strong>MCP统一标准</strong><br>写一次 → 所有AI都能用 ✅<br><br>就像所有手机统一用Type-C</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 8. Agent -->
+  <div class="card concept" data-idx="8" style="--accent:#ff6b6b;">
+    <div class="tag" style="background:linear-gradient(90deg,#ff6b6b,#ee5a24);"></div>
+    <div class="number">08 / 09</div>
+    <div class="icon">🤖</div>
+    <div class="term">Agent</div>
+    <div class="term-en">智能体 · 自主打工人</div>
+    <div class="divider"></div>
+    <div class="desc">不用你一步步教<br>它自己想、自己干</div>
+    <div class="detail">自主规划 → 自主调工具 → 持续工作<br>直到任务完成 🎯<br><br>例：查天气 → 发现下雨<br>→ 自动搜附近雨伞店<br><br><strong>Claude Code · Codex · Gemini CLI</strong></div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 9. Agent Skill -->
+  <div class="card concept" data-idx="9" style="--accent:#00b894;">
+    <div class="tag" style="background:linear-gradient(90deg,#00b894,#00cec9);"></div>
+    <div class="number">09 / 09</div>
+    <div class="icon">📋</div>
+    <div class="term">Agent Skill</div>
+    <div class="term-en">技能文档 · Agent的工作手册</div>
+    <div class="divider"></div>
+    <div class="desc">提前写好SOP<br>Agent照着做就行</div>
+    <div class="detail">本质：一份 <strong>SKILL.md</strong> 文档<br><br>元数据层 → 名称 + 描述<br>指令层 → 目标 / 步骤 / 规则 / 格式<br><br>以后只需说「我要出门了」<br>Agent 自动查天气、列清单 ✅</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 总结 -->
+  <div class="card summary" data-idx="10">
+    <h2>🔗 一条线串起来</h2>
+    <div class="chain">
+      <div class="chain-item"><span class="ci-icon">🧠</span><span class="ci-text"><strong>LLM</strong> 大脑 → 文字接龙引擎</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">🔤</span><span class="ci-text"><strong>Token</strong> 语言 → 最小处理单位</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">💭</span><span class="ci-text"><strong>Context</strong> 记忆 → 装着所有对话</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">📐</span><span class="ci-text"><strong>Window</strong> 容量 → 记忆的上限</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">📝</span><span class="ci-text"><strong>Prompt</strong> 指令 → 你说的话</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">🔧</span><span class="ci-text"><strong>Tool</strong> 双手 → 操作外部世界</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">🔌</span><span class="ci-text"><strong>MCP</strong> 接口 → 统一标准协议</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">🤖</span><span class="ci-text"><strong>Agent</strong> 打工人 → 自主完成任务</span></div>
+      <div class="arrow">↓</div>
+      <div class="chain-item"><span class="ci-icon">📋</span><span class="ci-text"><strong>Skill</strong> 手册 → 做得又快又好</span></div>
+    </div>
+    <div class="watermark" style="color:rgba(255,255,255,.3);">@运哥的AI笔记</div>
+  </div>
+
+  <!-- 尾页 -->
+  <div class="card ending" data-idx="11">
+    <div class="emoji-big">⭐</div>
+    <h2>觉得有用就收藏吧！</h2>
+    <div class="credit">
+      📹 内容来源<br>
+      <strong>马克的技术工作坊</strong> · YouTube<br>
+      《从LLM到Agent Skill<br>一期视频带你打通底层逻辑》
+    </div>
+    <div class="tags">#AI科普 #大模型 #LLM #Agent<br>#MCP #收藏等于学会 #干货分享<br>#ChatGPT #科技 #程序员</div>
+    <div class="watermark">@运哥的AI笔记</div>
+  </div>
+
+</div>
+
+<p class="tip">💡 点击「一键下载全部」可导出12张图片（需等待几秒）</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+const cards = document.querySelectorAll('.card');
+let current = 0;
+
+function show(idx) {
+  cards.forEach(c => c.classList.remove('active'));
+  cards[idx].classList.add('active');
+  current = idx;
+  document.getElementById('pageNum').textContent = `${idx + 1} / ${cards.length}`;
+}
+
+function prev() { if (current > 0) show(current - 1); }
+function next() { if (current < cards.length - 1) show(current + 1); }
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') prev();
+  if (e.key === 'ArrowRight') next();
+});
+
+// swipe
+let startX = 0;
+const wrapper = document.getElementById('cardWrapper');
+wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+wrapper.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) { diff > 0 ? prev() : next(); }
+});
+
+async function downloadAll() {
+  const btn = event.target;
+  btn.textContent = '⏳ 生成中...';
+  btn.disabled = true;
+
+  for (let i = 0; i < cards.length; i++) {
+    show(i);
+    await new Promise(r => setTimeout(r, 100));
+    const canvas = await html2canvas(wrapper, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: null,
+    });
+    const link = document.createElement('a');
+    link.download = `ai-concepts-${String(i + 1).padStart(2, '0')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  show(0);
+  btn.textContent = '📥 一键下载全部';
+  btn.disabled = false;
+}
+</script>
+
+</body>
+</html>
