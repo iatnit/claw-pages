@@ -1,152 +1,514 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12岁ADHD少年：红绿灯饮食指南</title>
-    <style>
-        :root {
-            --green: #2ecc71;
-            --yellow: #f1c40f;
-            --red: #e74c3c;
-            --bg: #f8f9fa;
-            --card-bg: #ffffff;
-        }
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background-color: var(--bg);
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        .intro {
-            background: #e8f4fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            font-size: 0.95em;
-            color: #34495e;
-        }
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 8px solid;
-        }
-        .green-zone {
-            background-color: #f0fff4;
-            border-color: var(--green);
-        }
-        .yellow-zone {
-            background-color: #fffdf0;
-            border-color: var(--yellow);
-        }
-        .red-zone {
-            background-color: #fff5f5;
-            border-color: var(--red);
-        }
-        h2 {
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-        }
-        .status-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            margin-right: 10px;
-            display: inline-block;
-        }
-        .bg-green { background: var(--green); }
-        .bg-yellow { background: var(--yellow); }
-        .bg-red { background: var(--red); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD 饮食 & 营养全攻略</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --accent: #ff6b35;
+  --accent2: #ffd700;
+  --accent3: #00d4aa;
+  --green: #2ecc71;
+  --yellow: #f1c40f;
+  --red: #e74c3c;
+  --blue: #3498db;
+  --purple: #9b59b6;
+  --text: #e8e8e8;
+  --muted: #888;
+  --border: #1e1e2e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Noto Sans SC', 'PingFang SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 20px;
+  max-width: 840px;
+  margin: 0 auto;
+}
 
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        .tip-box {
-            background: #f1f2f6;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 0.9em;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.85em;
-            color: #95a5a6;
-            margin-top: 40px;
-        }
-    </style>
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 0 30px;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 30px;
+}
+.header h1 {
+  font-size: 1.9em;
+  background: linear-gradient(135deg, var(--green), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.header .subtitle { color: var(--muted); font-size: 0.95em; }
+.header .quote {
+  margin-top: 18px;
+  padding: 12px 18px;
+  background: rgba(46,204,113,0.08);
+  border-left: 3px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #ccc;
+  font-size: 0.88em;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+.nav a {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85em;
+  transition: all 0.2s;
+}
+.nav a:hover { border-color: var(--accent); color: var(--text); }
+
+/* Section */
+.section { margin-bottom: 40px; }
+.section-title {
+  font-size: 1.35em;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.section-title .emoji { font-size: 1.2em; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.card:hover { border-color: rgba(255,255,255,0.1); }
+.card h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.05em; }
+.card p { color: #ccc; margin-bottom: 8px; font-size: 0.92em; }
+
+/* Traffic light zones */
+.zone {
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 14px;
+  border-left: 5px solid;
+}
+.zone-green { background: rgba(46,204,113,0.06); border-color: var(--green); }
+.zone-yellow { background: rgba(241,196,15,0.06); border-color: var(--yellow); }
+.zone-red { background: rgba(231,76,60,0.06); border-color: var(--red); }
+.zone h3 { margin-bottom: 10px; font-size: 1.05em; }
+.zone-green h3 { color: var(--green); }
+.zone-yellow h3 { color: var(--yellow); }
+.zone-red h3 { color: var(--red); }
+.zone ul { padding-left: 18px; color: #ccc; font-size: 0.9em; }
+.zone li { margin-bottom: 6px; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.88em;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th { color: var(--accent2); font-size: 0.82em; text-transform: uppercase; }
+td { color: #ccc; }
+
+/* Pill tags */
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.78em;
+  font-weight: 600;
+}
+.pill-green { background: rgba(46,204,113,0.15); color: var(--green); }
+.pill-blue { background: rgba(52,152,219,0.15); color: var(--blue); }
+.pill-purple { background: rgba(155,89,182,0.15); color: var(--purple); }
+.pill-orange { background: rgba(255,107,53,0.15); color: var(--accent); }
+
+/* Stars */
+.stars { color: var(--accent2); font-size: 0.85em; }
+
+/* Tip box */
+.tip-box {
+  background: rgba(255,215,0,0.06);
+  border: 1px dashed var(--accent2);
+  border-radius: 10px;
+  padding: 15px 18px;
+  margin-top: 12px;
+}
+.tip-box .label { color: var(--accent2); font-weight: bold; font-size: 0.85em; margin-bottom: 5px; }
+.tip-box ul { padding-left: 18px; color: #ccc; font-size: 0.88em; }
+.tip-box li { margin-bottom: 4px; }
+
+/* Schedule grid */
+.schedule {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 6px 15px;
+  font-size: 0.88em;
+}
+.schedule .time { color: var(--accent); font-weight: bold; text-align: right; }
+.schedule .task { color: #ccc; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  color: var(--muted);
+  font-size: 0.82em;
+}
+
+/* Info banner */
+.info-banner {
+  background: rgba(52,152,219,0.08);
+  border: 1px solid rgba(52,152,219,0.2);
+  border-radius: 10px;
+  padding: 15px 18px;
+  margin-bottom: 25px;
+  font-size: 0.88em;
+  color: #aac8e8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body { padding: 12px; }
+  .header h1 { font-size: 1.4em; }
+  .nav { gap: 5px; }
+  .schedule { grid-template-columns: 70px 1fr; }
+  table { font-size: 0.82em; }
+  th, td { padding: 8px 6px; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 12岁ADHD少年：红绿灯饮食指南</h1>
-        <div class="intro">
-            <strong>阿爪寄语：</strong> 117智商的大脑是一台顶级电脑，这些食物就是给电脑选燃料。选对了，大脑运行如飞；选错了，系统就会卡顿。这个清单能帮你优化“大脑系统”，让你写作业更快、打球更准！
-        </div>
 
-        <!-- 绿灯区 -->
-        <div class="section green-zone">
-            <h2><span class="status-icon bg-green"></span> 🟢 绿灯区：大脑的最爱 (尽量多吃)</h2>
-            <ul>
-                <li><strong>优质蛋白（多巴胺原料）</strong>：鸡蛋、深海鱼（三文鱼/鳕鱼）、瘦肉、豆类、希腊酸奶。</li>
-                <li><strong>复杂碳水（稳定供能）</strong>：糙米、燕麦、红薯、玉米、藜麦（避免血糖过快波动）。</li>
-                <li><strong>深色蔬菜（抗炎）</strong>：西蓝花、菠菜、甘蓝（富含叶黄素和抗氧化剂）。</li>
-                <li><strong>健康油脂（大脑润滑油）</strong>：牛油果、核桃、奇亚籽、橄榄油（富含Omega-3）。</li>
-                <li><strong>天然水果</strong>：蓝莓（补脑神器）、草莓、苹果、梨（带皮吃更健康）。</li>
-            </ul>
-        </div>
+<div class="header">
+  <h1>🧬 ADHD 饮食 & 营养全攻略</h1>
+  <div class="subtitle">红绿灯饮食 · 补剂方案 · 线粒体修复 — 三合一家庭版</div>
+  <div class="quote">
+    "大脑只占体重 2%，但消耗 20% 的能量。ADHD 孩子的大脑 = 顶配电脑 + 不稳定电源。我们要做的，就是升级电源。"<br>
+    — 基于 Christopher Palmer《Brain Energy》理论
+  </div>
+</div>
 
-        <!-- 黄灯区 -->
-        <div class="section yellow-zone">
-            <h2><span class=\"status-icon bg-yellow\"></span> 🟡 黄灯区：谨慎对待 (适量、看反应)</h2>
-            <ul>
-                <li><strong>乳制品</strong>：牛奶、奶酪（部分ADHD孩子会有轻微不耐受，建议观察）。</li>
-                <li><strong>面食/麸质</strong>：白面包、面条（如果吃了之后觉得脑子“蒙蒙的”，建议减量）。</li>
-                <li><strong>天然代糖</strong>：蜂蜜、枫糖浆（虽然比白糖好，但依然会引起血糖波动）。</li>
-                <li><strong>纯果汁</strong>：由于缺少纤维，果汁会让血糖升高很快。</li>
-            </ul>
-        </div>
+<div class="info-banner">
+  👨‍👩‍👧‍👦 <strong>适用对象：</strong>浩然（12岁，50kg，ADHD未用药，扁平足）& 闺女（15岁，50kg，ADHD未用药）<br>
+  📅 方案制定：2026-03-18 → 补剂确定：2026-03-23 → 整合更新：2026-03-29
+</div>
 
-        <!-- 红灯区 -->
-        <div class="section red-zone">
-            <h2><span class=\"status-icon bg-red\"></span> 🔴 红灯区：专注力杀手 (尽量不碰)</h2>
-            <ul>
-                <li><strong>人工色素（最危险）</strong>：柠檬黄(Yellow 5)、诱惑红(Red 40)——彩色糖果、彩虹饮料、某些彩色麦片。</li>
-                <li><strong>精制糖/高糖</strong>：可乐、雪碧、奶茶、白砂糖（会引发“血糖崩溃”，导致情绪失控）。</li>
-                <li><strong>高度加工食品</strong>：方便面、含防腐剂的香肠、膨化零食（引发肠道微炎症）。</li>
-                <li><strong>反式脂肪</strong>：炸薯条、劣质植物奶油点心（干扰神经信号传导）。</li>
-            </ul>
-        </div>
+<nav class="nav">
+  <a href="#diet">🚦 红绿灯饮食</a>
+  <a href="#mito">🔋 线粒体饮食策略</a>
+  <a href="#supplements">💊 补剂方案</a>
+  <a href="#schedule">⏰ 每日时间表</a>
+  <a href="#shopping">🛒 购物清单</a>
+  <a href="#progress">📊 进阶层</a>
+  <a href="#evaluation">📋 评估清单</a>
+</nav>
 
-        <div class="tip-box">
-            <strong>💡 阿爪的私房小贴士：</strong>
-            <p>1. <strong>高蛋白早餐</strong>是这一天的成功关键。早上吃饱蛋白，上午上课不卡顿。</p>
-            <p>2. <strong>多喝水</strong>。大脑脱水哪怕只有2%，专注力就会下降20%。</p>
-            <p>3. <strong>80/20原则</strong>。不需要100%完美。如果80%时间在绿灯区，剩下的20%偶尔放纵一下（比如周末喝次快乐水）也是OK性的。</p>
-        </div>
+<!-- ===== 第一部分：红绿灯饮食 ===== -->
+<div class="section" id="diet">
+  <div class="section-title"><span class="emoji">🚦</span> 第一章：红绿灯饮食指南</div>
 
-        <div class="footer">
-            此指南由阿爪(A-Zhua)为您精心整理 · 祝12岁的少年大脑如飞！🐾
-        </div>
-    </div>
+  <div class="zone zone-green">
+    <h3>🟢 绿灯区 — 大脑的最爱（尽量多吃）</h3>
+    <ul>
+      <li><strong>优质蛋白（多巴胺原料）</strong>：鸡蛋、深海鱼（三文鱼/鳕鱼）、瘦肉、豆类、希腊酸奶</li>
+      <li><strong>复杂碳水（稳定供能）</strong>：糙米、燕麦、红薯、玉米、藜麦 — 避免血糖过快波动</li>
+      <li><strong>深色蔬菜（抗炎+线粒体保护）</strong>：西蓝花、菠菜、甘蓝 — 富含叶黄素和抗氧化剂</li>
+      <li><strong>健康油脂（大脑润滑油）</strong>：牛油果、核桃、奇亚籽、橄榄油 — 富含 Omega-3</li>
+      <li><strong>天然水果</strong>：蓝莓（补脑神器）、草莓、苹果、梨（带皮吃更健康）</li>
+      <li><strong>坚果 & 黑巧</strong>：核桃、杏仁、85%黑巧克力 — 优质脂肪酸 + 镁</li>
+    </ul>
+  </div>
+
+  <div class="zone zone-yellow">
+    <h3>🟡 黄灯区 — 谨慎对待（适量、看反应）</h3>
+    <ul>
+      <li><strong>乳制品</strong>：牛奶、奶酪 — 部分 ADHD 孩子轻微不耐受，建议观察（浩然每天全脂纯牛奶 500ml 用于长高）</li>
+      <li><strong>面食/麸质</strong>：白面包、面条 — 如果吃了之后脑子"蒙蒙的"，建议减量</li>
+      <li><strong>天然代糖</strong>：蜂蜜、枫糖浆 — 比白糖好，但依然引起血糖波动</li>
+      <li><strong>纯果汁</strong>：缺少纤维，血糖升高快 — 不如直接吃水果</li>
+      <li><strong>白米饭</strong>：减半，用糙米/红薯/玉米替代部分</li>
+    </ul>
+  </div>
+
+  <div class="zone zone-red">
+    <h3>🔴 红灯区 — 专注力杀手（尽量不碰）</h3>
+    <ul>
+      <li><strong>人工色素（最危险）</strong>：柠檬黄(Yellow 5)、诱惑红(Red 40) — 彩色糖果、彩虹饮料、彩色麦片</li>
+      <li><strong>精制糖/高糖</strong>：可乐、雪碧、奶茶、白砂糖 — 引发"血糖崩溃"，情绪失控</li>
+      <li><strong>高度加工食品</strong>：方便面、含防腐剂的香肠、膨化零食 — 引发肠道微炎症</li>
+      <li><strong>反式脂肪</strong>：炸薯条、劣质植物奶油点心 — 干扰神经信号传导，破坏线粒体膜</li>
+    </ul>
+  </div>
+
+  <div class="tip-box">
+    <div class="label">💡 80/20 原则</div>
+    <ul>
+      <li>不需要 100% 完美。80% 时间在绿灯区，20% 偶尔放纵（周末喝次快乐水）也没问题</li>
+      <li><strong>高蛋白早餐</strong>是一天的成功关键 — 早上吃饱蛋白，上午上课不卡顿</li>
+      <li><strong>多喝水</strong> — 大脑脱水 2%，专注力就下降 20%</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 第二部分：线粒体饮食策略 ===== -->
+<div class="section" id="mito">
+  <div class="section-title"><span class="emoji">🔋</span> 第二章：线粒体饮食策略（温和版生酮）</div>
+
+  <div class="card">
+    <h3>核心理论：Brain Energy</h3>
+    <p>Christopher Palmer 博士的核心观点：<strong>所有精神疾病（包括 ADHD）本质上是大脑的"代谢疾病"</strong>——大脑细胞里的线粒体（发电厂）供能不足或功能异常。</p>
+    <p>前额叶线粒体掉线 → ADHD 症状出现。修复线粒体 = 从根源改善 ADHD。</p>
+    <p>⚠️ 严格生酮不适合 12-15 岁发育期，采用"低糖高脂"策略：</p>
+  </div>
+
+  <table>
+    <tr><th>餐次</th><th>建议</th><th>线粒体逻辑</th></tr>
+    <tr>
+      <td><strong>🌅 早餐</strong></td>
+      <td>2-3 鸡蛋 + 牛油果 + 坚果，不吃面包包子</td>
+      <td>高蛋白+优质脂肪启动线粒体</td>
+    </tr>
+    <tr>
+      <td><strong>🌞 午餐</strong></td>
+      <td>米饭减半，蔬菜肉类加量</td>
+      <td>控碳水，线粒体稳定供能</td>
+    </tr>
+    <tr>
+      <td><strong>🌙 晚餐</strong></td>
+      <td>鱼/瘦肉 + 大量蔬菜 + 少量粗粮</td>
+      <td>低碳水为睡眠修复创造条件</td>
+    </tr>
+    <tr>
+      <td><strong>🥜 零食</strong></td>
+      <td>坚果、奶酪、85% 黑巧克力</td>
+      <td>替代糖果，供应优质脂肪酸</td>
+    </tr>
+    <tr>
+      <td><strong>🚫 禁止</strong></td>
+      <td>奶茶、可乐、彩色糖果、蛋糕</td>
+      <td>精制糖是线粒体的"毒药"</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== 第三部分：补剂方案 ===== -->
+<div class="section" id="supplements">
+  <div class="section-title"><span class="emoji">💊</span> 第三章：补剂方案 — 基础层（已采购）</div>
+
+  <div class="card">
+    <h3>1. 高 EPA 鱼油 <span class="stars">⭐⭐⭐⭐ 最重要</span></h3>
+    <p><span class="pill pill-blue">Life Extension Mega EPA/DHA</span> EPA 720mg + DHA 480mg/粒</p>
+    <p><strong>为什么：</strong>ADHD 营养补充中证据最充分。多项 Meta 分析显示 Omega-3 改善注意力和冲动控制。关键是 EPA 比例要高（本方案 EPA:DHA = 1.5:1 ✅）。</p>
+    <p><strong>线粒体作用：</strong>修复线粒体膜结构，改善细胞间信号传导。</p>
+    <p><strong>剂量：</strong>每人每天 1 粒，早餐随餐吃（脂溶性，随餐吸收好）</p>
+  </div>
+
+  <div class="card">
+    <h3>2. 苏糖酸镁 Magtein® <span class="stars">⭐⭐⭐⭐</span></h3>
+    <p><span class="pill pill-green">美格泰 苏糖酸镁</span> 60粒/盒</p>
+    <p><strong>为什么：</strong>ADHD 儿童 50-70% 镁不足。镁参与多巴胺调节、神经放松、改善睡眠。苏糖酸镁是<strong>唯一被证实有效穿透血脑屏障</strong>的镁形式。</p>
+    <p><strong>线粒体作用：</strong>线粒体内 300+ 种酶反应的"开关"。</p>
+    <p><strong>剂量：</strong>每人每天 4 粒（午饭后 2 粒 + 睡前 1h 2 粒），每天 120mg 元素镁</p>
+    <p style="color:var(--accent);font-size:0.85em">⚠️ 浩然腿部肌肉异常硬（扁平足代偿+缺镁），补镁后观察一个月</p>
+  </div>
+
+  <div class="card">
+    <h3>3. 锌 <span class="stars">⭐⭐⭐</span></h3>
+    <p><span class="pill pill-orange">Swanson 吡啶甲酸锌</span> 22mg/粒</p>
+    <p><strong>为什么：</strong>ADHD 儿童普遍锌偏低。补锌对注意力有帮助。吡啶甲酸锌吸收率高于普通葡萄糖酸锌。</p>
+    <p><strong>线粒体作用：</strong>保护线粒体免受氧化损伤。</p>
+    <p><strong>剂量：</strong>每人每天 1 粒，午饭后（不要空腹，容易恶心）</p>
+  </div>
+
+  <div class="card">
+    <h3>4. PS 磷脂酰丝氨酸 <span class="stars">⭐⭐⭐</span></h3>
+    <p><span class="pill pill-purple">Life Extension PS Caps</span> 100mg/粒</p>
+    <p><strong>为什么：</strong>小规模研究显示对 ADHD 儿童注意力有改善。安全性好，副作用基本为零。</p>
+    <p><strong>剂量：</strong>每人每天 1 粒，早餐后</p>
+  </div>
+
+  <div class="card">
+    <h3>5. 维生素 D3 <span class="stars">⭐⭐</span></h3>
+    <p><span class="pill pill-blue">星鲨 维 D3</span> 360IU/粒</p>
+    <p><strong>为什么：</strong>促进钙吸收，骨骼发育必需。鱼油不含 VD3 需要单独补。</p>
+    <p><strong>剂量：</strong>每人每天 1 粒，和鱼油一起吃（脂溶性，一起吸收最佳）</p>
+  </div>
+
+  <div class="tip-box">
+    <div class="label">⚡ 上药顺序（逐步添加，观察反应）</div>
+    <ul>
+      <li><strong>第 1 周：</strong>鱼油 + 维 D3 → 观察肠胃、过敏反应</li>
+      <li><strong>第 2 周：</strong>加苏糖酸镁 → 观察睡眠变化、是否拉肚子</li>
+      <li><strong>第 3 周：</strong>加锌 → 观察是否恶心</li>
+      <li><strong>第 4 周：</strong>加 PS → 全部到位</li>
+      <li>如果镁吃了拉肚子，减到每次 1 粒</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 第四部分：每日时间表 ===== -->
+<div class="section" id="schedule">
+  <div class="section-title"><span class="emoji">⏰</span> 第四章：每日服用 & 饮食时间表</div>
+
+  <div class="card">
+    <h3>🌅 早餐时</h3>
+    <table>
+      <tr><th>项目</th><th>浩然</th><th>闺女</th><th>说明</th></tr>
+      <tr><td>🥚 高蛋白早餐</td><td>✅</td><td>✅</td><td>鸡蛋+牛油果+坚果，不吃面包包子</td></tr>
+      <tr><td>鱼油</td><td>1粒</td><td>1粒</td><td>EPA 720mg + DHA 480mg</td></tr>
+      <tr><td>PS 磷脂酰丝氨酸</td><td>1粒</td><td>1粒</td><td>100mg</td></tr>
+      <tr><td>维 D3</td><td>1粒</td><td>1粒</td><td>360IU，和鱼油一起吸收最佳</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🌞 午饭后</h3>
+    <table>
+      <tr><th>项目</th><th>浩然</th><th>闺女</th><th>说明</th></tr>
+      <tr><td>锌</td><td>1粒</td><td>1粒</td><td>22mg，不要空腹吃</td></tr>
+      <tr><td>苏糖酸镁</td><td>2粒</td><td>2粒</td><td>60mg 元素镁</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🌙 睡前 1 小时</h3>
+    <table>
+      <tr><th>项目</th><th>浩然</th><th>闺女</th><th>说明</th></tr>
+      <tr><td>苏糖酸镁</td><td>2粒</td><td>2粒</td><td>60mg 元素镁，助眠</td></tr>
+      <tr><td>🥛 牛奶（浩然）</td><td>250ml</td><td>—</td><td>全脂纯牛奶，长高用</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🏃 运动建议（线粒体增殖）</h3>
+    <table>
+      <tr><th>运动</th><th>线粒体作用</th><th>建议</th></tr>
+      <tr><td>乒乓球 🏓</td><td>短时爆发 → 线粒体增殖</td><td>继续</td></tr>
+      <tr><td>游泳 🏊</td><td>持续有氧 → 提高线粒体效率</td><td>继续</td></tr>
+      <tr><td>跳绳 ⭐</td><td>高强度间歇 → 最强线粒体生物合成</td><td>每天 5-10 分钟</td></tr>
+      <tr><td>冷水淋浴 🚿</td><td>激活棕色脂肪线粒体</td><td>洗完热水澡冲 30 秒冷水（可选）</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 第五部分：购物清单 ===== -->
+<div class="section" id="shopping">
+  <div class="section-title"><span class="emoji">🛒</span> 第五章：京东购物清单</div>
+
+  <table>
+    <tr><th>#</th><th>产品</th><th>规格</th><th>价格</th><th>月用量</th></tr>
+    <tr><td>1</td><td>美格泰 苏糖酸镁 Magtein®</td><td>60粒×4盒</td><td>¥548</td><td>4盒/月</td></tr>
+    <tr><td>2</td><td>Life Extension PS Caps</td><td>100mg×100粒</td><td>¥306</td><td>1瓶/1.5月</td></tr>
+    <tr><td>3</td><td>Life Extension Mega EPA/DHA</td><td>120粒</td><td>¥228</td><td>1瓶/2月</td></tr>
+    <tr><td>4</td><td>Swanson 吡啶甲酸锌</td><td>22mg×60粒</td><td>¥61</td><td>1瓶/月</td></tr>
+    <tr><td>5</td><td>星鲨 维生素 D3</td><td>360IU×30粒</td><td>¥95</td><td>按需</td></tr>
+    <tr><td colspan="3" style="text-align:right;font-weight:bold;">首次采购合计</td><td colspan="2" style="color:var(--accent2);font-weight:bold;">¥1,238</td></tr>
+    <tr><td colspan="3" style="text-align:right;font-weight:bold;">月均费用</td><td colspan="2" style="color:var(--accent2);font-weight:bold;">~¥920</td></tr>
+  </table>
+</div>
+
+<!-- ===== 第六部分：进阶层 ===== -->
+<div class="section" id="progress">
+  <div class="section-title"><span class="emoji">📊</span> 第六章：进阶层补剂（基础层稳定后考虑）</div>
+
+  <div class="card">
+    <p style="color:var(--accent2);">⚠️ 以下为基础层稳定 4 周后的可选进阶，不急于一次性加入。</p>
+  </div>
+
+  <div class="card">
+    <h3>1. 乙酰左旋肉碱 (ALC) <span class="stars">⭐⭐⭐⭐</span></h3>
+    <p><span class="pill pill-purple">Now Foods Acetyl-L-Carnitine 500mg</span></p>
+    <p><strong>作用：</strong>把脂肪酸搬运进线粒体燃烧，穿透血脑屏障直接给大脑供能。</p>
+    <p><strong>ADHD 研究：</strong>临床试验证明 500-1500mg/天改善注意力和多动。</p>
+    <p><strong>剂量：</strong>500mg/天，早餐时</p>
+  </div>
+
+  <div class="card">
+    <h3>2. 辅酶 Q10 (Ubiquinol) <span class="stars">⭐⭐⭐</span></h3>
+    <p><span class="pill pill-orange">Jarrow Formulas QH-absorb</span></p>
+    <p><strong>作用：</strong>线粒体电子传递链核心组件 + 强抗氧化剂。选 Ubiquinol 形式，吸收率高 8 倍。</p>
+    <p><strong>剂量：</strong>100mg/天，下午运动前</p>
+  </div>
+
+  <div class="card">
+    <h3>3. B 族维生素复合物 <span class="stars">⭐⭐⭐</span></h3>
+    <p><span class="pill pill-green">Thorne Basic B Complex</span></p>
+    <p><strong>作用：</strong>B1/B2/B3/B5/B6/B12 全部直接参与线粒体能量代谢。ADHD 儿童普遍缺乏 B6 和 B12。</p>
+    <p><strong>剂量：</strong>1粒/天，早餐时</p>
+  </div>
+
+  <div class="card">
+    <h3>4. α-硫辛酸 (ALA) <span class="stars">⭐⭐</span></h3>
+    <p><span class="pill pill-blue">Doctor's Best Alpha-Lipoic Acid</span></p>
+    <p><strong>作用：</strong>水溶+脂溶双重抗氧化，能回收其他抗氧化剂形成循环。</p>
+    <p><strong>剂量：</strong>100-200mg/天，晚上</p>
+  </div>
+</div>
+
+<!-- ===== 第七部分：评估清单 ===== -->
+<div class="section" id="evaluation">
+  <div class="section-title"><span class="emoji">📋</span> 第七章：3 个月评估清单</div>
+
+  <div class="card">
+    <h3>吃满 3 个月后观察</h3>
+    <table>
+      <tr><th>维度</th><th>观察指标</th><th>评分 (1-5)</th></tr>
+      <tr><td>🎯 注意力</td><td>写作业/上课能集中多长时间？</td><td>___</td></tr>
+      <tr><td>😴 睡眠</td><td>入睡速度？半夜醒来次数？早起精神？</td><td>___</td></tr>
+      <tr><td>😊 情绪</td><td>暴躁/崩溃频率降低了吗？</td><td>___</td></tr>
+      <tr><td>🏃 冲动</td><td>能先想再做了吗？排队能等了吗？</td><td>___</td></tr>
+      <tr><td>🦵 腿部（浩然）</td><td>肌肉还那么硬吗？抽筋频率？</td><td>___</td></tr>
+      <tr><td>📏 身高（浩然）</td><td>3个月长了多少？</td><td>___cm</td></tr>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <div class="label">⚠️ 重要注意事项</div>
+    <ul>
+      <li>目前两个孩子都<strong>未用 ADHD 药物</strong>，如果将来用药需要重新评估补充剂搭配</li>
+      <li>建议查一下<strong>血清铁蛋白</strong>，低于 30ng/mL 需要补铁</li>
+      <li>建议浩然做一次<strong>骨龄检查</strong>（100-200元），可精确预测最终身高</li>
+      <li>至少坚持<strong> 3 个月</strong>才能看到明显变化</li>
+      <li>记录每天注意力评分(1-5)和情绪变化，方便回顾</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  🐾 阿爪出品 | ADHD 饮食 & 营养全攻略 v2.0<br>
+  红绿灯饮食 (03-18) + 补剂方案 (03-23) + 线粒体修复 (03-19) = 三合一整合版<br>
+  为浩然 & 闺女量身定制 | 最后更新 2026-03-29<br><br>
+  <em>参考：Christopher Palmer《Brain Energy》· PMC 临床研究 · 多项 Omega-3 Meta 分析</em>
+</div>
+
 </body>
 </html>
