@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全家每日营养素表（打印版）</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #fff;
+  color: #222;
+  line-height: 1.5;
+}
+@media print {
+  .no-print { display: none !important; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  body { padding: 0; }
+}
+@media screen {
+  body { padding: 20px; max-width: 800px; margin: 0 auto; }
+  .page { margin-bottom: 40px; border: 1px dashed #ccc; }
+}
+.page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 25px 30px;
+  position: relative;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #333;
+}
+.page-header h1 { font-size: 1.7em; margin-bottom: 3px; }
+.page-header .info { font-size: 0.85em; color: #666; }
+.color-blue { color: #1565C0; }
+.color-pink { color: #C2185B; }
+.color-green { color: #2E7D32; }
+.color-purple { color: #6A1B9A; }
+
+.time-section { margin-bottom: 16px; }
+.time-header {
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.time-header.morning { background: #FFF3E0; color: #E65100; border-left: 4px solid #FF9800; }
+.time-header.evening { background: #EDE7F6; color: #4527A0; border-left: 4px solid #673AB7; }
+
+.med-table { width: 100%; border-collapse: collapse; }
+.med-table th {
+  text-align: left; padding: 6px 10px;
+  background: #f5f5f5; border-bottom: 2px solid #ddd;
+  font-size: 0.8em; color: #555;
+}
+.med-table td { padding: 7px 10px; border-bottom: 1px solid #eee; font-size: 0.9em; }
+.med-table .dose { font-weight: bold; font-size: 1.05em; text-align: center; width: 70px; }
+.med-table .note { color: #888; font-size: 0.78em; }
+
+.checklist-section { margin-top: 14px; }
+.checklist-title {
+  font-size: 1em; font-weight: bold; text-align: center;
+  margin-bottom: 8px; padding: 5px; background: #f5f5f5; border-radius: 5px;
+}
+.check-table { width: 100%; border-collapse: collapse; }
+.check-table th, .check-table td {
+  padding: 4px 6px; border: 1px solid #ddd; text-align: center; font-size: 0.78em;
+}
+.check-table th { background: #f9f9f9; font-weight: bold; }
+.check-table td:first-child { text-align: left; font-weight: 500; width: 140px; }
+.section-row { font-weight: bold; text-align: left !important; }
+.section-row.morning { background: #FFF8E1; color: #E65100; }
+.section-row.evening { background: #F3E5F5; color: #4527A0; }
+.checkbox {
+  display: inline-block; width: 14px; height: 14px;
+  border: 2px solid #999; border-radius: 2px;
+}
+
+.tips {
+  margin-top: 12px; padding: 10px 12px;
+  background: #FFF8E1; border: 1px solid #FFE082;
+  border-radius: 6px; font-size: 0.78em;
+}
+.tips strong { color: #E65100; }
+
+.page-footer {
+  position: absolute; bottom: 15px; left: 30px; right: 30px;
+  text-align: center; font-size: 0.7em; color: #bbb;
+  border-top: 1px solid #eee; padding-top: 6px;
+}
+.page-footer a { color: #999; }
+
+.print-btn {
+  display: block; margin: 20px auto; padding: 14px 50px;
+  font-size: 1.1em; background: #333; color: #fff;
+  border: none; border-radius: 8px; cursor: pointer;
+}
+.print-btn:hover { background: #555; }
+.nav-link { text-align: center; margin-bottom: 15px; font-size: 0.9em; }
+.nav-link a { color: #2196F3; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="nav-link no-print">
+  <a href="adhd-diet-guide.html">← 返回 ADHD 全攻略</a> ｜ <a href="index.html">主页</a>
+</div>
+
+<!-- ========== 第1页：张浩然 ========== -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="color-blue">👦 张浩然 · 每日营养素</h1>
+    <div class="info">12岁 · ADHD 营养支持 · 仅早+晚</div>
+  </div>
+  <div class="time-section">
+    <div class="time-header morning">☀️ 早餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>🥚 高蛋白早餐</td><td class="dose">必须</td><td class="note">鸡蛋+坚果，别吃面包包子</td></tr>
+      <tr><td>💊 EZZ 综合胶囊</td><td class="dose">2 粒</td><td class="note">赖氨酸+钙+D3+B2+锌+牛磺酸+镁</td></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">注意力+抗炎</td></tr>
+      <tr><td>💊 PS 磷脂酰丝氨酸</td><td class="dose">1 粒</td><td class="note">改善注意力</td></tr>
+      <tr><td>💊 维生素 D3 (Swanson)</td><td class="dose">1 粒</td><td class="note">促进钙吸收</td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header evening">🌙 晚餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">分两次吸收好</td></tr>
+      <tr><td>💊 锌 Zinc Picolinate</td><td class="dose">1 粒</td><td class="note">22mg，别空腹</td></tr>
+      <tr><td>💊 Magtein 苏糖酸镁</td><td class="dose">2 粒</td><td class="note">穿透血脑屏障，助眠</td></tr>
+      <tr><td>🥛 全脂纯牛奶</td><td class="dose">250ml</td><td class="note">促进长高</td></tr>
+    </table>
+  </div>
+  <div class="checklist-section">
+    <div class="checklist-title">📋 第___周（___月___日 ~ ___月___日）</div>
+    <table class="check-table">
+      <tr><th>药品</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+      <tr><td colspan="8" class="section-row morning">☀️ 早餐</td></tr>
+      <tr><td>EZZ ×2</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>PS ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>D3 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td colspan="8" class="section-row evening">🌙 晚餐</td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>锌 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>Magtein ×2</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>牛奶 250ml</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header" style="background:#E8F5E9;color:#2E7D32;border-left:4px solid #4CAF50;">🏃 每日运动</div>
+    <table class="med-table">
+      <tr><th>运动</th><th>时长</th><th>说明</th></tr>
+      <tr><td>🏓 乒乓球</td><td class="dose">继续</td><td class="note">短时爆发→线粒体增殖</td></tr>
+      <tr><td>🏊 游泳</td><td class="dose">继续</td><td class="note">持续有氧→线粒体效率</td></tr>
+      <tr><td>⭐ 跳绳</td><td class="dose">5-10分</td><td class="note">高强度间歇→最强线粒体生成</td></tr>
+      <tr><td>🧘 拉伸</td><td class="dose">10分</td><td class="note">扁平足+腿部肌肉放松（必做）</td></tr>
+    </table>
+  </div>
+  <div class="tips"><strong>⚠️</strong> 随餐吃别空腹 · Magtein拉肚子减到1粒 · 坚持3个月</div>
+  <div class="page-footer">🐾 阿爪出品 | 2026-03-29 | <a href="https://pages.zhangyun.xyz/adhd-diet-guide.html">完整版</a></div>
+</div>
+
+<!-- ========== 第2页：张悠然 ========== -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="color-pink">👧 张悠然 · 每日营养素</h1>
+    <div class="info">15岁 · ADHD 营养支持 · 仅早+晚</div>
+  </div>
+  <div class="time-section">
+    <div class="time-header morning">☀️ 早餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>🥚 高蛋白早餐</td><td class="dose">必须</td><td class="note">鸡蛋+坚果，别吃面包包子</td></tr>
+      <tr><td>💊 EZZ 综合胶囊</td><td class="dose">3 粒</td><td class="note">赖氨酸+钙+D3+B2+锌+牛磺酸+镁</td></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">注意力+抗炎</td></tr>
+      <tr><td>💊 PS 磷脂酰丝氨酸</td><td class="dose">1 粒</td><td class="note">改善注意力</td></tr>
+      <tr><td>💊 维生素 D3 (Swanson)</td><td class="dose">1 粒</td><td class="note">促进钙吸收</td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header evening">🌙 晚餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">分两次吸收好</td></tr>
+      <tr><td>💊 锌 Zinc Picolinate</td><td class="dose">1 粒</td><td class="note">22mg，别空腹</td></tr>
+      <tr><td>💊 Magtein 苏糖酸镁</td><td class="dose">2 粒</td><td class="note">穿透血脑屏障，助眠</td></tr>
+    </table>
+  </div>
+  <div class="checklist-section">
+    <div class="checklist-title">📋 第___周（___月___日 ~ ___月___日）</div>
+    <table class="check-table">
+      <tr><th>药品</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+      <tr><td colspan="8" class="section-row morning">☀️ 早餐</td></tr>
+      <tr><td>EZZ ×3</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>PS ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>D3 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td colspan="8" class="section-row evening">🌙 晚餐</td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>锌 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>Magtein ×2</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header" style="background:#E8F5E9;color:#2E7D32;border-left:4px solid #4CAF50;">🏃 每日运动</div>
+    <table class="med-table">
+      <tr><th>运动</th><th>时长</th><th>说明</th></tr>
+      <tr><td>🚶‍♀️ 快走/慢跑</td><td class="dose">20-30分</td><td class="note">有氧基础，和朋友一起更容易坚持</td></tr>
+      <tr><td>⭐ 跳绳/开合跳</td><td class="dose">5-10分</td><td class="note">高强度间歇，线粒体增殖</td></tr>
+      <tr><td>🧘 拉伸/瑜伽</td><td class="dose">10分</td><td class="note">柔韧性+放松</td></tr>
+    </table>
+  </div>
+  <div class="tips"><strong>⚠️</strong> 随餐吃别空腹 · Magtein拉肚子减到1粒 · 坚持3个月</div>
+  <div class="page-footer">🐾 阿爪出品 | 2026-03-29 | <a href="https://pages.zhangyun.xyz/adhd-diet-guide.html">完整版</a></div>
+</div>
+
+<!-- ========== 第3页：运哥 ========== -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="color-green">👨 运哥 · 每日营养素</h1>
+    <div class="info">ADHD · 血糖管理 · 脂溢性皮炎 · 消化调理 · 替尔泊肽期间</div>
+  </div>
+  <div class="time-section">
+    <div class="time-header morning">☀️ 早餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>🥚 高蛋白早餐</td><td class="dose">必须</td><td class="note">鸡蛋+牛油果+坚果，控碳水</td></tr>
+      <tr><td>💊 Swisse 男性综合维生素</td><td class="dose">1 粒</td><td class="note">全面打底（含B族/锌/硒等）</td></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">ADHD+抗炎+降血脂</td></tr>
+      <tr><td>💊 PS 磷脂酰丝氨酸</td><td class="dose">1 粒</td><td class="note">ADHD 注意力改善</td></tr>
+      <tr><td>💊 ACTASK Vitamin B</td><td class="dose">1 粒</td><td class="note">消化+脂溢性皮炎+线粒体代谢</td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header evening">🌙 晚餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">分两次吸收好</td></tr>
+      <tr><td>💊 ACTASK D3 5000IU</td><td class="dose">1 粒</td><td class="note">运动少+室内多严重缺D</td></tr>
+      <tr><td>💊 ACTASK Liver Detox</td><td class="dose">1 粒</td><td class="note">打针用药期间护肝</td></tr>
+      <tr><td>💊 Magtein 苏糖酸镁</td><td class="dose">2 粒</td><td class="note">ADHD+助眠+肌肉放松</td></tr>
+      <tr><td>💊 小蘖碱</td><td class="dose">按说明</td><td class="note">辅助血糖控制</td></tr>
+    </table>
+  </div>
+  <div class="checklist-section">
+    <div class="checklist-title">📋 第___周（___月___日 ~ ___月___日）</div>
+    <table class="check-table">
+      <tr><th>药品</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+      <tr><td colspan="8" class="section-row morning">☀️ 早餐</td></tr>
+      <tr><td>Swisse 男士 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>PS ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>B族 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td colspan="8" class="section-row evening">🌙 晚餐</td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>D3 5000IU ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>护肝片 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>Magtein ×2</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>小蘖碱</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header" style="background:#E8F5E9;color:#2E7D32;border-left:4px solid #4CAF50;">🏃 每日运动（必须加强！）</div>
+    <table class="med-table">
+      <tr><th>运动</th><th>时长</th><th>说明</th></tr>
+      <tr><td>🚶 快走</td><td class="dose">30分</td><td class="note">最低门槛，饭后走起来，降血糖效果最直接</td></tr>
+      <tr><td>⭐ 力量训练</td><td class="dose">15-20分</td><td class="note">深蹲+俯卧撑+平板支撑，增肌提高基础代谢</td></tr>
+      <tr><td>🚿 冷水淋浴</td><td class="dose">30秒</td><td class="note">洗完热水澡冲30秒冷水，激活棕色脂肪（可选）</td></tr>
+    </table>
+  </div>
+  <div class="tips">
+    <strong>⚠️</strong> 随餐吃别空腹 · 小蘖碱和替尔泊肽配合使用，如血糖过低及时调整 · 脂溢性皮炎关键靠B族+鱼油抗炎 · <strong>运动是降血糖最有效的"药"，比任何补剂都重要</strong>
+  </div>
+  <div class="page-footer">🐾 阿爪出品 | 2026-03-29 | <a href="https://pages.zhangyun.xyz">pages.zhangyun.xyz</a></div>
+</div>
+
+<!-- ========== 第4页：陈旻 ========== -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="color-purple">👩 陈旻 · 每日营养素</h1>
+    <div class="info">关节保健 · 日常营养补充</div>
+  </div>
+  <div class="time-section">
+    <div class="time-header morning">☀️ 早餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>💊 维生素 C</td><td class="dose">1 粒</td><td class="note">促进胶原蛋白合成，关节修复辅助</td></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">关节抗炎+心血管保护</td></tr>
+      <tr><td>💊 叶黄素</td><td class="dose">1 粒</td><td class="note">护眼</td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header evening">🌙 晚餐时</div>
+    <table class="med-table">
+      <tr><th>药品</th><th>数量</th><th>说明</th></tr>
+      <tr><td>💊 鱼油 EPA/DHA</td><td class="dose">1 粒</td><td class="note">分两次吸收好</td></tr>
+      <tr><td>💊 Blackmores 氨糖 1500</td><td class="dose">按瓶身</td><td class="note">关节修复核心</td></tr>
+      <tr><td>💊 维生素 D3</td><td class="dose">1 粒</td><td class="note">骨骼+关节+钙吸收</td></tr>
+      <tr><td>💊 Magtein 苏糖酸镁</td><td class="dose">2 粒</td><td class="note">肌肉放松+助眠</td></tr>
+    </table>
+  </div>
+  <div class="checklist-section">
+    <div class="checklist-title">📋 第___周（___月___日 ~ ___月___日）</div>
+    <table class="check-table">
+      <tr><th>药品</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+      <tr><td colspan="8" class="section-row morning">☀️ 早餐</td></tr>
+      <tr><td>维C ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>叶黄素 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td colspan="8" class="section-row evening">🌙 晚餐</td></tr>
+      <tr><td>鱼油 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>氨糖</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>D3 ×1</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+      <tr><td>Magtein ×2</td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td><td><span class="checkbox"></span></td></tr>
+    </table>
+  </div>
+  <div class="time-section">
+    <div class="time-header" style="background:#E8F5E9;color:#2E7D32;border-left:4px solid #4CAF50;">🏃 每日运动（关节友好型）</div>
+    <table class="med-table">
+      <tr><th>运动</th><th>时长</th><th>说明</th></tr>
+      <tr><td>🚶‍♀️ 散步/快走</td><td class="dose">20-30分</td><td class="note">低冲击有氧，关节压力小</td></tr>
+      <tr><td>🏊 游泳/水中运动</td><td class="dose">30分</td><td class="note">最适合关节问题，水的浮力减轻关节负担</td></tr>
+      <tr><td>🧘 瑜伽/拉伸</td><td class="dose">15分</td><td class="note">关节灵活性+肌肉支撑力</td></tr>
+    </table>
+  </div>
+  <div class="tips">
+    <strong>⚠️</strong> 氨糖需要持续吃 3 个月以上才能见效 · 关节痛加重时可增加鱼油到每次 2 粒 · <strong>避免跑步、跳跃等高冲击运动</strong> · 游泳对关节最友好
+  </div>
+  <div class="page-footer">🐾 阿爪出品 | 2026-03-29 | <a href="https://pages.zhangyun.xyz">pages.zhangyun.xyz</a></div>
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ 打印全家四页 A4</button>
+
+</body>
+</html>
