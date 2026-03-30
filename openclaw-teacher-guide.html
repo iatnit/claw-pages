@@ -223,7 +223,7 @@
 
 <div class="container">
 
-<!-- 目录 -->
+<!-- TOC -->
 <div class="toc">
   <h2>📋 培训大纲</h2>
   <ol>
@@ -374,27 +374,49 @@
   <div class="highlight-box">
     <strong>以 MiniMax 为例，全程不到1分钟：</strong>
     <ol>
-      <li>打开 MiniMax Agent 官网</li>
-      <li>侧边栏找到「MaxClaw」</li>
-      <li>对它说"我想接入到飞书/钉钉"</li>
-      <li>跟着指引操作 → 搞定！</li>
+        <li><a href="#s1">OpenClaw 是什么？——给老师的一句话解释</a></li>
+        <li><a href="#s2">安装三步走——10分钟搞定</a></li>
+        <li><a href="#s3">核心概念：Gateway → Agent → Skills</a></li>
+        <li><a href="#s4">教师必装的 5 个技能（Skills）</a></li>
+        <li><a href="#s5">实战场景：教学与办公效率提升</a></li>
+        <li><a href="#s6">安全须知与注意事项</a></li>
+        <li><a href="#s7">常见问题 FAQ</a></li>
+        <li><a href="#s8">进阶之路与资源推荐</a></li>
     </ol>
-  </div>
-  <p><strong>Kimi 也有类似方案</strong>，手机App还能直接用 Kimi Claw。</p>
-  
-  <h3>🅲 本地安装要点（给想折腾的老师）</h3>
-  <div class="blue-box">
-    <strong>系统要求：</strong>
+</div>
+
+<!-- Section 1 -->
+<div class="section" id="s1">
+    <h2><span class="num">1</span>OpenClaw（小龙虾）是什么？</h2>
+    <p>简单说：<strong>OpenClaw 是一个可以帮你干活的 AI 助理系统。</strong>大家叫它"小龙虾"🦞。</p>
+    <p>它和 ChatGPT 的区别是：</p>
+    <div class="card-grid">
+        <div class="card">
+            <h4>🗣️ ChatGPT / Claude</h4>
+            <p>只能「聊天」。你问它问题，它给你回答。仅此而已。</p>
+        </div>
+        <div class="card">
+            <h4>🦞 OpenClaw（小龙虾）</h4>
+            <p>能「干活」。帮你搜索资料、整理文档、发邮件、管理日程、分析数据……它有手有脚。</p>
+        </div>
+    </div>
+    <blockquote>
+        类比理解：ChatGPT 是一个知识渊博的顾问，你问什么他答什么。<br>
+        小龙虾是一个能干的秘书，不仅能回答问题，还能帮你执行任务。
+    </blockquote>
+    <p>它的大脑是大语言模型（如 Claude），但通过 <strong>Skills（技能系统）</strong> 获得了执行能力。就像一个聪明的人，学会了各种工具的使用方法。</p>
+</div>
+
+<!-- Section 2 -->
+<div class="section" id="s2">
+    <h2><span class="num">2</span>安装三步走</h2>
+    <p>整个过程大约 10 分钟，只需要一台电脑（Windows / Mac / Linux 均可）。</p>
+
+    <h3>前提条件</h3>
     <ul>
-      <li>Windows 10+ / macOS / Linux 均可</li>
-      <li>Node.js ≥ v22（安装脚本会自动装）</li>
-      <li>5GB以上磁盘空间</li>
-      <li>稳定网络</li>
+        <li>安装 <strong>Node.js</strong>（版本 18+）：访问 <a href="https://nodejs.org" target="_blank">nodejs.org</a> 下载安装包，一路「下一步」即可</li>
+        <li>一个 AI 服务的 API Key（推荐 Claude 或 GPT，后面教怎么获取）</li>
     </ul>
-  </div>
-  <p><strong>一键安装命令（Windows PowerShell）：</strong></p>
-  <pre><code># Windows 先解除脚本限制（重要！否则报红字错误）
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # 然后安装
 npx openclaw@latest</code></pre>
@@ -476,65 +498,97 @@ npx openclaw@latest</code></pre>
       <p>你："帮我查明天天气"</p>
       <p>AI："好的！我很高兴能帮助您查询天气信息！明天的天气预计是……"</p>
     </div>
-    <div class="comp-card comp-after">
-      <h4>配置后</h4>
-      <p>你："帮我查明天天气"</p>
-      <p>AI："王老师，明天上海：多云转晴，18-25°C，适合户外活动。"</p>
+    <div class="code-block">
+        <span class="comment"># 全局安装 OpenClaw</span><br>
+        <span class="cmd">npm install -g openclaw</span>
     </div>
-  </div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-content">
+                <h4>初始化配置</h4>
+                <p>安装完成后运行初始化向导：</p>
+            </div>
+        </div>
+    </div>
+    <div class="code-block">
+        <span class="comment"># 启动配置向导，按提示填写即可</span><br>
+        <span class="cmd">openclaw setup</span>
+    </div>
+    <p>向导会引导你：选择 AI 模型 → 填入 API Key → 设置工作目录。</p>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-content">
+                <h4>启动并开始使用</h4>
+                <p>配置完成后，启动服务：</p>
+            </div>
+        </div>
+    </div>
+    <div class="code-block">
+        <span class="comment"># 启动 Gateway 服务</span><br>
+        <span class="cmd">openclaw gateway start</span><br><br>
+        <span class="comment"># 开始对话</span><br>
+        <span class="cmd">openclaw chat</span>
+    </div>
+
+    <div class="callout callout-tip">
+        <span class="icon">💡</span>
+        <div class="text">
+            <strong>手机也能用！</strong>
+            下载 OpenClaw App（iOS/Android），扫码连接电脑上的 Gateway，之后在手机上就能随时和 AI 助理对话。就像加了一个微信好友一样方便。
+        </div>
+    </div>
 </div>
 
-<!-- Part 5 -->
-<div class="section" id="part5">
-  <h2>🔧 五、技能安装<span class="tag tag-time">10分钟</span></h2>
-  
-  <h3>基础四件套（新手必装）</h3>
-  <table>
-    <tr><th>技能</th><th>作用</th><th>类比</th></tr>
-    <tr>
-      <td><strong>Tavily Search</strong></td>
-      <td>让小龙虾能联网搜索</td>
-      <td>给它装了个浏览器</td>
-    </tr>
-    <tr>
-      <td><strong>Firecrawl</strong></td>
-      <td>让它能读懂网页内容</td>
-      <td>给它戴了副眼镜</td>
-    </tr>
-    <tr>
-      <td><strong>Summarize</strong></td>
-      <td>长文章秒变摘要</td>
-      <td>给它装了个速读器</td>
-    </tr>
-    <tr>
-      <td><strong>Browser</strong></td>
-      <td>让它能操控浏览器</td>
-      <td>给它一双手</td>
-    </tr>
-  </table>
-  
-  <p><strong>安装方式（二选一）：</strong></p>
-  <pre><code># 方式一：直接跟小龙虾说（推荐！）
-"帮我安装 Tavily Search 技能"
+<!-- Section 3 -->
+<div class="section" id="s3">
+    <h2><span class="num">3</span>核心概念</h2>
+    <p>理解三个关键词，就理解了小龙虾的全部：</p>
 
-# 方式二：命令行
-npx clawhub@latest install tavily-search</code></pre>
-  
-  <h3>教师专属推荐</h3>
-  <table>
-    <tr><th>技能</th><th>教师用途</th></tr>
-    <tr><td><strong>Multi Search Engine</strong></td><td>17个搜索引擎聚合，中文资料搜索更全面（备课神器）</td></tr>
-    <tr><td><strong>Systematic Debugging</strong></td><td>结构化解决问题，遇到技术问题不慌</td></tr>
-    <tr><td><strong>Self-Improving Agent</strong></td><td>它会记住你的纠正，下次不犯同样的错</td></tr>
-    <tr><td><strong>Office Automation</strong></td><td>日程/邮件/文档/数据处理一条龙</td></tr>
-  </table>
-  
-  <h3>安全审计（推荐）</h3>
-  <div class="warn-box">
-    ⚠️ ClawHub 上有 13000+ 个技能，<strong>质量参差不齐</strong>。建议先安装 <strong>Clawsec</strong> 安全审计技能：
-    <pre><code>npx clawhub@latest install clawsec</code></pre>
-    安装后，它会自动扫描你要安装的新技能，给出安全评级：SAFE / CAUTION / DANGEROUS。
-  </div>
+    <div class="table-wrap">
+        <table>
+            <tr>
+                <th>概念</th>
+                <th>类比</th>
+                <th>作用</th>
+            </tr>
+            <tr>
+                <td><strong>🌐 Gateway（网关）</strong></td>
+                <td>学校的传达室</td>
+                <td>接收你的消息，分发给 AI 处理。可以连接微信、Telegram 等。</td>
+            </tr>
+            <tr>
+                <td><strong>🧠 Agent（智能体）</strong></td>
+                <td>大脑</td>
+                <td>理解你的意图，决定要做什么、怎么做。基于大语言模型。</td>
+            </tr>
+            <tr>
+                <td><strong>🔧 Skills（技能）</strong></td>
+                <td>工具箱 / 才艺</td>
+                <td>具体的执行能力。搜索、写作、数据分析……每个 Skill 是一项技能。</td>
+            </tr>
+        </table>
+    </div>
+
+    <blockquote>
+        没有 Skills 的小龙虾 = 聪明的实习生（脑子好使，但啥也不会干）<br>
+        装上 Skills 的小龙虾 = 全能的教学助理（要啥会啥）
+    </blockquote>
+
+    <p><strong>安装技能的方法很简单，一行命令：</strong></p>
+    <div class="code-block">
+        <span class="comment"># 安装一个技能（以搜索为例）</span><br>
+        <span class="cmd">npx clawhub@latest install tavily-search</span>
+    </div>
+
+    <div class="callout callout-info">
+        <span class="icon">📊</span>
+        <div class="text">
+            <strong>技能市场有多大？</strong>
+            目前 ClawHub 上有 <strong>11,600+</strong> 个技能可用。但质量参差不齐，后面会告诉你哪些值得装。
+        </div>
+    </div>
 </div>
 
 <!-- Part 6 -->
@@ -588,37 +642,63 @@ npx clawhub@latest install tavily-search</code></pre>
   </div>
 </div>
 
-<!-- Part 8 -->
-<div class="section" id="part8">
-  <h2>🛡️ 八、安全须知<span class="tag tag-time">5分钟</span><span class="tag tag-key">重要</span></h2>
-  
-  <h3>三件必做的事</h3>
-  <ol>
-    <li>
-      <strong>不要把端口开放到公网</strong><br>
-      确认地址是 <code>127.0.0.1:18789</code>（只有自己能访问），<strong>不要</strong>改成 <code>0.0.0.0</code>
-    </li>
-    <li>
-      <strong>保护好 API Key</strong><br>
-      API Key = 密码。不要截图发群里、不要上传到任何地方
-    </li>
-    <li>
-      <strong>定期更新</strong><br>
-      <code>openclaw update</code> — 至少每两周一次
-    </li>
-  </ol>
-  
-  <div class="warn-box">
-    ⚠️ 全球已有 42,000+ 个小龙虾实例因配置不当暴露在公网，近 1,800 个泄露了 API 密钥和聊天记录。<strong>不要成为其中之一。</strong>
-  </div>
-  
-  <h3>执行审批机制</h3>
-  <p>小龙虾做高风险操作时会<strong>先问你</strong>：</p>
-  <ul>
-    <li><strong>Allow once</strong>（允许一次）— 不确定时选这个</li>
-    <li><strong>Always allow</strong>（永远允许）— 确认安全后选这个</li>
-    <li><strong>Deny</strong>（拒绝）— 感觉不对就拒绝</li>
-  </ul>
+<!-- Section 6 -->
+<div class="section" id="s6">
+    <h2><span class="num">6</span>安全须知</h2>
+
+    <div class="callout callout-warn">
+        <span class="icon">⚠️</span>
+        <div class="text">
+            <strong>最重要的一条</strong>
+            AI 是工具，不是权威。所有生成的内容都需要老师审核后才能使用！
+        </div>
+    </div>
+
+    <h3>🔐 数据安全</h3>
+    <ul>
+        <li><strong>不要上传学生的敏感个人信息</strong>（身份证号、家庭住址等）</li>
+        <li>成绩数据建议脱敏后使用（用学号代替姓名）</li>
+        <li>API Key 是你的账户密钥，不要分享给他人</li>
+    </ul>
+
+    <h3>📋 使用原则</h3>
+    <ul>
+        <li>AI 生成的教案和试题，<strong>务必检查准确性</strong>后再使用</li>
+        <li>不要让 AI 替代你的专业判断 —— 它是助手，不是替代者</li>
+        <li>安装技能前用 Clawsec 扫描，🚫 DANGEROUS 评级的坚决不装</li>
+        <li>初次使用建议在非关键场景练手，熟练后再用于正式工作</li>
+    </ul>
+
+    <h3>💰 费用说明</h3>
+    <div class="table-wrap">
+        <table>
+            <tr>
+                <th>项目</th>
+                <th>费用</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>OpenClaw 软件</td>
+                <td><strong>免费</strong></td>
+                <td>开源软件，永久免费</td>
+            </tr>
+            <tr>
+                <td>AI 模型 API</td>
+                <td>约 20-50 元/月</td>
+                <td>按使用量计费，日常教学辅助花费不高</td>
+            </tr>
+            <tr>
+                <td>Tavily 搜索</td>
+                <td>免费额度 1000次/月</td>
+                <td>日常使用基本够了</td>
+            </tr>
+            <tr>
+                <td>Multi Search</td>
+                <td><strong>免费</strong></td>
+                <td>无需 API Key</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <!-- Part 9 -->
@@ -656,34 +736,46 @@ npx clawhub@latest install tavily-search</code></pre>
   </ul>
 </div>
 
-<!-- Part 10 -->
-<div class="section" id="part10">
-  <h2>📚 十、参考资源汇总</h2>
-  
-  <h3>入门教程</h3>
-  <ul>
-    <li>🔗 爱范儿：<a href="https://www.ifanr.com/1656346" target="_blank">小白指南1分钟搞定</a></li>
-    <li>🔗 腾讯新闻：<a href="https://news.qq.com/rain/a/20260309A02VOS00" target="_blank">装好之后的完整配置指南</a></li>
-    <li>🔗 阿里云：<a href="https://developer.aliyun.com/article/1714770" target="_blank">保姆级部署+52个内置Skill</a></li>
-    <li>🔗 中关村在线：<a href="https://news.zol.com.cn/1154/11545455.html" target="_blank">5分钟无痛上手教程</a></li>
-  </ul>
-  
-  <h3>进阶资源</h3>
-  <ul>
-    <li>🔗 微信公众号「开发者阿橙」：<a href="https://mp.weixin.qq.com/s/S_6GweaJ1KmNbaP84QJSZQ" target="_blank">先装这10个Skills，再谈生产力</a></li>
-    <li>🔗 B站：<a href="https://www.bilibili.com/video/BV1TpAZzeEiZ/" target="_blank">全网最细教学：安装→Skills→多Agent协作</a></li>
-    <li>🔗 B站：<a href="https://www.bilibili.com/video/BV1UqPQzXEmy/" target="_blank">李宏毅：解剖小龙虾，AI Agent原理</a></li>
-    <li>🔗 ClawHub 技能市场：<a href="https://clawhub.ai/" target="_blank">clawhub.ai</a></li>
-    <li>🔗 OpenClaw 官方案例：<a href="https://openclaw.ai/showcase" target="_blank">openclaw.ai/showcase</a></li>
-    <li>🔗 网友用例集合：<a href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank">awesome-openclaw-usecases</a></li>
-  </ul>
-  
-  <h3>文章来源</h3>
-  <ul>
-    <li>开发者阿橙 —《OpenClaw避坑指南：先装这10个Skills，再谈生产力》</li>
-    <li>爱范儿 —《别在 OpenClaw 上花冤枉钱了》</li>
-    <li>小互 —《装好小龙虾之后：完整配置指南》</li>
-  </ul>
+<!-- Section 8 -->
+<div class="section" id="s8">
+    <h2><span class="num">8</span>进阶之路</h2>
+
+    <p>掌握基础后，可以继续探索：</p>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>📱 微信连接</h4>
+            <p>把 AI 助理加为微信好友，随时随地用手机对话。</p>
+        </div>
+        <div class="card">
+            <h4>⏰ 定时提醒</h4>
+            <p>每天早上自动推送今日课程安排、待办事项。</p>
+        </div>
+        <div class="card">
+            <h4>🔧 自定义技能</h4>
+            <p>根据你的教学需求，创建专属技能（如自动批改选择题）。</p>
+        </div>
+        <div class="card">
+            <h4>👥 教研组协作</h4>
+            <p>共享技能配置，统一教学辅助工具链。</p>
+        </div>
+    </div>
+
+    <h3>📖 推荐资源</h3>
+    <ul>
+        <li>📘 OpenClaw 官方文档：<a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a></li>
+        <li>🛒 技能市场（11,600+ 技能）：<a href="https://clawhub.com" target="_blank">clawhub.com</a></li>
+        <li>💬 社区交流：<a href="https://discord.com/invite/clawd" target="_blank">Discord 社区</a></li>
+        <li>📄 参考文章：<a href="https://mp.weixin.qq.com/s/S_6GweaJ1KmNbaP84QJSZQ" target="_blank">橙哥：OpenClaw 10个值得装的 Skills 详解</a></li>
+    </ul>
+
+    <div class="callout callout-tip">
+        <span class="icon">🦞</span>
+        <div class="text">
+            <strong>记住</strong>
+            AI 的价值不在于替代老师，而在于解放老师的时间——让你把精力放在最重要的事情上：<strong>教育学生</strong>。
+        </div>
+    </div>
 </div>
 
 </div>
