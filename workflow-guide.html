@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿爪工作流：内容生产 → 三端同步</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --accent: #ff6b35;
+  --accent2: #ffd700;
+  --accent3: #00d4aa;
+  --text: #e8e8e8;
+  --muted: #888;
+  --border: #1e1e2e;
+  --danger: #ff4757;
+  --safe: #2ed573;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Noto Sans SC', 'PingFang SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+.container { max-width: 850px; margin: 0 auto; padding: 24px; }
+.header {
+  text-align: center;
+  padding: 40px 0 30px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 30px;
+}
+.header h1 {
+  font-size: 1.6em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header .sub { color: var(--muted); margin-top: 6px; font-size: 0.9em; }
+
+.section {
+  margin-bottom: 30px;
+}
+.section-title {
+  font-size: 1.2em;
+  color: var(--accent2);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Flow steps */
+.flow {
+  position: relative;
+  padding-left: 36px;
+}
+.flow::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.step {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+.step::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+}
+.step.safe::before { background: var(--safe); }
+.step.danger::before { background: var(--danger); }
+.step .num {
+  display: inline-block;
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.8em;
+  padding: 1px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+.step .num.safe { background: var(--safe); }
+.step .num.danger { background: var(--danger); }
+.step .title { font-weight: 600; display: inline; }
+.step .desc { color: var(--muted); font-size: 0.9em; margin-top: 6px; }
+.step code {
+  background: rgba(255,255,255,0.08);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* Rule boxes */
+.rule-box {
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+.rule-safe {
+  background: rgba(46,213,115,0.08);
+  border: 1px solid rgba(46,213,115,0.25);
+}
+.rule-danger {
+  background: rgba(255,71,87,0.08);
+  border: 1px solid rgba(255,71,87,0.25);
+}
+.rule-box .label {
+  font-weight: 700;
+  font-size: 0.85em;
+  margin-bottom: 6px;
+}
+.rule-safe .label { color: var(--safe); }
+.rule-danger .label { color: var(--danger); }
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.9em;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+}
+th { background: rgba(255,255,255,0.04); color: var(--accent2); }
+
+.footer {
+  text-align: center;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 0.82em;
+}
+
+pre {
+  background: rgba(255,255,255,0.04);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  overflow-x: auto;
+  margin: 10px 0;
+  color: var(--accent3);
+}
+
+@media (max-width: 600px) {
+  .container { padding: 16px; }
+  .header h1 { font-size: 1.3em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🐾 阿爪工作流手册</h1>
+  <div class="sub">内容生产 → 三端同步 · 防覆盖 · 可回滚</div>
+</div>
+
+<!-- ====== 架构 ====== -->
+<div class="section">
+  <div class="section-title">📐 三端同步架构</div>
+  <table>
+    <tr>
+      <th>终端</th><th>位置</th><th>用途</th><th>访问方式</th>
+    </tr>
+    <tr>
+      <td>① Canvas</td>
+      <td><code>canvas/xxx.html</code></td>
+      <td>本地在线预览</td>
+      <td><code>pages.zhangyun.xyz/__openclaw__/canvas/</code></td>
+    </tr>
+    <tr>
+      <td>② Obsidian</td>
+      <td><code>knowledge_vault/05-Claw-Pages/</code></td>
+      <td>手机离线查看</td>
+      <td>Obsidian App → GitHub 同步</td>
+    </tr>
+    <tr>
+      <td>③ kb 知识库</td>
+      <td>GitHub <code>iatnit/claw-pages</code></td>
+      <td>正式知识库</td>
+      <td><code>kb.zhangyun.xyz</code>（Google 登录）</td>
+    </tr>
+  </table>
+  <p style="color:var(--muted);font-size:0.85em;">三者独立存储，互不影响。新内容同时放三份。</p>
+</div>
+
+<!-- ====== 完整流程 ====== -->
+<div class="section">
+  <div class="section-title">🔄 完整流程（以一篇文章为例）</div>
+  <p style="color:var(--muted);margin-bottom:14px;">运哥发来一个链接 → "帮我研究并存档到三端"</p>
+
+  <div class="flow">
+
+    <div class="step safe">
+      <span class="num safe">1</span>
+      <div class="title">抓取 & 研究内容</div>
+      <div class="desc">
+        用 web_fetch / baoyu-url-to-markdown 抓取文章<br>
+        深入研究、整理、提炼核心要点<br>
+        📁 原文存档：<code>url-to-markdown/域名/slug.md</code>
+      </div>
+    </div>
+
+    <div class="step safe">
+      <span class="num safe">2</span>
+      <div class="title">生成 HTML 页面</div>
+      <div class="desc">
+        将研究成果做成精美 HTML 页面<br>
+        📁 保存到：<code>canvas/文件名.html</code><br>
+        ✅ 此时 Canvas（终端①）已可访问
+      </div>
+    </div>
+
+    <div class="step safe">
+      <span class="num safe">3</span>
+      <div class="title">复制到 Obsidian</div>
+      <div class="desc">
+        <code>cp canvas/文件名.html → knowledge_vault/05-Claw-Pages/</code><br>
+        推送 GitHub：<code>git push origin master && git push origin master:main</code><br>
+        ✅ 此时 Obsidian（终端②）手机可同步
+      </div>
+    </div>
+
+    <div class="step danger">
+      <span class="num danger">4</span>
+      <div class="title">⚠️ 更新 kb 首页 index.html（关键步骤）</div>
+      <div class="desc">
+        <strong>先拉取最新版：</strong><code>git pull origin main</code><br>
+        <strong>只追加卡片，不重写整个文件：</strong>在对应分类下新增一个 <code>&lt;a class="card"&gt;</code><br>
+        <strong>绝不运行 build-kb-site.py 生成 index.html</strong>
+      </div>
+    </div>
+
+    <div class="step safe">
+      <span class="num safe">5</span>
+      <div class="title">推送 kb 仓库</div>
+      <div class="desc">
+        复制 HTML 文件到 kb 仓库：<code>cp canvas/文件名.html → /tmp/claw-pages/</code><br>
+        <code>git add -A && git commit && git push origin main</code><br>
+        Cloudflare Pages 自动部署（1-2分钟生效）<br>
+        ✅ 此时 kb.zhangyun.xyz（终端③）可访问
+      </div>
+    </div>
+
+    <div class="step safe">
+      <span class="num safe">6</span>
+      <div class="title">验证 & 确认</div>
+      <div class="desc">
+        用 <code>web_fetch</code> 访问 kb.zhangyun.xyz 确认首页内容完整<br>
+        告诉运哥三端链接，确认完成
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== 防覆盖规则 ====== -->
+<div class="section">
+  <div class="section-title">🛡️ 防覆盖规则</div>
+
+  <div class="rule-danger">
+    <div class="label">🚫 绝对禁止</div>
+    <ul>
+      <li>禁止运行 <code>build-kb-site.py</code> 生成 index.html（它会覆盖首页）</li>
+      <li>禁止整体重写 index.html（只能追加卡片）</li>
+      <li>禁止 <code>git push --force</code>（会丢失历史）</li>
+      <li>禁止不拉取就推送（先 <code>git pull</code> 再 <code>git push</code>）</li>
+    </ul>
+  </div>
+
+  <div class="rule-safe">
+    <div class="label">✅ 正确做法</div>
+    <ul>
+      <li>index.html 只做<strong>追加操作</strong>：在对应分类下插入新卡片</li>
+      <li>每次操作前先 <code>git pull origin main</code> 拿到最新版</li>
+      <li>新文件直接 <code>cp</code> 进仓库，不影响其他文件</li>
+      <li><code>update-kb-site.sh</code> 已修改为<strong>跳过 index.html</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ====== 备份 & 回滚 ====== -->
+<div class="section">
+  <div class="section-title">🔙 备份与回滚能力</div>
+
+  <table>
+    <tr><th>场景</th><th>恢复方法</th></tr>
+    <tr>
+      <td>首页被覆盖</td>
+      <td><code>git log --oneline</code> 找到正常的 commit<br><code>git show &lt;commit&gt;:index.html &gt; index.html</code> 恢复</td>
+    </tr>
+    <tr>
+      <td>某个文件被删除</td>
+      <td><code>git checkout &lt;commit&gt; -- 文件名.html</code></td>
+    </tr>
+    <tr>
+      <td>整个仓库搞乱了</td>
+      <td><code>git reset --hard &lt;正常的commit&gt;</code><br><code>git push origin main --force</code>（仅此情况允许 force push）</td>
+    </tr>
+    <tr>
+      <td>Canvas 文件丢失</td>
+      <td>从 Obsidian 或 kb 仓库反向复制回来</td>
+    </tr>
+    <tr>
+      <td>Obsidian 文件丢失</td>
+      <td>从 Canvas 或 kb 仓库反向复制回来</td>
+    </tr>
+  </table>
+
+  <div class="rule-safe">
+    <div class="label">💡 三重备份 = 天然冗余</div>
+    <p>同一份文件存在三个地方（Canvas + Obsidian + kb仓库），任何一个出问题都能从另外两个恢复。加上 Git 历史，相当于有<strong>四层保险</strong>。</p>
+  </div>
+</div>
+
+<!-- ====== 追加卡片模板 ====== -->
+<div class="section">
+  <div class="section-title">📝 追加卡片模板</div>
+  <p style="color:var(--muted);margin-bottom:10px;">往 index.html 对应分类下插入：</p>
+  <pre>&lt;a class="card" href="新文件名.html"&gt;
+  &lt;div class="title"&gt;📌 文章标题&lt;/div&gt;
+  &lt;div class="desc"&gt;一句话描述。&lt;/div&gt;
+  &lt;div class="meta"&gt;
+    &lt;span class="tag learning"&gt;标签&lt;/span&gt;
+    &lt;span&gt;2026-03-30&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/a&gt;</pre>
+  <p style="color:var(--muted);font-size:0.85em;">
+    可用标签样式：<code>health</code> <code>business</code> <code>learning</code> <code>tool</code> <code>family</code><br>
+    如需新分类，在已有分类之间插入一个新的 <code>&lt;div class="category"&gt;</code> 块即可。
+  </p>
+</div>
+
+<!-- ====== 快速命令 ====== -->
+<div class="section">
+  <div class="section-title">⚡ 快速命令参考</div>
+  <pre># ===== 终端② Obsidian 同步 =====
+cp canvas/新文件.html knowledge_vault/05-Claw-Pages/
+cd knowledge_vault
+git add -A && git commit -m "📚 新增：标题"
+git push origin master && git push origin master:main
+
+# ===== 终端③ kb 知识库同步 =====
+cd /tmp/claw-pages && git pull origin main
+cp ~/clawd/canvas/新文件.html ./
+# 手动编辑 index.html 追加卡片（不要整体替换！）
+git add -A && git commit -m "📚 新增：标题"
+git push origin main
+# Cloudflare Pages 1-2分钟自动部署</pre>
+</div>
+
+<div class="footer">
+  🐾 阿爪工作流手册 v1.0 · 2026-03-30<br>
+  规则：只追加不覆盖 · 先拉取再推送 · 三重备份
+</div>
+
+</div>
+</body>
+</html>

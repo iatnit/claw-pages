@@ -1,187 +1,90 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐾 阿爪知识库</title>
+<!doctype html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OpenClaw Canvas</title>
 <style>
-:root {
-  --bg: #0a0a0f;
-  --card: #12121a;
-  --accent: #ff6b35;
-  --accent2: #ffd700;
-  --accent3: #00d4aa;
-  --text: #e8e8e8;
-  --muted: #888;
-  --border: #1e1e2e;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, 'Noto Sans SC', 'PingFang SC', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  min-height: 100vh;
-}
-.container { max-width: 800px; margin: 0 auto; padding: 20px; }
-
-.header {
-  text-align: center;
-  padding: 50px 0 40px;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 40px;
-}
-.header .logo { font-size: 3em; margin-bottom: 10px; }
-.header h1 {
-  font-size: 1.8em;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.header .subtitle { color: var(--muted); margin-top: 8px; font-size: 0.95em; }
-.header .stats { color: var(--muted); margin-top: 12px; font-size: 0.85em; }
-
-.category {
-  margin-bottom: 35px;
-}
-.category-title {
-  font-size: 1.15em;
-  color: var(--accent2);
-  margin-bottom: 15px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card {
-  display: block;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 22px;
-  margin-bottom: 12px;
-  text-decoration: none;
-  color: var(--text);
-  transition: all 0.2s ease;
-}
-.card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(255,107,53,0.1);
-}
-.card .title {
-  font-size: 1.05em;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-.card .desc {
-  font-size: 0.85em;
-  color: var(--muted);
-  line-height: 1.5;
-}
-.card .meta {
-  display: flex;
-  gap: 12px;
-  margin-top: 8px;
-  font-size: 0.78em;
-  color: var(--muted);
-}
-.card .tag {
-  display: inline-block;
-  padding: 1px 8px;
-  border-radius: 4px;
-  font-size: 0.75em;
-}
-.tag.health { background: rgba(0,212,170,0.15); color: var(--accent3); }
-.tag.learning { background: rgba(255,215,0,0.15); color: var(--accent2); }
-.tag.tool { background: rgba(100,149,237,0.15); color: #6495ed; }
-.tag.new { background: rgba(255,59,48,0.2); color: #ff3b30; }
-
-.footer {
-  text-align: center;
-  padding: 30px 0;
-  border-top: 1px solid var(--border);
-  margin-top: 40px;
-  color: var(--muted);
-  font-size: 0.82em;
-}
-.footer a { color: var(--accent); text-decoration: none; }
-
-@media (max-width: 600px) {
-  .header { padding: 30px 0 25px; }
-  .header h1 { font-size: 1.4em; }
-  .card { padding: 15px 18px; }
-}
+  html, body { height: 100%; margin: 0; background: #000; color: #fff; font: 16px/1.4 -apple-system, BlinkMacSystemFont, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { min-height: 100%; display: grid; place-items: center; padding: 24px; }
+  .card { width: min(720px, 100%); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 14px; }
+  .title { display: flex; align-items: baseline; gap: 10px; }
+  h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
+  .sub { opacity: 0.75; font-size: 13px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  button { appearance: none; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.10); color: #fff; padding: 10px 12px; border-radius: 12px; font-weight: 600; cursor: pointer; }
+  button:active { transform: translateY(1px); }
+  .ok { color: #24e08a; }
+  .bad { color: #ff5c5c; }
+  .log { margin-top: 14px; opacity: 0.85; font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; white-space: pre-wrap; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08); padding: 10px; border-radius: 12px; }
 </style>
-</head>
-<body>
-<div class="container">
+<div class="wrap">
+  <div class="card">
+    <div class="title">
+      <h1>OpenClaw Canvas</h1>
+      <div class="sub">Interactive test page (auto-reload enabled)</div>
+    </div>
 
-  <div class="header">
-    <div class="logo">🐾</div>
-    <h1>阿爪知识库</h1>
-    <div class="subtitle">阿爪出品 · 深度分析 · 实践手册 · 行动指南</div>
-    <div class="stats">共 4 篇 · 持续更新中</div>
+    <div class="row">
+      <button id="btn-hello">Hello</button>
+      <button id="btn-time">Time</button>
+      <button id="btn-photo">Photo</button>
+      <button id="btn-dalek">Dalek</button>
+    </div>
+
+    <div id="status" class="sub" style="margin-top: 10px;"></div>
+    <div id="log" class="log">Ready.</div>
   </div>
-
-  <!-- 学习 & 思维 -->
-  <div class="category">
-    <div class="category-title">📚 学习 & 思维</div>
-
-    <a class="card" href="antifragile-critical-analysis.html">
-      <div class="title">📖 《反脆弱》批判性深度解读</div>
-      <div class="desc">中英文多源交叉验证：七大核心概念、五个主要软肋、中英文解读差异对比、ADHD视角特别分析、推荐深度阅读链接。塔勒布的好想法和他的偏见，一次看清。</div>
-      <div class="meta">
-        <span class="tag new">NEW</span>
-        <span class="tag learning">读书笔记</span>
-        <span>2026-03-31</span>
-      </div>
-    </a>
-
-    <a class="card" href="taleb-adhd-playbook.html">
-      <div class="title">🏋️ 塔勒布思维 × ADHD 实践手册</div>
-      <div class="desc">将塔勒布的反脆弱理论与 ADHD 特质深度融合：认知重塑、杠铃策略、凸性试错、反PUA免疫力和阅读路线图。</div>
-      <div class="meta">
-        <span class="tag learning">方法论</span>
-        <span class="tag health">ADHD</span>
-        <span>2026-03-28</span>
-      </div>
-    </a>
-
-    <a class="card" href="ai-concepts-carousel.html">
-      <div class="title">🤖 AI 核心概念轮播</div>
-      <div class="desc">AI 关键概念可视化卡片，适合快速学习和回顾。</div>
-      <div class="meta">
-        <span class="tag learning">AI学习</span>
-        <span>2026-03-18</span>
-      </div>
-    </a>
-  </div>
-
-  <!-- 教师 & 培训 -->
-  <div class="category">
-    <div class="category-title">🎓 教师 & 培训</div>
-
-    <a class="card" href="openclaw-teacher-guide.html">
-      <div class="title">🦞 OpenClaw（小龙虾）教师培训指南</div>
-      <div class="desc">面向国际学校老师的90分钟培训大纲：从零安装使用小龙虾提升工作和生活效率。含安装路线、配置模板、技能推荐、教师专属场景和Q&A。</div>
-      <div class="meta">
-        <span class="tag tool">AI工具</span>
-        <span class="tag learning">培训</span>
-        <span>2026-03-30</span>
-      </div>
-    </a>
-  </div>
-
-  <div class="footer">
-    🐾 阿爪出品 · kb.zhangyun.xyz<br>
-    持续更新中 — 每次产出新内容自动同步
-  </div>
-
 </div>
-</body>
-</html>
+<script>
+(() => {
+  const logEl = document.getElementById("log");
+  const statusEl = document.getElementById("status");
+  const log = (msg) => { logEl.textContent = String(msg); };
+
+  const hasIOS = () =>
+    !!(
+      window.webkit &&
+      window.webkit.messageHandlers &&
+      window.webkit.messageHandlers.openclawCanvasA2UIAction
+    );
+  const hasAndroid = () =>
+    !!(
+      (window.openclawCanvasA2UIAction &&
+        typeof window.openclawCanvasA2UIAction.postMessage === "function")
+    );
+  const hasHelper = () => typeof window.openclawSendUserAction === "function";
+  statusEl.innerHTML =
+    "Bridge: " +
+    (hasHelper() ? "<span class='ok'>ready</span>" : "<span class='bad'>missing</span>") +
+    " · iOS=" + (hasIOS() ? "yes" : "no") +
+    " · Android=" + (hasAndroid() ? "yes" : "no");
+
+  const onStatus = (ev) => {
+    const d = ev && ev.detail || {};
+    log("Action status: id=" + (d.id || "?") + " ok=" + String(!!d.ok) + (d.error ? (" error=" + d.error) : ""));
+  };
+  window.addEventListener("openclaw:a2ui-action-status", onStatus);
+
+  function send(name, sourceComponentId) {
+    if (!hasHelper()) {
+      log("No action bridge found. Ensure you're viewing this on an iOS/Android OpenClaw node canvas.");
+      return;
+    }
+    const sendUserAction =
+      typeof window.openclawSendUserAction === "function"
+        ? window.openclawSendUserAction
+        : undefined;
+    const ok = sendUserAction({
+      name,
+      surfaceId: "main",
+      sourceComponentId,
+      context: { t: Date.now() },
+    });
+    log(ok ? ("Sent action: " + name) : ("Failed to send action: " + name));
+  }
+
+  document.getElementById("btn-hello").onclick = () => send("hello", "demo.hello");
+  document.getElementById("btn-time").onclick = () => send("time", "demo.time");
+  document.getElementById("btn-photo").onclick = () => send("photo", "demo.photo");
+  document.getElementById("btn-dalek").onclick = () => send("dalek", "demo.dalek");
+})();
+</script>

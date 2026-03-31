@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张家全家每日营养素服用表</title>
+    <style>
+        @media print {
+            body { padding: 0; background: white; }
+            .no-print { display: none; }
+            .person-page { page-break-after: always; }
+            .person-page:last-child { page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        .person-page {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .header { text-align: center; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 3px solid; }
+        .header h1 { font-size: 1.4em; margin-bottom: 3px; }
+        .header .info { color: #888; font-size: 0.82em; }
+        .header-girl { border-color: #e91e90; }
+        .header-boy { border-color: #2196f3; }
+        .header-dad { border-color: #ff9800; }
+        .header-mom { border-color: #9c27b0; }
+
+        .time-block { margin-bottom: 16px; border-radius: 10px; overflow: hidden; border: 2px solid #eee; }
+        .time-header { padding: 9px 16px; font-size: 1.05em; font-weight: bold; color: white; }
+        .morning { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .evening { background: linear-gradient(135deg, #2c3e50, #34495e); }
+
+        .pill-list { padding: 12px 16px; }
+        .pill-row { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px dashed #f0f0f0; }
+        .pill-row:last-child { border-bottom: none; }
+        .pill-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1em; margin-right: 10px; flex-shrink: 0; }
+        .icon-fish { background: #e3f2fd; }
+        .icon-ps { background: #f3e5f5; }
+        .icon-d3 { background: #fff8e1; }
+        .icon-ezz { background: #e8f5e9; }
+        .icon-zinc { background: #fce4ec; }
+        .icon-mag { background: #e0f7fa; }
+        .icon-multi { background: #fff3e0; }
+        .icon-liver { background: #efebe9; }
+        .icon-eye { background: #e8eaf6; }
+        .icon-vc { background: #f1f8e9; }
+        .icon-vb { background: #e8f5e9; }
+        .icon-ve { background: #fce4ec; }
+        .icon-gluc { background: #e0f2f1; }
+        .icon-protein { background: #fff9c4; }
+
+        .pill-info { flex: 1; }
+        .pill-name { font-weight: 600; font-size: 0.9em; }
+        .pill-detail { font-size: 0.75em; color: #888; margin-top: 1px; }
+        .pill-count { font-size: 1.2em; font-weight: 800; min-width: 45px; text-align: center; }
+        .pill-check { width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 4px; margin-left: 6px; flex-shrink: 0; }
+
+        .weekly-track { margin-top: 12px; padding: 12px 16px; background: #f8fffe; border: 1px solid #a7f3d0; border-radius: 10px; }
+        .weekly-track h3 { color: #059669; font-size: 0.85em; margin-bottom: 8px; }
+        .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+        .day-col { border: 1px solid #e5e7eb; border-radius: 6px; padding: 4px 2px; }
+        .day-col .day-name { font-size: 0.75em; font-weight: 600; color: #555; margin-bottom: 4px; }
+        .day-col .check-box { width: 16px; height: 16px; border: 2px solid #ccc; border-radius: 3px; margin: 2px auto; }
+        .day-col .check-label { font-size: 0.6em; color: #999; }
+
+        .notes { margin-top: 12px; padding: 10px 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; }
+        .notes h3 { color: #d97706; font-size: 0.82em; margin-bottom: 5px; }
+        .notes li { font-size: 0.75em; color: #555; margin-bottom: 2px; line-height: 1.4; }
+        .notes ul { padding-left: 15px; }
+
+        .alert-box { margin-top: 10px; padding: 10px 14px; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 8px; }
+        .alert-box p { font-size: 0.78em; color: #b91c1c; font-weight: 600; }
+
+        .footer { text-align: center; font-size: 0.72em; color: #ccc; margin-top: 10px; }
+        .nav-link { text-align: center; margin: 20px auto; max-width: 700px; }
+        .nav-link a { display: inline-block; background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 12px 28px; border-radius: 10px; text-decoration: none; font-size: 1em; font-weight: bold; margin: 5px; }
+        .nav-link a.blue { background: linear-gradient(135deg, #3498db, #2c3e50); }
+    </style>
+</head>
+<body>
+
+<!-- ===== 第1页：张悠然 ===== -->
+<div class="person-page">
+    <div class="header header-girl">
+        <h1>👧 张悠然 每日营养素</h1>
+        <div class="info">15岁 · 50kg · ADHD 营养支持 · 2026.03.29</div>
+    </div>
+    <div class="time-block">
+        <div class="time-header morning">🌅 早餐时（跟饭一起吃！）</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-fish">🐟</div><div class="pill-info"><div class="pill-name">鱼油 Mega EPA/DHA</div><div class="pill-detail">EPA 720mg + DHA 480mg</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ps">💜</div><div class="pill-info"><div class="pill-name">PS 磷脂酰丝氨酸</div><div class="pill-detail">100mg · 改善注意力</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-d3">☀️</div><div class="pill-info"><div class="pill-name">维生素 D3</div><div class="pill-detail">Swanson · 脂溶性随餐吃</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ezz">💚</div><div class="pill-info"><div class="pill-name">EZZ 复合胶囊</div><div class="pill-detail">赖氨酸+钙+B2+锌+牛磺酸</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">穿透血脑屏障 · ADHD 王牌</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="time-header evening">🌙 晚饭后</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-zinc">⚡</div><div class="pill-info"><div class="pill-name">吡啶甲酸锌 22mg</div><div class="pill-detail">不能空腹！</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ezz">💚</div><div class="pill-info"><div class="pill-name">EZZ 复合胶囊</div><div class="pill-detail">14-24岁每天共3粒</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">助眠 · 每天共4粒=120mg</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="weekly-track">
+        <h3>✅ 本周打卡</h3>
+        <div class="week-grid">
+            <div class="day-col"><div class="day-name">一</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">二</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">三</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">四</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">五</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">六</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">日</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+        </div>
+    </div>
+    <div class="notes"><h3>⚠️ 注意</h3><ul><li>鱼油+D3 <strong>必须随饭吃</strong></li><li>锌<strong>不能空腹</strong></li><li>苏糖酸镁如拉肚子 → 减到每次1粒</li><li>至少坚持 <strong>3个月</strong> 再评估</li></ul></div>
+    <div class="notes" style="background:#eef6ff; border-color:#93c5fd; margin-top:8px;">
+        <h3 style="color:#2563eb;">🏃 每日运动</h3>
+        <ul>
+            <li>🏓 <strong>乒乓球</strong> — 短时爆发，线粒体增殖（已在练）</li>
+            <li>🏊 <strong>游泳</strong> — 持续有氧，线粒体效率（已在练）</li>
+            <li>🪢 <strong>跳绳 5-10分钟</strong> — HIIT，最强线粒体合成</li>
+            <li>🧘 <strong>拉伸 10分钟</strong> — 每天必做！</li>
+        </ul>
+    </div>
+    <div class="footer">🐾 阿爪出品 · 2026.03.29</div>
+</div>
+
+<!-- ===== 第2页：张浩然 ===== -->
+<div class="person-page">
+    <div class="header header-boy">
+        <h1>👦 张浩然 每日营养素</h1>
+        <div class="info">12岁 · 50kg · 154cm · ADHD 营养支持 · 2026.03.29</div>
+    </div>
+    <div class="time-block">
+        <div class="time-header morning">🌅 早餐时（跟饭一起吃！）</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-fish">🐟</div><div class="pill-info"><div class="pill-name">鱼油 Mega EPA/DHA</div><div class="pill-detail">EPA 720mg + DHA 480mg</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ps">💜</div><div class="pill-info"><div class="pill-name">PS 磷脂酰丝氨酸</div><div class="pill-detail">100mg · 改善注意力</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-d3">☀️</div><div class="pill-info"><div class="pill-name">维生素 D3</div><div class="pill-detail">Swanson · 脂溶性随餐吃</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ezz">💚</div><div class="pill-info"><div class="pill-name">EZZ 复合胶囊</div><div class="pill-detail">赖氨酸+钙+B2+锌+牛磺酸</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">穿透血脑屏障 · ADHD 王牌</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="time-header evening">🌙 晚饭后</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-zinc">⚡</div><div class="pill-info"><div class="pill-name">吡啶甲酸锌 22mg</div><div class="pill-detail">不能空腹！</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ezz">💚</div><div class="pill-info"><div class="pill-name">EZZ 复合胶囊</div><div class="pill-detail">9-13岁每天共2粒</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">助眠+放松腿部肌肉 · 每天共4粒</div></div><div class="pill-count">×2</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="weekly-track">
+        <h3>✅ 本周打卡</h3>
+        <div class="week-grid">
+            <div class="day-col"><div class="day-name">一</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">二</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">三</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">四</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">五</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">六</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">日</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+        </div>
+    </div>
+    <div class="notes"><h3>⚠️ 注意</h3><ul><li>鱼油+D3 <strong>必须随饭吃</strong></li><li>锌<strong>不能空腹</strong></li><li>每天早晚各 250ml <strong>全脂纯牛奶</strong>（身高发育）</li><li>至少坚持 <strong>3个月</strong> 再评估</li></ul></div>
+    <div class="notes" style="background:#eef6ff; border-color:#93c5fd; margin-top:8px;">
+        <h3 style="color:#2563eb;">🏃 每日运动</h3>
+        <ul>
+            <li>🏓 <strong>乒乓球</strong> — 短时爆发，线粒体增殖（已在练）</li>
+            <li>🏊 <strong>游泳</strong> — 持续有氧，线粒体效率（已在练）</li>
+            <li>🪢 <strong>跳绳 5-10分钟</strong> — HIIT，最强线粒体合成</li>
+            <li>🧘 <strong>拉伸 10分钟</strong> — 每天必做！（扁平足+腿硬）</li>
+            <li>🚿 <strong>冷水淋浴 30秒</strong> — 热水澡后冲冷水，激活棕色脂肪线粒体</li>
+        </ul>
+    </div>
+    <div class="footer">🐾 阿爪出品 · 2026.03.29</div>
+</div>
+
+<!-- ===== 第3页：运哥 ===== -->
+<div class="person-page">
+    <div class="header header-dad">
+        <h1>👨 运哥 每日营养素</h1>
+        <div class="info">71kg · ADHD + 替尔泊肽用药中 · 2026.03.29</div>
+    </div>
+    <div class="alert-box">
+        <p>⚠️ 替尔泊肽让食量减少40%，营养素流失严重。每餐必须保证蛋白质摄入！目标：每天 85g+ 蛋白质</p>
+    </div>
+    <div class="time-block" style="margin-top:14px;">
+        <div class="time-header morning">🌅 早餐时（跟饭一起吃！）</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-multi">💊</div><div class="pill-info"><div class="pill-name">Swisse 男士复合维生素</div><div class="pill-detail">基础打底（含B族+维C+锌等）</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-d3">☀️</div><div class="pill-info"><div class="pill-name">ACTASK 维D3 5000IU</div><div class="pill-detail">GLP-1 最易缺 + ADHD 辅助</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-fish">🐟</div><div class="pill-info"><div class="pill-name">鱼油 Mega EPA/DHA</div><div class="pill-detail">ADHD + 抗炎（脂溢性皮炎）</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">穿透血脑屏障 · ADHD 支持</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row" style="background:#fffde7; border-radius:6px; padding:8px;"><div class="pill-icon icon-protein">⭐</div><div class="pill-info"><div class="pill-name" style="color:#d97706;">蛋白质 ≥30g</div><div class="pill-detail" style="color:#92400e;">2-3个鸡蛋 / 蛋白粉 / 瘦肉 — 防肌肉流失！</div></div><div class="pill-count" style="color:#d97706;">必吃</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="time-header evening">🌙 晚饭后</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-zinc">⚡</div><div class="pill-info"><div class="pill-name">吡啶甲酸锌 22mg</div><div class="pill-detail">复合维生素只含8mg不够 · ADHD需15-30mg</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">助眠 · 每天共2粒</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-liver">🛡️</div><div class="pill-info"><div class="pill-name">ACTASK 护肝片</div><div class="pill-detail">药物代谢支持</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-eye">👁️</div><div class="pill-info"><div class="pill-name">叶黄素</div><div class="pill-detail">长期看屏幕护眼</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="weekly-track">
+        <h3>✅ 本周打卡</h3>
+        <div class="week-grid">
+            <div class="day-col"><div class="day-name">一</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">二</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">三</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">四</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">五</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">六</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">日</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+        </div>
+    </div>
+    <div class="notes"><h3>⚠️ 注意</h3><ul><li><strong>小蘗碱暂停</strong>（与替尔泊肽同时降血糖有低血糖风险）</li><li>Swisse 复合维生素含锌仅 8mg，加 Swanson 锌 22mg = 共 30mg，安全范围内</li><li>消化差 → 苏糖酸镁比柠檬酸镁温和，如仍拉肚子则减量</li><li>鱼油对<strong>脂溢性皮炎</strong>有抗炎帮助</li></ul></div>
+    <div class="notes" style="background:#fef3c7; border-color:#fbbf24; margin-top:8px;">
+        <h3 style="color:#b45309;">🏋️ 每日运动（防肌肉流失！）</h3>
+        <ul>
+            <li>💪 <strong>俯卧撑</strong> 3组×10个（可从跪姿开始）</li>
+            <li>🦵 <strong>深蹲</strong> 3组×15个</li>
+            <li>🧱 <strong>平板支撑</strong> 3组×30秒</li>
+            <li>🚶 <strong>散步</strong> 20-30分钟</li>
+            <li style="color:#b45309; font-weight:600;">⚠️ 替尔泊肽减掉的不只是脂肪，还有肌肉！力量训练是必须的！</li>
+        </ul>
+    </div>
+    <div class="footer">🐾 阿爪出品 · 2026.03.29</div>
+</div>
+
+<!-- ===== 第4页：陈旻 ===== -->
+<div class="person-page">
+    <div class="header header-mom">
+        <h1>👩 陈旻 每日营养素</h1>
+        <div class="info">163cm · 关节保健 · 2026.03.29</div>
+    </div>
+    <div class="time-block">
+        <div class="time-header morning">🌅 早餐时</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-vb">🌈</div><div class="pill-info"><div class="pill-name">ACTASK Vitamin B 复合</div><div class="pill-detail">能量代谢+神经系统</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-vc">🍊</div><div class="pill-info"><div class="pill-name">维生素C咀嚼片</div><div class="pill-detail">抗氧化+免疫+促铁吸收</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-d3">☀️</div><div class="pill-info"><div class="pill-name">ACTASK 维D3 5000IU</div><div class="pill-detail">骨骼+预防骨质疏松+钙吸收</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-ve">💗</div><div class="pill-info"><div class="pill-name">维生素E</div><div class="pill-detail">女性抗氧化+皮肤</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">神经放松+肌肉舒缓</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="time-block">
+        <div class="time-header evening">🌙 晚饭后</div>
+        <div class="pill-list">
+            <div class="pill-row"><div class="pill-icon icon-gluc">🦴</div><div class="pill-info"><div class="pill-name">Blackmores 氨糖 1500mg</div><div class="pill-detail">关节软骨修复 · 关节痛对症</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-mag">🧠</div><div class="pill-info"><div class="pill-name">苏糖酸镁 Magtein</div><div class="pill-detail">助眠+缓解关节僵硬 · 每天共2粒</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+            <div class="pill-row"><div class="pill-icon icon-eye">👁️</div><div class="pill-info"><div class="pill-name">叶黄素</div><div class="pill-detail">护眼</div></div><div class="pill-count">×1</div><div class="pill-check"></div></div>
+        </div>
+    </div>
+    <div class="weekly-track">
+        <h3>✅ 本周打卡</h3>
+        <div class="week-grid">
+            <div class="day-col"><div class="day-name">一</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">二</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">三</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">四</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">五</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">六</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+            <div class="day-col"><div class="day-name">日</div><div class="check-label">早</div><div class="check-box"></div><div class="check-label">晚</div><div class="check-box"></div></div>
+        </div>
+    </div>
+    <div class="notes"><h3>⚠️ 注意</h3><ul><li>氨糖需连续吃 <strong>4-6周</strong> 才能感受到关节改善</li><li>维D3+维E 是脂溶性，<strong>随餐吃</strong>吸收好</li><li>如关节痛加重建议看骨科确认原因</li></ul></div>
+    <div class="notes" style="background:#f3e8ff; border-color:#c4b5fd; margin-top:8px;">
+        <h3 style="color:#7c3aed;">🧘 每日运动（关节友好版）</h3>
+        <ul>
+            <li>🚶 <strong>散步</strong> 30分钟 — 低冲击有氧，关节友好</li>
+            <li>🧘 <strong>瑜伽/拉伸</strong> 15分钟 — 增加关节灵活性</li>
+            <li>🏊 <strong>游泳</strong>（如方便）— 零冲击，关节最佳运动</li>
+            <li>🦵 <strong>靠墙静蹲</strong> 3组×30秒 — 强化膝关节周围肌肉</li>
+            <li style="color:#7c3aed; font-size:0.72em;">⚠️ 避免跑步/跳跃等高冲击运动，保护关节</li>
+        </ul>
+    </div>
+    <div class="footer">🐾 阿爪出品 · 2026.03.29</div>
+</div>
+
+<!-- 跳转链接 -->
+<div class="nav-link no-print">
+    <a href="./adhd-diet-guide.html">🚦 红绿灯饮食指南</a>
+    <a href="./adhd-daily-supplement.html" class="blue">📋 孩子用药表（旧版）</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访客登记</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 30px 0;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-message .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .success-message .icon::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        .success-message h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .success-message p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            padding: 12px 30px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        
+        .qr-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        #qrcode {
+            margin: 0 auto;
+            padding: 15px;
+            background: white;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .admin-link a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .admin-link a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 访客登记</h1>
+            <p>请填写以下信息完成登记</p>
+        </div>
+        
+        <div class="card" id="formCard">
+            <form id="checkinForm">
+                <div class="form-group">
+                    <label>姓名 <span class="required">*</span></label>
+                    <input type="text" name="name" placeholder="请输入您的姓名" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>电话 <span class="required">*</span></label>
+                    <input type="tel" name="phone" placeholder="请输入您的手机号码" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>公司/单位</label>
+                    <input type="text" name="company" placeholder="请输入您的公司或单位名称（选填）">
+                </div>
+                
+                <div class="form-group">
+                    <label>来访目的 <span class="required">*</span></label>
+                    <select name="purpose" required>
+                        <option value="">请选择来访目的</option>
+                        <option value="商务洽谈">商务洽谈</option>
+                        <option value="会议">参加会议</option>
+                        <option value="面试">面试</option>
+                        <option value="拜访">拜访客户</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>备注</label>
+                    <textarea name="notes" placeholder="如有其他需要说明的事项，请在此填写"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">提交登记</button>
+            </form>
+            
+            <div class="qr-section">
+                <h3>📱 扫码快速访问</h3>
+                <div id="qrcode"></div>
+            </div>
+        </div>
+        
+        <div class="card success-message" id="successMessage">
+            <div class="icon"></div>
+            <h2>登记成功！</h2>
+            <p>感谢您的配合，我们的工作人员会尽快与您联系。</p>
+            <button class="back-btn" onclick="location.reload()">返回继续登记</button>
+        </div>
+        
+        <div class="admin-link">
+            <a href="./admin.html">🔒 进入管理后台</a>
+        </div>
+    </div>
+    
+    <script>
+        // 生成当前页面的二维码
+        function generateQRCode() {
+            const currentUrl = window.location.href;
+            const qrcodeContainer = document.getElementById('qrcode');
+            qrcodeContainer.innerHTML = '';
+            
+            new QRCode(qrcodeContainer, {
+                text: currentUrl,
+                width: 150,
+                height: 150,
+                colorDark: '#333333',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        }
+        
+        // 表单提交
+        document.getElementById('checkinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '提交中...';
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            data.checkin_time = new Date().toISOString();
+            data.id = Date.now();
+            
+            // 保存到 localStorage
+            let records = JSON.parse(localStorage.getItem('checkin_records') || '[]');
+            records.unshift(data);
+            localStorage.setItem('checkin_records', JSON.stringify(records));
+            
+            // 显示成功信息
+            document.getElementById('formCard').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        });
+        
+        // 页面加载时生成二维码
+        window.addEventListener('load', generateQRCode);
+    </script>
+</body>
+</html>

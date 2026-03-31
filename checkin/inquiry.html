@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品咨询 - LOCACRYSTAL®幸运（乐卡辅料）水钻</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .header-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header-banner h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .company-intro {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .company-intro p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .company-intro .en {
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .contact-info {
+            padding: 20px 30px;
+            background: #fafafa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .contact-info h3 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .contact-item .label {
+            min-width: 80px;
+            color: #888;
+        }
+        
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-content {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: #fff;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group .hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            accent-color: #667eea;
+            cursor: pointer;
+        }
+        
+        .checkbox-item span {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .checkbox-item span.en {
+            color: #667eea;
+            font-size: 13px;
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .file-upload:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .file-upload .upload-icon {
+            font-size: 32px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload .upload-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        .file-list {
+            margin-top: 10px;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .file-item .remove-file {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 60px 30px;
+        }
+        
+        .success-message .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .success-message .icon::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        .success-message h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .success-message p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .back-btn {
+            padding: 12px 30px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 25px 30px;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+        
+        .qr-section h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        #qrcode {
+            display: inline-block;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .admin-link {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .admin-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header-banner {
+                padding: 30px 20px;
+            }
+            
+            .company-intro,
+            .contact-info,
+            .form-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <div class="header-banner">
+                <h1>LOCACRYSTAL®幸运（乐卡辅料）水钻</h1>
+            </div>
+            
+            <div class="company-intro">
+                <p>本公司17年专注水晶水钻制品，专业生产各种带钻类服装辅料，鞋材辅料，手镯辅料，饰品辅料以及家居用品，供应工厂、跨境电商、外贸公司，是您可信赖的合作伙伴。</p>
+                <p class="en">With 17 years of expertise in crystal and rhinestone products, our company specializes in manufacturing a wide range of embellished apparel accessories, footwear components, bracelet parts, jewelry elements, and home décor items. We proudly supply factories, e-commerce platforms, and international trade companies, making us your trusted and reliable partner.</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>📞 联系方式 Contact</h3>
+                <div class="contact-item">
+                    <span class="label">微信Wechat:</span>
+                    <span>18606776000</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">WhatsApp:</span>
+                    <a href="https://wa.me/8618606776000" target="_blank">Talk to Lucky (Sales manager)</a>
+                </div>
+                <div class="contact-item">
+                    <span class="label">店面地址:</span>
+                    <span>义乌兴中小区9栋1号（幸运水钻）</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">工厂地址:</span>
+                    <span>浦江经济开发区前方大道313号（乐卡辅料）</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">网站:</span>
+                    <a href="http://www.locacrystal.com" target="_blank">www.locacrystal.com</a>
+                </div>
+            </div>
+            
+            <div class="form-content" id="formContent">
+                <form id="inquiryForm">
+                    <div class="form-group">
+                        <label>姓名 Name <span class="required">*</span></label>
+                        <input type="text" name="name" placeholder="请输入您的姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>手机号 Phone <span class="required">*</span></label>
+                        <input type="tel" name="phone" placeholder="Example: +86 18606776000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>国家 Country <span class="required">*</span></label>
+                        <input type="text" name="country" placeholder="请输入您所在的国家" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>感兴趣的产品 your Interest in <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Footwear related">
+                                <span class="en">Footwear related</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Bangle related">
+                                <span class="en">Bangle related</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Hair clips related">
+                                <span class="en">Hair clips related</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Jewelry related">
+                                <span class="en">Jewelry related</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Fitted accessories">
+                                <span class="en">Fitted accessories</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Sheets">
+                                <span class="en">Sheets</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Rhinestone Chaton">
+                                <span class="en">Rhinestone Chaton</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Rhinestone lines and Strips">
+                                <span class="en">Rhinestone lines and Strips</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Fancy crystal beads">
+                                <span class="en">Fancy crystal beads</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Rhinestone Hotfix">
+                                <span class="en">Rhinestone Hotfix</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="interest" value="Mirror items">
+                                <span class="en">Mirror items</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>业务类型 your business <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="business" value="retail shop">
+                                <span class="en">retail shop</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="business" value="whole sell shop">
+                                <span class="en">whole sell shop</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="business" value="factory">
+                                <span class="en">factory</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="business" value="shipping agent">
+                                <span class="en">shipping agent</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>样品图片、名片等 Name Card/Sample <span class="required">*</span></label>
+                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">+</div>
+                            <div class="upload-text">请选择或拖拽上传附件、限制每个20MB以内</div>
+                            <input type="file" id="fileInput" multiple accept="image/*,.pdf,.doc,.docx" onchange="handleFileSelect(event)">
+                        </div>
+                        <div class="file-list" id="fileList"></div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">提交 Submit</button>
+                </form>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <div class="icon"></div>
+                <h2>提交成功！Submitted Successfully!</h2>
+                <p>感谢您的咨询，我们的销售经理会尽快与您联系。<br>Thank you for your inquiry. Our sales manager will contact you soon.</p>
+                <button class="back-btn" onclick="location.reload()">返回继续提交 Return</button>
+            </div>
+            
+            <div class="qr-section">
+                <h3>📱 扫码快速访问 Scan to Access</h3>
+                <div id="qrcode"></div>
+            </div>
+        </div>
+        
+        <div class="admin-link">
+            <a href="./inquiry-admin.html">🔒 管理后台 Admin</a>
+        </div>
+    </div>
+    
+    <script>
+        // 存储选中的文件
+        let selectedFiles = [];
+        
+        // 处理文件选择
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            selectedFiles = [...selectedFiles, ...files];
+            updateFileList();
+        }
+        
+        // 更新文件列表显示
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = selectedFiles.map((file, index) => `
+                <div class="file-item">
+                    <span>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    <span class="remove-file" onclick="removeFile(${index})">×</span>
+                </div>
+            `).join('');
+        }
+        
+        // 移除文件
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+        }
+        
+        // 拖拽上传
+        document.querySelector('.file-upload').addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.currentTarget.style.borderColor = '#667eea';
+            e.currentTarget.style.background = '#f8f9ff';
+        });
+        
+        document.querySelector('.file-upload').addEventListener('dragleave', (e) => {
+            e.currentTarget.style.borderColor = '#ddd';
+            e.currentTarget.style.background = '#fafafa';
+        });
+        
+        document.querySelector('.file-upload').addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.currentTarget.style.borderColor = '#ddd';
+            e.currentTarget.style.background = '#fafafa';
+            
+            const files = Array.from(e.dataTransfer.files);
+            selectedFiles = [...selectedFiles, ...files];
+            updateFileList();
+        });
+        
+        // 生成二维码
+        function generateQRCode() {
+            const currentUrl = window.location.href;
+            const qrcodeContainer = document.getElementById('qrcode');
+            qrcodeContainer.innerHTML = '';
+            
+            new QRCode(qrcodeContainer, {
+                text: currentUrl,
+                width: 150,
+                height: 150,
+                colorDark: '#333333',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        }
+        
+        // 表单提交
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '提交中 Submitting...';
+            
+            // 收集表单数据
+            const formData = {
+                id: Date.now(),
+                name: document.querySelector('input[name="name"]').value,
+                phone: document.querySelector('input[name="phone"]').value,
+                country: document.querySelector('input[name="country"]').value,
+                interests: Array.from(document.querySelectorAll('input[name="interest"]:checked')).map(cb => cb.value),
+                business: Array.from(document.querySelectorAll('input[name="business"]:checked')).map(cb => cb.value),
+                files: selectedFiles.map(f => f.name),
+                submitTime: new Date().toISOString()
+            };
+            
+            // 保存到 localStorage
+            let records = JSON.parse(localStorage.getItem('inquiry_records') || '[]');
+            records.unshift(formData);
+            localStorage.setItem('inquiry_records', JSON.stringify(records));
+            
+            // 显示成功信息
+            document.getElementById('formContent').style.display = 'none';
+            document.querySelector('.qr-section').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        });
+        
+        // 页面加载时生成二维码
+        window.addEventListener('load', generateQRCode);
+    </script>
+</body>
+</html>

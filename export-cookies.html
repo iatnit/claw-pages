@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM Cookie 导出工具</title>
+    <style>
+        body { font-family: 'PingFang SC', sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { color: #2c3e50; text-align: center; }
+        .step { background: #e8f4fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #3498db; }
+        .step h3 { margin-top: 0; color: #2980b9; }
+        button { background: #3498db; color: #fff; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; margin: 10px 0; }
+        button:hover { background: #2980b9; }
+        textarea { width: 100%; height: 150px; border: 2px solid #ddd; border-radius: 8px; padding: 10px; font-family: monospace; font-size: 12px; resize: vertical; box-sizing: border-box; }
+        .success { background: #d5f5e3; color: #27ae60; padding: 15px; border-radius: 8px; display: none; text-align: center; font-weight: bold; }
+        .warn { background: #fdf2e9; color: #e67e22; padding: 10px; border-radius: 6px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🍪 NotebookLM Cookie 导出</h1>
+        <p>这个页面帮你把 Google 登录 Cookie 导出，让阿爪可以自动操作 NotebookLM。</p>
+        
+        <div class="step">
+            <h3>步骤 1：打开 NotebookLM</h3>
+            <p>在这个浏览器的<strong>另一个标签页</strong>打开并确保已登录：</p>
+            <button onclick="window.open('https://notebooklm.google.com/', '_blank')">打开 NotebookLM ↗</button>
+        </div>
+
+        <div class="step">
+            <h3>步骤 2：复制 Cookie</h3>
+            <p>在 NotebookLM 那个标签页里，按 <strong>F12</strong> 打开开发者工具，点 <strong>Console（控制台）</strong>，粘贴以下代码并回车：</p>
+            <textarea id="code" readonly>document.cookie</textarea>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('code').value)">复制代码 📋</button>
+        </div>
+
+        <div class="step">
+            <h3>步骤 3：粘贴结果</h3>
+            <p>把控制台输出的结果粘贴到下面的框里：</p>
+            <textarea id="cookies" placeholder="把 Cookie 内容粘贴到这里..."></textarea>
+            <button onclick="copyCookies()">复制并发送给阿爪 📤</button>
+        </div>
+        
+        <div class="success" id="success">✅ 已复制到剪贴板！请粘贴发送给阿爪（Telegram）</div>
+
+        <div class="warn">
+            ⚠️ Cookie 包含你的登录信息，只发给阿爪，不要分享给其他人。
+        </div>
+    </div>
+
+    <script>
+    function copyCookies() {
+        const cookies = document.getElementById('cookies').value;
+        if (!cookies.trim()) {
+            alert('请先粘贴 Cookie 内容！');
+            return;
+        }
+        navigator.clipboard.writeText(cookies).then(() => {
+            document.getElementById('success').style.display = 'block';
+        });
+    }
+    </script>
+</body>
+</html>
