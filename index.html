@@ -25,7 +25,6 @@ body {
 }
 .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
-/* Header */
 .header {
   text-align: center;
   padding: 50px 0 40px;
@@ -41,8 +40,8 @@ body {
   background-clip: text;
 }
 .header .subtitle { color: var(--muted); margin-top: 8px; font-size: 0.95em; }
+.header .stats { color: var(--muted); margin-top: 12px; font-size: 0.85em; }
 
-/* Category */
 .category {
   margin-bottom: 35px;
 }
@@ -57,7 +56,6 @@ body {
   gap: 8px;
 }
 
-/* Cards */
 .card {
   display: block;
   background: var(--card);
@@ -99,13 +97,10 @@ body {
   font-size: 0.75em;
 }
 .tag.health { background: rgba(0,212,170,0.15); color: var(--accent3); }
-.tag.business { background: rgba(255,107,53,0.15); color: var(--accent); }
 .tag.learning { background: rgba(255,215,0,0.15); color: var(--accent2); }
 .tag.tool { background: rgba(100,149,237,0.15); color: #6495ed; }
-.tag.family { background: rgba(255,100,200,0.15); color: #ff7ec3; }
 .tag.new { background: rgba(255,59,48,0.2); color: #ff3b30; }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 30px 0;
@@ -116,7 +111,6 @@ body {
 }
 .footer a { color: var(--accent); text-decoration: none; }
 
-/* Responsive */
 @media (max-width: 600px) {
   .header { padding: 30px 0 25px; }
   .header h1 { font-size: 1.4em; }
@@ -130,40 +124,40 @@ body {
   <div class="header">
     <div class="logo">🐾</div>
     <h1>阿爪知识库</h1>
-    <div class="subtitle">运哥的 AI 伙伴 — 手册 · 指南 · 工具</div>
+    <div class="subtitle">阿爪出品 · 深度分析 · 实践手册 · 行动指南</div>
+    <div class="stats">共 4 篇 · 持续更新中</div>
   </div>
 
-  <!-- 家庭 & 健康 -->
+  <!-- 学习 & 思维 -->
   <div class="category">
-    <div class="category-title">👨‍👩‍👧‍👦 家庭 & 健康</div>
+    <div class="category-title">📚 学习 & 思维</div>
+
+    <a class="card" href="antifragile-critical-analysis.html">
+      <div class="title">📖 《反脆弱》批判性深度解读</div>
+      <div class="desc">中英文多源交叉验证：七大核心概念、五个主要软肋、中英文解读差异对比、ADHD视角特别分析、推荐深度阅读链接。塔勒布的好想法和他的偏见，一次看清。</div>
+      <div class="meta">
+        <span class="tag new">NEW</span>
+        <span class="tag learning">读书笔记</span>
+        <span>2026-03-31</span>
+      </div>
+    </a>
 
     <a class="card" href="taleb-adhd-playbook.html">
       <div class="title">🏋️ 塔勒布思维 × ADHD 实践手册</div>
-      <div class="desc">将塔勒布的反脆弱理论与 ADHD 特质深度融合，为浩然和闺女量身定制的行动指南。包含杠铃策略、凸性试错、反PUA免疫力、阅读路线图。</div>
+      <div class="desc">将塔勒布的反脆弱理论与 ADHD 特质深度融合：认知重塑、杠铃策略、凸性试错、反PUA免疫力和阅读路线图。</div>
       <div class="meta">
-        <span class="tag family">家庭定制</span>
+        <span class="tag learning">方法论</span>
         <span class="tag health">ADHD</span>
         <span>2026-03-28</span>
       </div>
     </a>
 
-    <a class="card" href="adhd-diet-guide.html">
-      <div class="title">🧬 ADHD 饮食 & 营养全攻略</div>
-      <div class="desc">三合一整合版：红绿灯饮食 + 6瓶实际补剂方案 + 线粒体修复。含早晚服用时间表、库存清单、3个月评估。</div>
+    <a class="card" href="ai-concepts-carousel.html">
+      <div class="title">🤖 AI 核心概念轮播</div>
+      <div class="desc">AI 关键概念可视化卡片，适合快速学习和回顾。</div>
       <div class="meta">
-        <span class="tag health">健康</span>
-        <span class="tag family">育儿</span>
-        <span>2026-03-29 (v2.1)</span>
-      </div>
-    </a>
-
-    <a class="card" href="family-nutrition-print.html">
-      <div class="title">🖨️ 全家每日营养素表（打印版）</div>
-      <div class="desc">四页 A4：浩然 · 悠然 · 运哥 · 陈旻，每人一页含早晚用药表+一周打勾表，直接打印贴冰箱。</div>
-      <div class="meta">
-        <span class="tag health">健康</span>
-        <span class="tag family">全家</span>
-        <span>2026-03-29</span>
+        <span class="tag learning">AI学习</span>
+        <span>2026-03-18</span>
       </div>
     </a>
   </div>
@@ -176,7 +170,6 @@ body {
       <div class="title">🦞 OpenClaw（小龙虾）教师培训指南</div>
       <div class="desc">面向国际学校老师的90分钟培训大纲：从零安装使用小龙虾提升工作和生活效率。含安装路线、配置模板、技能推荐、教师专属场景和Q&A。</div>
       <div class="meta">
-        <span class="tag new">NEW</span>
         <span class="tag tool">AI工具</span>
         <span class="tag learning">培训</span>
         <span>2026-03-30</span>
@@ -184,97 +177,8 @@ body {
     </a>
   </div>
 
-  <!-- 商业 & 业务 -->
-  <div class="category">
-    <div class="category-title">💼 商业 & 业务</div>
-
-    <a class="card" href="pakistan-shoe-customers.html">
-      <div class="title">🇵🇰 巴基斯坦鞋材辅料大客户开发指南</div>
-      <div class="desc">拉合尔鞋类市场深度调研，顶级客户名录、采购联系方式、展会信息。</div>
-      <div class="meta">
-        <span class="tag business">外贸</span>
-        <span>2026-03-18</span>
-      </div>
-    </a>
-
-    <a class="card" href="shoe-ecommerce-strategy.html">
-      <div class="title">👟 鞋材电商策略</div>
-      <div class="desc">鞋材辅料线上销售策略分析与平台选择。</div>
-      <div class="meta">
-        <span class="tag business">电商</span>
-        <span>2026-03-18</span>
-      </div>
-    </a>
-  </div>
-
-  <!-- 学习 & 成长 -->
-  <div class="category">
-    <div class="category-title">📚 学习 & 成长</div>
-
-    <a class="card" href="antifragile-critical-analysis.html">
-      <div class="title">📖 《反脆弱》批判性深度解读</div>
-      <div class="desc">中英文多源交叉验证：七大核心概念、五个主要软肋、中英文解读差异对比、ADHD视角特别分析、推荐深度阅读链接。塔勒布的好想法和他的偏见，一次看清。</div>
-      <div class="meta">
-        <span class="tag new">NEW</span>
-        <span class="tag learning">读书笔记</span>
-        <span class="tag health">ADHD</span>
-        <span>2026-03-31</span>
-      </div>
-    </a>
-
-    <a class="card" href="howie-analysis.html">
-      <div class="title">🔍 Howie 操作模式拆解</div>
-      <div class="desc">学习榜样分析：小能熊创始人陈华伟的完整工具链、费曼学习法、Learn in Public 工作流，及运哥对标行动方案。</div>
-      <div class="meta">
-        <span class="tag learning">学习方法</span>
-        <span>2026-03-29</span>
-      </div>
-    </a>
-
-    <a class="card" href="ai-concepts-carousel.html">
-      <div class="title">🤖 AI 核心概念轮播</div>
-      <div class="desc">AI 关键概念可视化卡片，适合快速学习和回顾。</div>
-      <div class="meta">
-        <span class="tag learning">AI学习</span>
-        <span>2026-03-18</span>
-      </div>
-    </a>
-
-    <a class="card" href="upgrade-plan.html">
-      <div class="title">🔄 个人升级蓝图</div>
-      <div class="desc">基于《有限与无限的游戏》的个人 OS 升级计划 — 识别角色、力量与权力、拥抱意外。</div>
-      <div class="meta">
-        <span class="tag learning">读书笔记</span>
-        <span>2026-03-15</span>
-      </div>
-    </a>
-  </div>
-
-  <!-- 工具 & Dashboard -->
-  <div class="category">
-    <div class="category-title">🔧 工具 & 面板</div>
-
-    <a class="card" href="super-dashboard.html">
-      <div class="title">📊 超级仪表盘</div>
-      <div class="desc">阿爪系统运行状态、任务追踪、快捷操作面板。</div>
-      <div class="meta">
-        <span class="tag tool">工具</span>
-        <span>2026-03-29</span>
-      </div>
-    </a>
-
-    <a class="card" href="dashboard.html">
-      <div class="title">📋 基础面板</div>
-      <div class="desc">快捷信息面板。</div>
-      <div class="meta">
-        <span class="tag tool">工具</span>
-        <span>2026-03-18</span>
-      </div>
-    </a>
-  </div>
-
   <div class="footer">
-    🐾 阿爪出品 | <a href="https://github.com/iatnit/claw-pages">GitHub</a><br>
+    🐾 阿爪出品 · kb.zhangyun.xyz<br>
     持续更新中 — 每次产出新内容自动同步
   </div>
 
