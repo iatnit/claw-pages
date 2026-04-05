@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>国际学校教师 AI 效率培训方案 · 阿爪出品</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #09090f;
+      --card: #11111c;
+      --border: #1c1c2e;
+      --accent: #818cf8;
+      --accent2: #34d399;
+      --accent3: #f59e0b;
+      --accent4: #f472b6;
+      --text: #e2e2f0;
+      --muted: #666;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, #0f0f20 0%, #0a0a14 60%, #090912 100%);
+      padding: 70px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: #818cf822;
+      border: 1px solid #818cf844;
+      color: var(--accent);
+      font-size: 0.78rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #818cf8, #34d399, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .hero p { color: #888; font-size: 1rem; max-width: 560px; margin: 0 auto 28px; line-height: 1.7; }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-stat .num { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .hero-stat .label { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    /* ── Layout ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+    /* ── Section ── */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .section-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 700; flex-shrink: 0;
+    }
+    .section-title { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+    .section-sub { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    /* ── Tool Cards ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .tool-card:hover { border-color: var(--accent); }
+    .tool-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .tool-card .name { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .tool-card .role { font-size: 0.78rem; color: var(--accent); margin-bottom: 10px; }
+    .tool-card .desc { font-size: 0.83rem; color: #888; line-height: 1.6; }
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th {
+      background: #0d0d1a;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #141420;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+    /* ── Tags ── */
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .tag-blue { background: #818cf822; color: #818cf8; border: 1px solid #818cf844; }
+    .tag-green { background: #34d39922; color: #34d399; border: 1px solid #34d39944; }
+    .tag-yellow { background: #f59e0b22; color: #f59e0b; border: 1px solid #f59e0b44; }
+    .tag-pink { background: #f472b622; color: #f472b6; border: 1px solid #f472b644; }
+    .tag-purple { background: #a78bfa22; color: #a78bfa; border: 1px solid #a78bfa44; }
+    /* ── Prompt Box ── */
+    .prompt-box {
+      background: #0a0a16;
+      border: 1px solid #818cf833;
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.82rem;
+      color: #c7d2fe;
+      line-height: 1.8;
+      margin: 12px 0;
+      white-space: pre-wrap;
+    }
+    .prompt-label {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      font-family: sans-serif;
+    }
+    /* ── Steps ── */
+    .steps { list-style: none; }
+    .steps li {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .steps li:last-child { border-bottom: none; }
+    .step-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #34d399);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .step-content .title { font-weight: 600; margin-bottom: 3px; }
+    .step-content .desc { font-size: 0.85rem; color: #888; line-height: 1.6; }
+    /* ── Timeline ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 0;
+    }
+    .tl-time {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 12px 16px 12px 0;
+      border-right: 2px solid var(--border);
+      text-align: right;
+    }
+    .tl-content {
+      padding: 12px 0 12px 20px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #0f0f1a;
+      line-height: 1.6;
+    }
+    .tl-content strong { color: var(--accent); }
+    /* ── Pain Grid ── */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .pain-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .pain-card .level {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .pain-card.high .level { color: #f87171; }
+    .pain-card.mid .level { color: #f59e0b; }
+    .pain-card ul { list-style: none; }
+    .pain-card li {
+      font-size: 0.85rem;
+      color: #aaa;
+      padding: 5px 0;
+      border-bottom: 1px solid #1a1a28;
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .pain-card li:last-child { border-bottom: none; }
+    /* ── Subject Matrix ── */
+    .matrix { overflow-x: auto; }
+    /* ── Cost ── */
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .cost-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .cost-card.best { border-color: #818cf844; background: #818cf808; }
+    .cost-card .price { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin: 8px 0 4px; }
+    .cost-card .plan { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+    .cost-card .tools { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+    /* ── Tip ── */
+    .tip {
+      background: #0d1f1a;
+      border: 1px solid #34d39933;
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: #a7f3d0;
+      font-size: 0.86rem;
+      line-height: 1.7;
+      margin: 14px 0;
+    }
+    .tip strong { color: #34d399; }
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: #333;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.7rem; }
+      .hero-stats { gap: 20px; }
+      .container { padding: 32px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="badge">悠然国际学校 · 教师培训方案 · 2026-04-05</div>
+  <h1>教师 AI 效率工具<br>培训完整方案</h1>
+  <p>以小龙虾（OpenClaw）为核心，整合豆包、DeepSeek、NotebookLM，让老师每天少干 2 小时</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">2.5h</div><div class="label">培训时长</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label">核心工具</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">实战演练</div></div>
+    <div class="hero-stat"><div class="num">¥0</div><div class="label">入门成本</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 教师痛点 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">①</div>
+      <div>
+        <div class="section-title">教师核心痛点梳理</div>
+        <div class="section-sub">IGCSE / A-Level 体系教师的真实工作负担</div>
+      </div>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card high">
+        <div class="level">🔴 高频痛点（每天）</div>
+        <ul>
+          <li>📚 备课耗时：每节课 2-3 小时找资料、做PPT</li>
+          <li>✍️ Essay批改：量大、反馈难保证质量</li>
+          <li>📨 家长沟通：中英文切换、措辞占用大量时间</li>
+          <li>📝 出题命题：期中期末出题费时费力</li>
+        </ul>
+      </div>
+      <div class="pain-card mid">
+        <div class="level">🟡 中频痛点（每周）</div>
+        <ul>
+          <li>🎯 个性化辅导：学生水平参差，难以逐一设计</li>
+          <li>🌐 翻译需求：中英文教材混用频繁</li>
+          <li>📋 报告撰写：学生评语、教研总结</li>
+          <li>📊 学情分析：跟踪进步、识别薄弱点</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip">
+      💡 <strong>研究数据</strong>：使用 AI 工具后，备课/批改效率平均提升 30%+，家校沟通时间减少 50%。
+    </div>
+  </div>
+
+  <!-- 工具矩阵 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">②</div>
+      <div>
+        <div class="section-title">工具矩阵</div>
+        <div class="section-sub">以小龙虾为调度中枢，按场景分配最佳工具</div>
+      </div>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="icon">🦞</div>
+        <div class="name">小龙虾（OpenClaw）</div>
+        <div class="role">调度中枢 · 核心助手</div>
+        <div class="desc">微信/Telegram 直接接入。英文批改、学生评语、个人AI助手，Claude 驱动，质量最高。</div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">🫘</div>
+        <div class="name">豆包 App</div>
+        <div class="role">日常快速助手</div>
+        <div class="desc">手机随手可用。备课框架、家长通知翻译、批量评语生成。全网最低价，几乎免费。</div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">🔍</div>
+        <div class="name">DeepSeek</div>
+        <div class="role">出题 · 逻辑推理</div>
+        <div class="desc">出卷命题、错题分析、教研总结。推理能力国产最强，API 价格是 Claude 的 5%。</div>
+      </div>
+      <div class="tool-card">
+        <div class="icon">📓</div>
+        <div class="name">NotebookLM</div>
+        <div class="role">教材分析 · 知识库</div>
+        <div class="desc">上传考纲/教材，只基于文件回答，不会乱编。一键生成课程播客，支持中英双语。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🗺️ 场景 → 工具 对应表</h3>
+      <table>
+        <thead>
+          <tr><th>场景</th><th>推荐工具</th><th>理由</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>备课框架生成</td><td><span class="tag tag-yellow">豆包</span></td><td>速度快，中文优秀，几乎免费</td></tr>
+          <tr><td>Essay / 中文作文批改</td><td><span class="tag tag-blue">小龙虾</span></td><td>Claude 精细英文反馈，质量最高</td></tr>
+          <tr><td>家长通知中英互译</td><td><span class="tag tag-yellow">豆包</span></td><td>快速、准确、随手可用</td></tr>
+          <tr><td>出题命题</td><td><span class="tag tag-green">DeepSeek R1</span></td><td>逻辑推理强，出题质量高</td></tr>
+          <tr><td>考纲/教材深度分析</td><td><span class="tag tag-pink">NotebookLM</span></td><td>基于文档回答，不幻觉</td></tr>
+          <tr><td>课程播客生成</td><td><span class="tag tag-pink">NotebookLM</span></td><td>Audio Overview 一键生成</td></tr>
+          <tr><td>学生个性化评语</td><td><span class="tag tag-blue">小龙虾</span><span class="tag tag-yellow">豆包</span></td><td>语言自然，可批量处理</td></tr>
+          <tr><td>PPT / 课件</td><td><span class="tag tag-yellow">豆包</span></td><td>多模态，直接生图</td></tr>
+          <tr><td>教研总结 / 反思</td><td><span class="tag tag-green">DeepSeek</span></td><td>逻辑整理清晰</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 培训模块 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">③</div>
+      <div>
+        <div class="section-title">培训模块设计</div>
+        <div class="section-sub">总时长 2.5 小时 · 理论 + 实操结合</div>
+      </div>
+    </div>
+
+    <!-- 时间表 -->
+    <div class="card" style="margin-bottom:24px">
+      <h3>⏱️ 时间表</h3>
+      <div class="timeline">
+        <div class="tl-time">09:00-09:20</div>
+        <div class="tl-content"><strong>模块一：认知破冰</strong>（20分钟）消除恐惧，建立正确期待</div>
+        <div class="tl-time">09:20-09:45</div>
+        <div class="tl-content"><strong>模块二A：豆包 + DeepSeek</strong>（25分钟）日常工具上手</div>
+        <div class="tl-time">09:45-10:05</div>
+        <div class="tl-content"><strong>模块二B：NotebookLM + 小龙虾</strong>（20分钟）进阶工具</div>
+        <div class="tl-time">10:05-10:15</div>
+        <div class="tl-content">☕ 休息</div>
+        <div class="tl-time">10:15-11:00</div>
+        <div class="tl-content"><strong>模块三：场景实战</strong>（45分钟）3个实操演练</div>
+        <div class="tl-time">11:00-11:30</div>
+        <div class="tl-content"><strong>模块四：进阶路线 + 答疑</strong>（30分钟）</div>
+      </div>
+    </div>
+
+    <!-- 模块一 -->
+    <div class="card">
+      <h3>🧊 模块一：认知破冰（20分钟）</h3>
+      <ul class="steps">
+        <li>
+          <div class="step-dot">1</div>
+          <div class="step-content">
+            <div class="title">破冰提问</div>
+            <div class="desc">「你现在每天有哪些工作，让你觉得又重复又累？」——收集真实痛点，当场用AI解决</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">2</div>
+          <div class="step-content">
+            <div class="title">核心认知：AI是"无限实习生"</div>
+            <div class="desc">AI 会犯错，所以老师不会被取代。但"用AI的老师"会取代"不用AI的老师"。</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">3</div>
+          <div class="step-content">
+            <div class="title">建立期待：今天学完，明天就能用上</div>
+            <div class="desc">零代码、零门槛。手机 App 即可开始，不需要任何技术背景。</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 模块三 实战 -->
+    <div class="card">
+      <h3>⚡ 模块三：场景实战（45分钟）</h3>
+
+      <div style="margin-bottom:24px">
+        <div style="font-weight:700;margin-bottom:10px;color:#f59e0b">实战1：10分钟生成完整教案</div>
+        <div class="prompt-label">示范 Prompt（直接复制使用）</div>
+        <div class="prompt-box">我是悠然国际学校的初中科学老师，
+教授IGCSE协调科学，目前学习"生态系统"单元。
+请帮我设计一节50分钟的课堂教案，包括：
+- 学习目标（3条）
+- 导入活动（5分钟）
+- 主要教学内容（30分钟，含2个互动环节）
+- 小组讨论题（3个）
+- 课后作业（2道题）
+语言：中文为主，专业术语用英文标注</div>
+        <div class="desc" style="font-size:0.83rem;color:#888">老师只需修改：学科 + 单元 + 课时目标，3分钟内完成</div>
+      </div>
+
+      <div style="margin-bottom:24px">
+        <div style="font-weight:700;margin-bottom:10px;color:#818cf8">实战2：AI批改一篇作文</div>
+        <div class="prompt-label">示范 Prompt</div>
+        <div class="prompt-box">请按照IGCSE English First Language的评分标准，
+批改以下学生作文。要求：
+1. 总体评分（/40）和理由
+2. 内容与结构：3个亮点
+3. 语言与表达：3个改进建议，每个给出修改示范句
+4. 写给学生的鼓励性总评（2-3句话）
+5. 语气：专业但温暖
+
+[粘贴学生作文]</div>
+      </div>
+
+      <div>
+        <div style="font-weight:700;margin-bottom:10px;color:#34d399">实战3：NotebookLM 分析 IGCSE 考纲</div>
+        <ul class="steps">
+          <li>
+            <div class="step-dot">1</div>
+            <div class="step-content"><div class="title">上传文件</div><div class="desc">将 Cambridge IGCSE Syllabus PDF 上传到 NotebookLM</div></div>
+          </li>
+          <li>
+            <div class="step-dot">2</div>
+            <div class="step-content"><div class="title">提问考点</div><div class="desc">「第三单元的核心考点是什么？历年常考题型有哪些？」</div></div>
+          </li>
+          <li>
+            <div class="step-dot">3</div>
+            <div class="step-content"><div class="title">生成播客</div><div class="desc">点击 Audio Overview，把教材变成15分钟通勤播客，课前让学生预习</div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 学科专属方案 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">④</div>
+      <div>
+        <div class="section-title">各学科专属工作流</div>
+        <div class="section-sub">按学科定制，开箱即用</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="matrix">
+        <table>
+          <thead>
+            <tr><th>学科</th><th>主力工具</th><th>核心使用场景</th><th>月省时估算</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🇬🇧 英语老师</td>
+              <td><span class="tag tag-blue">小龙虾</span><span class="tag tag-pink">NotebookLM</span></td>
+              <td>Essay精批 · 考纲分析 · 阅读理解出题</td>
+              <td style="color:#34d399">~15h</td>
+            </tr>
+            <tr>
+              <td>➗ 数学老师</td>
+              <td><span class="tag tag-green">DeepSeek R1</span></td>
+              <td>出题命题 · 解题思路分析 · 错题整理</td>
+              <td style="color:#34d399">~10h</td>
+            </tr>
+            <tr>
+              <td>🔬 科学老师</td>
+              <td><span class="tag tag-pink">NotebookLM</span><span class="tag tag-yellow">豆包</span></td>
+              <td>实验设计 · 教材备课 · 多媒体课件</td>
+              <td style="color:#34d399">~12h</td>
+            </tr>
+            <tr>
+              <td>📖 人文老师</td>
+              <td><span class="tag tag-pink">NotebookLM</span><span class="tag tag-blue">小龙虾</span></td>
+              <td>多文献整合 · 论文批改 · 历史资料分析</td>
+              <td style="color:#34d399">~18h</td>
+            </tr>
+            <tr>
+              <td>🇨🇳 中文老师</td>
+              <td><span class="tag tag-yellow">豆包</span><span class="tag tag-green">DeepSeek</span></td>
+              <td>作文批改 · 文言文解析 · 学生评语</td>
+              <td style="color:#34d399">~14h</td>
+            </tr>
+            <tr>
+              <td>🏫 班主任</td>
+              <td><span class="tag tag-yellow">豆包</span><span class="tag tag-blue">小龙虾</span></td>
+              <td>家长通知 · 学生评语 · 班会方案</td>
+              <td style="color:#34d399">~8h</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 费用方案 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">⑤</div>
+      <div>
+        <div class="section-title">费用方案</div>
+        <div class="section-sub">从完全免费到全功能，按需选择</div>
+      </div>
+    </div>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="plan">🆓 免费体验版</div>
+        <div class="price">¥0</div>
+        <div class="tools">豆包免费版<br>DeepSeek 网页免费<br>NotebookLM 免费<br>腾讯混元 Lite 免费</div>
+      </div>
+      <div class="cost-card best">
+        <div class="plan">⭐ 性价比版</div>
+        <div class="price">¥30</div>
+        <div class="tools">豆包 Pro<br>DeepSeek API<br>NotebookLM Plus<br>月均 50 万 Token</div>
+      </div>
+      <div class="cost-card">
+        <div class="plan">🚀 全功能版</div>
+        <div class="price">¥80</div>
+        <div class="tools">性价比版全部<br>+ 小龙虾（Claude）<br>英文批改质量最高</div>
+      </div>
+      <div class="cost-card">
+        <div class="plan">🏫 学校采购</div>
+        <div class="price">谈</div>
+        <div class="tools">小龙虾企业版<br>统一部署管理<br>按教师人数定价</div>
+      </div>
+    </div>
+    <div class="tip" style="margin-top:16px">
+      💡 <strong>对比参考</strong>：Claude Pro 单人 $20/月（¥145）；ChatGPT Plus $20/月（¥145）。国产工具组合方案费用仅为海外工具的 <strong>1/5 到 1/20</strong>，且无需翻墙。
+    </div>
+  </div>
+
+  <!-- NotebookLM 专区 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">⑥</div>
+      <div>
+        <div class="section-title">NotebookLM 国际学校专属玩法</div>
+        <div class="section-sub">IGCSE / A-Level 体系最强备课神器</div>
+      </div>
+    </div>
+    <div class="card">
+      <ul class="steps">
+        <li>
+          <div class="step-dot">A</div>
+          <div class="step-content">
+            <div class="title">Cambridge 考纲精读</div>
+            <div class="desc">上传 IGCSE/A-Level Syllabus PDF → 问「第5单元考点？常见考法？」→ 精准引用考纲原文，不幻觉</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">B</div>
+          <div class="step-content">
+            <div class="title">教材变通勤播客</div>
+            <div class="desc">上传课本章节 → 点「Audio Overview」→ 15分钟双人对话播客 → 课前发给学生预习，节省讲课时间</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">C</div>
+          <div class="step-content">
+            <div class="title">多资料融合备课</div>
+            <div class="desc">同时上传：教材 + 历年真题 + 教学指南 → 「这个知识点历年出题角度有哪些变化？」→ 综合多份文件分析</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">D</div>
+          <div class="step-content">
+            <div class="title">学生预习材料生成</div>
+            <div class="desc">上传课本章节 → 「生成5个课前思考问题，适合IGCSE学生水平」→ 直接发给学生</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  🐾 阿爪出品 · <a href="https://kb.zhangyun.xyz">kb.zhangyun.xyz</a> · 悠然国际学校教师培训专用 · 2026-04-05
+</footer>
+
+</body>
+</html>

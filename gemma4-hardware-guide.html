@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemma 4 本地部署硬件选购指南 · 阿爪出品</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      background: #0a0a10;
+      color: #e2e2f0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .hero {
+      text-align: center;
+      padding: 60px 0 50px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed22, #2563eb22);
+      border: 1px solid #7c3aed44;
+      color: #a78bfa;
+      font-size: 0.8rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: #666;
+      font-size: 1rem;
+    }
+    .section {
+      background: #12121e;
+      border: 1px solid #1e1e30;
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin: 24px 0;
+    }
+    .section h2 {
+      font-size: 1.15rem;
+      color: #a78bfa;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #0d0d1a;
+      color: #888;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #1e1e30;
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #1a1a28;
+      color: #d0d0e8;
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #14142010; }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .tag-green { background: #05966922; color: #34d399; border: 1px solid #05966944; }
+    .tag-red { background: #dc262622; color: #f87171; border: 1px solid #dc262644; }
+    .tag-yellow { background: #d9770622; color: #fbbf24; border: 1px solid #d9770644; }
+    .tag-purple { background: #7c3aed22; color: #a78bfa; border: 1px solid #7c3aed44; }
+    .tag-blue { background: #2563eb22; color: #60a5fa; border: 1px solid #2563eb44; }
+    .tier-card {
+      background: #0d0d1a;
+      border: 1px solid #1e1e30;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 12px 0;
+    }
+    .tier-card.best { border-color: #7c3aed44; }
+    .tier-card h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tier-card .specs {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.8;
+    }
+    .tier-card .model-rec {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: #a78bfa;
+    }
+    .speed-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .speed-bar {
+      flex: 1;
+      height: 6px;
+      background: #1e1e30;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .speed-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #7c3aed, #60a5fa);
+    }
+    .speed-label {
+      font-size: 0.8rem;
+      color: #666;
+      width: 80px;
+      text-align: right;
+    }
+    .cmd-box {
+      background: #0a0a14;
+      border: 1px solid #1e1e30;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.85rem;
+      color: #a78bfa;
+      margin: 10px 0;
+    }
+    .cmd-box .comment { color: #444; }
+    .tip {
+      background: #0d1f1a;
+      border: 1px solid #05966933;
+      border-radius: 10px;
+      padding: 16px 20px;
+      color: #a7f3d0;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin: 16px 0;
+    }
+    .tip strong { color: #34d399; }
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #333;
+      font-size: 0.8rem;
+    }
+    footer a { color: #7c3aed; text-decoration: none; }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .section { padding: 20px 18px; }
+      table { font-size: 0.8rem; }
+      td, th { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="badge">2026-04-05 · 阿爪出品</div>
+    <h1>Gemma 4 本地部署<br>硬件选购指南</h1>
+    <p>从手机到旗舰工作站，找到最适合你的本地 AI 配置</p>
+  </div>
+
+  <!-- 模型家族 -->
+  <div class="section">
+    <h2>🧬 Gemma 4 模型家族（2026-04-02 发布）</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>模型</th>
+          <th>架构</th>
+          <th>总参数</th>
+          <th>上下文</th>
+          <th>支持模态</th>
+          <th>定位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>E2B</strong></td>
+          <td>Dense (PLE)</td>
+          <td>~5.1B</td>
+          <td>128K</td>
+          <td>文/图/音/视频</td>
+          <td><span class="tag tag-green">手机端</span></td>
+        </tr>
+        <tr>
+          <td><strong>E4B</strong></td>
+          <td>Dense (PLE)</td>
+          <td>~5.1B</td>
+          <td>128K</td>
+          <td>文/图/音/视频</td>
+          <td><span class="tag tag-green">手机/轻量</span></td>
+        </tr>
+        <tr>
+          <td><strong>26B A4B</strong></td>
+          <td>MoE</td>
+          <td>26B（激活4B）</td>
+          <td>256K</td>
+          <td>文/图/视频</td>
+          <td><span class="tag tag-purple">⭐ 主力推荐</span></td>
+        </tr>
+        <tr>
+          <td><strong>31B</strong></td>
+          <td>Dense</td>
+          <td>31B</td>
+          <td>256K</td>
+          <td>文/图/视频</td>
+          <td><span class="tag tag-blue">旗舰</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      💡 <strong>E 系列的秘密</strong>：E2B/E4B 使用 Per-Layer Embeddings（PLE）技术，推理深度远超同参数量模型——用"小身体装了大脑"，是手机端的最优选择。
+    </div>
+  </div>
+
+  <!-- 显存需求 -->
+  <div class="section">
+    <h2>💾 显存/内存需求一览表</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>模型</th>
+          <th>Q4 量化</th>
+          <th>Q8 量化</th>
+          <th>BF16 全精度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>E2B</strong></td>
+          <td><span class="tag tag-green">~2 GB</span></td>
+          <td>~5 GB</td>
+          <td>~15 GB</td>
+        </tr>
+        <tr>
+          <td><strong>E4B</strong></td>
+          <td><span class="tag tag-green">~5 GB</span></td>
+          <td>~8 GB</td>
+          <td>~15 GB</td>
+        </tr>
+        <tr>
+          <td><strong>26B A4B</strong></td>
+          <td><span class="tag tag-yellow">~18 GB</span></td>
+          <td>~28 GB</td>
+          <td>~52 GB</td>
+        </tr>
+        <tr>
+          <td><strong>31B</strong></td>
+          <td><span class="tag tag-yellow">~20 GB</span></td>
+          <td>~34 GB</td>
+          <td>~62 GB</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 按设备推荐 -->
+  <div class="section">
+    <h2>📱 按设备推荐配置</h2>
+
+    <div class="tier-card">
+      <h3>📱 手机端（iPhone 17 Pro / 高端安卓）</h3>
+      <div class="specs">12GB 统一内存 · A19 Pro / 骁龙旗舰 · Neural Engine 加持</div>
+      <div class="model-rec">✅ 推荐：<strong>E4B Q4</strong>（~5GB）或 E2B Q8（~5GB）<br>支持：文字 + 图片 + 音频 + 视频多模态输入</div>
+    </div>
+
+    <div class="tier-card">
+      <h3>💻 Mac M4 / M5（32GB 统一内存）</h3>
+      <div class="specs">统一内存架构 · 约 120-150 GB/s 带宽 · 超低功耗</div>
+      <div class="model-rec">✅ 推荐：<strong>26B A4B Q4</strong>（~18GB）<br>速度约 30-50 t/s，支持 256K 超长上下文</div>
+    </div>
+
+    <div class="tier-card">
+      <h3>🖥️ Win + RTX 4080 Super（16GB VRAM）</h3>
+      <div class="specs">16GB GDDR6X · 736 GB/s 带宽 · 32GB 系统内存</div>
+      <div class="model-rec">✅ 推荐：<strong>26B A4B Q4</strong>（溢出约 2GB 到内存）约 40-50 t/s<br>✅ 也可跑：Qwen3-14B Q8（完全在 VRAM 内，极速）</div>
+    </div>
+
+    <div class="tier-card best">
+      <h3>🚀 Win + RTX 4090（24GB VRAM）<span class="tag tag-purple" style="font-size:0.7rem">推荐升级</span></h3>
+      <div class="specs">24GB GDDR6X · ~1008 GB/s 带宽 · 顶级本地推理</div>
+      <div class="model-rec">✅ 推荐：<strong>31B Q4</strong>（全速，约 80-120 t/s）<br>✅ 26B A4B Q8（完整精度，约 60-80 t/s）<br>可跑任意 70B 以下模型</div>
+    </div>
+
+    <div class="tier-card best">
+      <h3>🏆 Mac M5 Pro（64GB 统一内存）<span class="tag tag-blue" style="font-size:0.7rem">2026年6月发布</span></h3>
+      <div class="specs">64GB 统一内存 · 预计 ~200 GB/s 带宽 · macOS 生态</div>
+      <div class="model-rec">✅ 推荐：<strong>31B Q8</strong>（高精度，约 40-60 t/s）<br>✅ 还可跑：Qwen3-30B、Llama 3.3 70B Q4<br>256K 超长上下文不成问题</div>
+    </div>
+  </div>
+
+  <!-- 速度对比 -->
+  <div class="section">
+    <h2>⚡ 26B A4B Q4 生成速度横向对比</h2>
+    <table>
+      <thead>
+        <tr><th>硬件</th><th>生成速度</th><th>上下文支持</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>iPhone 17 Pro</td>
+          <td>
+            <div class="speed-bar-wrap">
+              <div class="speed-bar"><div class="speed-bar-fill" style="width:4%"></div></div>
+              <span class="speed-label">~7 t/s</span>
+            </div>
+          </td>
+          <td>128K</td>
+        </tr>
+        <tr>
+          <td>Mac M4 32GB</td>
+          <td>
+            <div class="speed-bar-wrap">
+              <div class="speed-bar"><div class="speed-bar-fill" style="width:22%"></div></div>
+              <span class="speed-label">~35 t/s</span>
+            </div>
+          </td>
+          <td>256K</td>
+        </tr>
+        <tr>
+          <td>RTX 4080S 16GB</td>
+          <td>
+            <div class="speed-bar-wrap">
+              <div class="speed-bar"><div class="speed-bar-fill" style="width:30%"></div></div>
+              <span class="speed-label">~45 t/s</span>
+            </div>
+          </td>
+          <td>128K（溢出）</td>
+        </tr>
+        <tr>
+          <td>RTX 4090 24GB</td>
+          <td>
+            <div class="speed-bar-wrap">
+              <div class="speed-bar"><div class="speed-bar-fill" style="width:75%"></div></div>
+              <span class="speed-label">~119 t/s</span>
+            </div>
+          </td>
+          <td>256K</td>
+        </tr>
+        <tr>
+          <td>RTX 5090 32GB</td>
+          <td>
+            <div class="speed-bar-wrap">
+              <div class="speed-bar"><div class="speed-bar-fill" style="width:100%"></div></div>
+              <span class="speed-label">~180 t/s</span>
+            </div>
+          </td>
+          <td>256K</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 快速上手 -->
+  <div class="section">
+    <h2>🚀 5 分钟跑起来（Ollama）</h2>
+    <div class="cmd-box">
+      <span class="comment"># macOS / Linux</span><br>
+      brew install ollama<br><br>
+      <span class="comment"># 日常对话（手机/轻量Mac）</span><br>
+      ollama run gemma4:e4b<br><br>
+      <span class="comment"># 主力模型（Mac 32GB / Win 4080S+）</span><br>
+      ollama run gemma4:26b-a4b<br><br>
+      <span class="comment"># 旗舰（Mac 64GB / Win 4090）</span><br>
+      ollama run gemma4:31b<br><br>
+      <span class="comment"># 中文专用（Win 4080S，完全在 VRAM 内）</span><br>
+      ollama run qwen3:14b
+    </div>
+    <div class="tip">
+      💡 <strong>骚操作</strong>：Win 电脑跑 Ollama 开启远程访问，Mac / 手机通过局域网调用，实现"Win 当 GPU 服务器，Mac/手机当客户端"的家庭 AI 局域网。
+    </div>
+  </div>
+
+  <!-- 其他值得关注的模型 -->
+  <div class="section">
+    <h2>🌟 其他值得跑的本地模型</h2>
+    <table>
+      <thead>
+        <tr><th>模型</th><th>VRAM（Q4）</th><th>最强项</th><th>推荐硬件</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Qwen3-8B</strong></td>
+          <td>~6 GB</td>
+          <td>中文日常，极速</td>
+          <td>任何 8GB+</td>
+        </tr>
+        <tr>
+          <td><strong>Qwen3-14B</strong></td>
+          <td>~10 GB</td>
+          <td>中文推理强</td>
+          <td>16GB VRAM</td>
+        </tr>
+        <tr>
+          <td><strong>Qwen3-Coder 30B</strong></td>
+          <td>~20 GB</td>
+          <td>写代码专用</td>
+          <td>24GB VRAM</td>
+        </tr>
+        <tr>
+          <td><strong>Llama 3.3 70B</strong></td>
+          <td>~40 GB</td>
+          <td>英文质量最高</td>
+          <td>48GB+ 或多卡</td>
+        </tr>
+        <tr>
+          <td><strong>DeepSeek-R2-Lite</strong></td>
+          <td>~14 GB</td>
+          <td>推理/数学</td>
+          <td>16GB VRAM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    🐾 阿爪出品 · <a href="https://kb.zhangyun.xyz">kb.zhangyun.xyz</a> · 2026-04-05
+  </footer>
+</div>
+</body>
+</html>
