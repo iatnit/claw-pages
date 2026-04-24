@@ -1,90 +1,708 @@
-<!doctype html>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>OpenClaw Canvas</title>
-<style>
-  html, body { height: 100%; margin: 0; background: #000; color: #fff; font: 16px/1.4 -apple-system, BlinkMacSystemFont, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-  .wrap { min-height: 100%; display: grid; place-items: center; padding: 24px; }
-  .card { width: min(720px, 100%); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 14px; }
-  .title { display: flex; align-items: baseline; gap: 10px; }
-  h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
-  .sub { opacity: 0.75; font-size: 13px; }
-  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-  button { appearance: none; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.10); color: #fff; padding: 10px 12px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-  button:active { transform: translateY(1px); }
-  .ok { color: #24e08a; }
-  .bad { color: #ff5c5c; }
-  .log { margin-top: 14px; opacity: 0.85; font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; white-space: pre-wrap; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08); padding: 10px; border-radius: 12px; }
-</style>
-<div class="wrap">
-  <div class="card">
-    <div class="title">
-      <h1>OpenClaw Canvas</h1>
-      <div class="sub">Interactive test page (auto-reload enabled)</div>
-    </div>
-
-    <div class="row">
-      <button id="btn-hello">Hello</button>
-      <button id="btn-time">Time</button>
-      <button id="btn-photo">Photo</button>
-      <button id="btn-dalek">Dalek</button>
-    </div>
-
-    <div id="status" class="sub" style="margin-top: 10px;"></div>
-    <div id="log" class="log">Ready.</div>
-  </div>
-</div>
-<script>
-(() => {
-  const logEl = document.getElementById("log");
-  const statusEl = document.getElementById("status");
-  const log = (msg) => { logEl.textContent = String(msg); };
-
-  const hasIOS = () =>
-    !!(
-      window.webkit &&
-      window.webkit.messageHandlers &&
-      window.webkit.messageHandlers.openclawCanvasA2UIAction
-    );
-  const hasAndroid = () =>
-    !!(
-      (window.openclawCanvasA2UIAction &&
-        typeof window.openclawCanvasA2UIAction.postMessage === "function")
-    );
-  const hasHelper = () => typeof window.openclawSendUserAction === "function";
-  statusEl.innerHTML =
-    "Bridge: " +
-    (hasHelper() ? "<span class='ok'>ready</span>" : "<span class='bad'>missing</span>") +
-    " · iOS=" + (hasIOS() ? "yes" : "no") +
-    " · Android=" + (hasAndroid() ? "yes" : "no");
-
-  const onStatus = (ev) => {
-    const d = ev && ev.detail || {};
-    log("Action status: id=" + (d.id || "?") + " ok=" + String(!!d.ok) + (d.error ? (" error=" + d.error) : ""));
-  };
-  window.addEventListener("openclaw:a2ui-action-status", onStatus);
-
-  function send(name, sourceComponentId) {
-    if (!hasHelper()) {
-      log("No action bridge found. Ensure you're viewing this on an iOS/Android OpenClaw node canvas.");
-      return;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>运哥知识库 | Zhangyun Pages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --ig-bg: #fafafa;
+      --ig-card: #ffffff;
+      --ig-border: #dbdbdb;
+      --ig-text: #262626;
+      --ig-text-secondary: #8e8e8e;
+      --ig-blue: #0095f6;
+      --ig-gradient-start: #f09433;
+      --ig-gradient-mid: #e6683c;
+      --ig-gradient-end: #bc1888;
+      --story-ring: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     }
-    const sendUserAction =
-      typeof window.openclawSendUserAction === "function"
-        ? window.openclawSendUserAction
-        : undefined;
-    const ok = sendUserAction({
-      name,
-      surfaceId: "main",
-      sourceComponentId,
-      context: { t: Date.now() },
-    });
-    log(ok ? ("Sent action: " + name) : ("Failed to send action: " + name));
-  }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--ig-bg);
+      color: var(--ig-text);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+    
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      background: var(--ig-card);
+      border-bottom: 1px solid var(--ig-border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: var(--story-ring);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .header-icons svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      stroke: var(--ig-text);
+      fill: none;
+      stroke-width: 2;
+    }
+    
+    /* Stories */
+    .stories-container {
+      background: var(--ig-card);
+      border-bottom: 1px solid var(--ig-border);
+      padding: 16px 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    
+    .stories-container::-webkit-scrollbar { display: none; }
+    
+    .stories {
+      display: flex;
+      gap: 18px;
+      padding: 0 16px;
+    }
+    
+    .story {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .story-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      padding: 3px;
+      background: var(--story-ring);
+      position: relative;
+    }
+    
+    .story-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      background: #f0f0f0;
+    }
+    
+    .story-name {
+      font-size: 11px;
+      color: var(--ig-text);
+      max-width: 64px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .story-add {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--ig-blue);
+      border-radius: 50%;
+      border: 2.5px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    /* Feed */
+    .feed {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    @media (max-width: 640px) {
+      .feed {
+        grid-template-columns: 1fr;
+        padding: 8px;
+      }
+    }
+    
+    .post {
+      background: var(--ig-card);
+      border: 1px solid var(--ig-border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .post:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+    }
+    
+    .post-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--story-ring);
+      padding: 2px;
+    }
+    
+    .post-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ig-text-secondary);
+      border: 2px solid white;
+    }
+    
+    .post-meta {
+      flex: 1;
+    }
+    
+    .post-author {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ig-text);
+    }
+    
+    .post-location {
+      font-size: 11px;
+      color: var(--ig-text-secondary);
+    }
+    
+    .post-more {
+      font-size: 16px;
+      color: var(--ig-text-secondary);
+      cursor: pointer;
+    }
+    
+    .post-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .post-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.03) 10px,
+        rgba(255,255,255,0.03) 20px
+      );
+      animation: shimmer 20s linear infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+    
+    .post-image span {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 14px 8px;
+    }
+    
+    .post-actions-left {
+      display: flex;
+      gap: 14px;
+    }
+    
+    .post-actions svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      stroke: var(--ig-text);
+      fill: none;
+      stroke-width: 2;
+    }
+    
+    .post-actions svg.filled {
+      fill: #ed4956;
+      stroke: #ed4956;
+    }
+    
+    .post-likes {
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .post-caption {
+      padding: 6px 14px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    
+    .post-caption .username {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    
+    .post-caption .hashtag {
+      color: var(--ig-blue);
+      cursor: pointer;
+    }
+    
+    .post-time {
+      padding: 0 14px 12px;
+      font-size: 10px;
+      color: var(--ig-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--ig-card);
+      border-top: 1px solid var(--ig-border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 0 12px;
+      z-index: 100;
+    }
+    
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      color: var(--ig-text);
+    }
+    
+    .bottom-nav-item svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--ig-text);
+      fill: none;
+      stroke-width: 2;
+    }
+    
+    .bottom-nav-item.active svg {
+      stroke: var(--ig-text);
+      fill: var(--ig-text);
+    }
+    
+    .bottom-nav-item span {
+      font-size: 10px;
+      color: var(--ig-text-secondary);
+    }
+    
+    .bottom-nav-item.active span {
+      color: var(--ig-text);
+      font-weight: 500;
+    }
+    
+    .nav-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--story-ring);
+      padding: 1.5px;
+    }
+    
+    .nav-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #f0f0f0;
+      border: 1.5px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    
+    /* Category Filter Active */
+    .story.active .story-avatar {
+      background: var(--ig-text);
+    }
+    
+    .story.active .story-name {
+      color: var(--ig-text);
+      font-weight: 600;
+    }
+    
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--ig-text-secondary);
+    }
+    
+    .empty-state svg {
+      width: 64px;
+      height: 64px;
+      stroke: var(--ig-border);
+      margin-bottom: 16px;
+    }
+    
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+<body>
 
-  document.getElementById("btn-hello").onclick = () => send("hello", "demo.hello");
-  document.getElementById("btn-time").onclick = () => send("time", "demo.time");
-  document.getElementById("btn-photo").onclick = () => send("photo", "demo.photo");
-  document.getElementById("btn-dalek").onclick = () => send("dalek", "demo.dalek");
-})();
-</script>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Pages.zhangyun</div>
+    <div class="header-icons">
+      <!-- Heart -->
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <!-- Message -->
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </div>
+  </header>
+
+  <!-- Stories -->
+  <div class="stories-container">
+    <div class="stories">
+      <div class="story active" data-category="all" onclick="filterPosts('all')">
+        <div class="story-avatar">
+          <div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;border:3px solid white;">🏠</div>
+        </div>
+        <span class="story-name">全部</span>
+      </div>
+      <div class="story" data-category="family" onclick="filterPosts('family')">
+        <div class="story-avatar">
+          <div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;border:3px solid white;">👨‍👩‍👧‍👦</div>
+        </div>
+        <span class="story-name">家庭健康</span>
+      </div>
+      <div class="story" data-category="business" onclick="filterPosts('business')">
+        <div class="story-avatar">
+          <div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#4facfe,#00f2fe);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;border:3px solid white;">💼</div>
+        </div>
+        <span class="story-name">商业业务</span>
+      </div>
+      <div class="story" data-category="learning" onclick="filterPosts('learning')">
+        <div class="story-avatar">
+          <div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#43e97b,#38f9d7);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;border:3px solid white;">📚</div>
+        </div>
+        <span class="story-name">学习成长</span>
+      </div>
+      <div class="story" data-category="tools" onclick="filterPosts('tools')">
+        <div class="story-avatar">
+          <div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#fa709a,#fee140);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;border:3px solid white;">🛠️</div>
+        </div>
+        <span class="story-name">工具面板</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feed -->
+  <div class="feed" id="feed">
+    <!-- Posts will be populated by JavaScript -->
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-item active">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>首页</span>
+    </div>
+    <div class="bottom-nav-item">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>搜索</span>
+    </div>
+    <div class="bottom-nav-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span>新建</span>
+    </div>
+    <div class="bottom-nav-item">
+      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>快捷</span>
+    </div>
+    <div class="bottom-nav-item">
+      <div class="nav-avatar">
+        <div class="nav-avatar-inner">运</div>
+      </div>
+      <span>我的</span>
+    </div>
+  </nav>
+
+  <script>
+    const posts = [
+      {
+        id: 1,
+        title: "ADHD 儿童营养补充方案",
+        caption: "为 12 岁 ADHD 儿童制定的完整营养补充方案，包含苏糖酸镁、鱼油、PS、锌和维D3",
+        category: "family",
+        categoryName: "家庭健康",
+        link: "adhd-daily-supplement.html",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        emoji: "🧠",
+        likes: "128",
+        time: "2026-03-23"
+      },
+      {
+        id: 2,
+        title: "ADHD 红绿灯饮食指南",
+        caption: "针对 ADHD 儿童的饮食管理指南，绿灯食物推荐和红灯食物避坑清单",
+        category: "family",
+        categoryName: "家庭健康",
+        link: "adhd-diet-guide.html",
+        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        emoji: "🍎",
+        likes: "96",
+        time: "2026-03-23"
+      },
+      {
+        id: 3,
+        title: "全家每日营养补充方案",
+        caption: "家庭成员的日常营养补充完整方案，涵盖维生素、矿物质和特殊需求",
+        category: "family",
+        categoryName: "家庭健康",
+        link: "family-daily-supplement.html",
+        gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+        emoji: "💊",
+        likes: "84",
+        time: "2026-03-24"
+      },
+      {
+        id: 4,
+        title: "巴基斯坦鞋材大客户开发指南",
+        caption: "针对巴基斯坦拉合尔鞋类市场的深度调研，包含顶级客户联系方式和展会信息",
+        category: "business",
+        categoryName: "商业业务",
+        link: "pakistan-shoe-customers.html",
+        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        emoji: "👟",
+        likes: "215",
+        time: "2026-03-18"
+      },
+      {
+        id: 5,
+        title: "鞋类电商出海策略",
+        caption: "鞋材辅料的跨境电商运营策略，从选品到物流的完整链路",
+        category: "business",
+        categoryName: "商业业务",
+        link: "shoe-ecommerce-strategy.html",
+        gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+        emoji: "🌐",
+        likes: "167",
+        time: "2026-03-24"
+      },
+      {
+        id: 6,
+        title: "AI 核心概念速查表",
+        caption: "50+ AI 核心概念的视觉化速查手册，适合教学和快速查阅",
+        category: "learning",
+        categoryName: "学习成长",
+        link: "ai-concepts-carousel.html",
+        gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+        emoji: "🤖",
+        likes: "342",
+        time: "2026-03-15"
+      },
+      {
+        id: 7,
+        title: "塔勒布思维 × ADHD 实践手册",
+        caption: "深度解析塔勒布的反脆弱思想与 ADHD 特质的四大关联，含实践指南",
+        category: "learning",
+        categoryName: "学习成长",
+        link: "taleb-adhd-playbook.html",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        emoji: "📖",
+        likes: "256",
+        time: "2026-03-28"
+      },
+      {
+        id: 8,
+        title: "反脆弱：批判性分析",
+        caption: "对塔勒布《反脆弱》的系统性批判与补充思考，识别其思维盲区",
+        category: "learning",
+        categoryName: "学习成长",
+        link: "antifragile-critical-analysis.html",
+        gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        emoji: "🧩",
+        likes: "189",
+        time: "2026-04-02"
+      },
+      {
+        id: 9,
+        title: "Gemma 4 硬件配置指南",
+        caption: "Google Gemma 4 大模型本地部署的硬件选购和配置指南",
+        category: "tools",
+        categoryName: "工具面板",
+        link: "gemma4-hardware-guide.html",
+        gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        emoji: "⚙️",
+        likes: "178",
+        time: "2026-04-10"
+      },
+      {
+        id: 10,
+        title: "OpenClaw 教师使用指南",
+        caption: "面向教育工作者的 OpenClaw AI 助手配置和使用教程",
+        category: "tools",
+        categoryName: "工具面板",
+        link: "openclaw-teacher-guide.html",
+        gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+        emoji: "👨‍🏫",
+        likes: "203",
+        time: "2026-04-15"
+      },
+      {
+        id: 11,
+        title: "超级数据看板",
+        caption: "实时更新的个人数据看板，整合多维度信息和可视化图表",
+        category: "tools",
+        categoryName: "工具面板",
+        link: "super-dashboard.html",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        emoji: "📊",
+        likes: "445",
+        time: "2026-04-20"
+      },
+      {
+        id: 12,
+        title: "数据看板",
+        caption: "简洁版个人数据监控面板，核心指标一览",
+        category: "tools",
+        categoryName: "工具面板",
+        link: "dashboard.html",
+        gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+        emoji: "📈",
+        likes: "156",
+        time: "2026-03-10"
+      }
+    ];
+
+    function renderPosts(category = 'all') {
+      const feed = document.getElementById('feed');
+      const filtered = category === 'all' ? posts : posts.filter(p => p.category === category);
+      
+      feed.innerHTML = filtered.map(post => `
+        <article class="post" onclick="window.location.href='${post.link}'">
+          <div class="post-header">
+            <div class="post-avatar">
+              <div class="post-avatar-inner">${post.emoji}</div>
+            </div>
+            <div class="post-meta">
+              <div class="post-author">${post.categoryName}</div>
+              <div class="post-location">${post.time}</div>
+            </div>
+            <div class="post-more">⋯</div>
+          </div>
+          <div class="post-image" style="background: ${post.gradient}">
+            <span>${post.emoji} ${post.title}</span>
+          </div>
+          <div class="post-actions">
+            <div class="post-actions-left">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </div>
+            <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="post-likes">${post.likes} 次收藏</div>
+          <div class="post-caption">
+            <span class="username">${post.categoryName}</span>
+            ${post.caption}
+            <span class="hashtag"> #${post.category}</span>
+          </div>
+          <div class="post-time">${post.time}</div>
+        </article>
+      `).join('');
+    }
+
+    function filterPosts(category) {
+      // Update active story
+      document.querySelectorAll('.story').forEach(s => s.classList.remove('active'));
+      document.querySelector(`[data-category="${category}"]`).classList.add('active');
+      
+      // Render filtered posts
+      renderPosts(category);
+    }
+
+    // Initial render
+    renderPosts('all');
+  </script>
+
+</body>
+</html>
