@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dontbesilent 问题消解 100 例</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --accent: #ff6b35;
+  --accent2: #ffd700;
+  --accent3: #00d4aa;
+  --text: #e8e8e8;
+  --muted: #888;
+  --border: #222;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  padding: 40px 0 30px;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 30px;
+}
+.header h1 {
+  font-size: 2em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.header .subtitle {
+  color: var(--muted);
+  font-size: 0.95em;
+}
+.header .quote {
+  margin-top: 20px;
+  padding: 15px 20px;
+  background: rgba(255,107,53,0.08);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #ccc;
+  font-size: 0.9em;
+}
+h2 {
+  font-size: 1.4em;
+  color: var(--accent2);
+  margin: 35px 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+h3 {
+  font-size: 1.15em;
+  color: var(--accent);
+  margin: 25px 0 12px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  color: #ccc;
+  font-size: 0.95em;
+}
+li:last-child { border-bottom: none; }
+li strong {
+  color: var(--accent3);
+  font-weight: 600;
+}
+blockquote {
+  margin: 15px 0;
+  padding: 12px 18px;
+  background: rgba(255,215,0,0.05);
+  border-left: 3px solid var(--accent2);
+  border-radius: 0 8px 8px 0;
+  color: #bbb;
+  font-size: 0.9em;
+}
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 30px 0;
+}
+.back-link {
+  display: inline-block;
+  margin: 30px 0;
+  padding: 10px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: all 0.3s;
+}
+.back-link:hover {
+  border-color: var(--accent);
+  background: rgba(255,107,53,0.1);
+}
+.footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85em;
+}
+@media (max-width: 600px) {
+  body { padding: 12px; }
+  .header h1 { font-size: 1.5em; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🎯 dontbesilent 问题消解 100 例</h1>
+  <div class="subtitle">100 个商业问题的六段式拆解手册</div>
+  <div class="quote">
+    原问题 → 错在哪里 → 隐含假设 → 大白话改写 → 真正该做的事 → 一句话
+  </div>
+</div>
+<h1>dontbesilent 问题消解 100 例</h1>
+<blockquote>本文将 100 个常见商业/创业/内容/执行问题，用统一的六段式结构进行拆解：</blockquote>
+<blockquote>1. **原问题**</blockquote>
+<blockquote>2. **错在哪里**</blockquote>
+<blockquote>3. **隐含假设**</blockquote>
+<blockquote>4. **大白话改写**</blockquote>
+<blockquote>5. **真正该做的事**</blockquote>
+<blockquote>6. **一句话**</blockquote>
+<h2>二、内容创作</h2>
+<h3>011. 我的内容为什么没有流量？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的内容为什么没有流量？</li>
+<li><strong>错在哪里：</strong> 把"没有流量"当成单一原因，但可能是选题、标题、封面、表达、平台、样本量的问题。</li>
+<li><strong>隐含假设：</strong> 流量失败有一个简单原因。</li>
+<li><strong>大白话改写：</strong> 用户为什么要在信息流里停下来，看完并互动？</li>
+<li><strong>真正该做的事：</strong> 拆 20 条同类爆款，对比选题冲突、标题承诺、封面信息、开头密度。</li>
+<li><strong>一句话：</strong> 流量不是平台欠你的，是内容没有抢到注意力。</li>
+</ul>
+<h3>012. 我应该做什么内容？</h3>
+<ul>
+<li><strong>原问题：</strong> 我应该做什么内容？</li>
+<li><strong>错在哪里：</strong> "应该"没有标准。是为了涨粉、成交、建立信任，还是训练表达？</li>
+<li><strong>隐含假设：</strong> 存在一个适合所有人的内容方向。</li>
+<li><strong>大白话改写：</strong> 我想通过内容让谁产生什么行动？</li>
+<li><strong>真正该做的事：</strong> 先确定产品和买家，再倒推内容选题。</li>
+<li><strong>一句话：</strong> 内容不是为了表达自己，是为了改变用户的下一步动作。</li>
+</ul>
+<h3>013. 我的内容 AI 味太重怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的内容 AI 味太重怎么办？</li>
+<li><strong>错在哪里：</strong> 把问题归因给 AI，但真正问题通常是人没有文字洁癖。</li>
+<li><strong>隐含假设：</strong> AI 写的内容天然有问题。</li>
+<li><strong>大白话改写：</strong> 这段文字是不是空、假、滑、套、没有具体判断？</li>
+<li><strong>真正该做的事：</strong> 删掉套话、排比、抽象名词，补具体对象、冲突、判断和例子。</li>
+<li><strong>一句话：</strong> 不是 AI 味，是你允许烂文字过稿。</li>
+</ul>
+<h3>014. 我要不要追热点？</h3>
+<ul>
+<li><strong>原问题：</strong> 我要不要追热点？</li>
+<li><strong>错在哪里：</strong> 热点不是目的。问题是热点能不能承载你的判断、产品和用户关系。</li>
+<li><strong>隐含假设：</strong> 热点会自动带来有价值的流量。</li>
+<li><strong>大白话改写：</strong> 这个热点能不能让我说出和业务有关的有效判断？</li>
+<li><strong>真正该做的事：</strong> 只追能连接你的产品、方法论、案例库和买家痛点的热点。</li>
+<li><strong>一句话：</strong> 追不上热点不可怕，被热点带着跑才可怕。</li>
+</ul>
+<h3>015. 我是做短视频还是公众号？</h3>
+<ul>
+<li><strong>原问题：</strong> 我是做短视频还是公众号？</li>
+<li><strong>错在哪里：</strong> 平台不是第一问题，内容形态和成交路径才是第一问题。</li>
+<li><strong>隐含假设：</strong> 选对平台就能解决内容问题。</li>
+<li><strong>大白话改写：</strong> 我的选题更适合被快速感知，还是适合被深度阅读？</li>
+<li><strong>真正该做的事：</strong> 观点冲突做短视频，深逻辑做公众号，工具清单做图文，再看转化路径。</li>
+<li><strong>一句话：</strong> 平台不是家，是分发工具。</li>
+</ul>
+<h3>016. 我的标题怎么写更吸引人？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的标题怎么写更吸引人？</li>
+<li><strong>错在哪里：</strong> 标题不能替一个无价值选题打工。</li>
+<li><strong>隐含假设：</strong> 标题技巧能拯救内容本身。</li>
+<li><strong>大白话改写：</strong> 这条内容到底给用户一个什么强承诺？</li>
+<li><strong>真正该做的事：</strong> 先把选题改到有冲突、有收益、有对象，再写标题。</li>
+<li><strong>一句话：</strong> 标题不是化妆，是把内容里最硬的东西露出来。</li>
+</ul>
+<h3>017. 我想做干货内容，可以吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我想做干货内容，可以吗？</li>
+<li><strong>错在哪里：</strong> "干货"是伪概念。用户要的不是干，是解决问题、获得判断、减少试错。</li>
+<li><strong>隐含假设：</strong> 信息密度高就是好内容。</li>
+<li><strong>大白话改写：</strong> 我的内容能不能让用户少走一步错路？</li>
+<li><strong>真正该做的事：</strong> 用案例、判断标准、反例和行动步骤替代信息堆砌。</li>
+<li><strong>一句话：</strong> 干货不是把知识压缩，是把问题讲清楚。</li>
+</ul>
+<h3>018. 我内容很专业，为什么没人看？</h3>
+<ul>
+<li><strong>原问题：</strong> 我内容很专业，为什么没人看？</li>
+<li><strong>错在哪里：</strong> 专业是你的感受，不是用户的阅读理由。</li>
+<li><strong>隐含假设：</strong> 专业会自动产生注意力。</li>
+<li><strong>大白话改写：</strong> 用户看完能不能立刻理解这和他有什么关系？</li>
+<li><strong>真正该做的事：</strong> 把专业语言翻译成场景、痛点、损失、收益和选择。</li>
+<li><strong>一句话：</strong> 专业不是让人觉得你厉害，是让人觉得自己被说中了。</li>
+</ul>
+<h3>019. 我想打造个人 IP，怎么定位？</h3>
+<ul>
+<li><strong>原问题：</strong> 我想打造个人 IP，怎么定位？</li>
+<li><strong>错在哪里：</strong> "IP 定位"经常是假问题。别人记住你，不是因为你写了定位句。</li>
+<li><strong>隐含假设：</strong> 存在一个可设计的正确定位。</li>
+<li><strong>大白话改写：</strong> 我能长期用什么判断帮助哪类人？</li>
+<li><strong>真正该做的事：</strong> 连续输出 30 条同一类问题的高质量判断，让外界形成记忆。</li>
+<li><strong>一句话：</strong> 定位不是你怎么介绍自己，是别人反复因为什么想起你。</li>
+</ul>
+<h3>020. 我每天发，为什么还没涨粉？</h3>
+<ul>
+<li><strong>原问题：</strong> 我每天发，为什么还没涨粉？</li>
+<li><strong>错在哪里：</strong> 把频率当因果。持续发和涨粉相关，但不必然因果。</li>
+<li><strong>隐含假设：</strong> 只要坚持发布，平台就应该奖励我。</li>
+<li><strong>大白话改写：</strong> 我每天发的东西，有没有每天变得更值得看？</li>
+<li><strong>真正该做的事：</strong> 停止机械打卡，建立复盘表：选题、开头、完播、互动、转粉原因。</li>
+<li><strong>一句话：</strong> 坚持错误动作，只会稳定生产错误结果。</li>
+</ul>
+<h2>四、知识付费</h2>
+<h3>031. 我做知识付费会不会割韭菜？</h3>
+<ul>
+<li><strong>原问题：</strong> 我做知识付费会不会割韭菜？</li>
+<li><strong>错在哪里：</strong> 把道德焦虑放在交易结构之前。关键不是知识付费，而是承诺和交付是否匹配。</li>
+<li><strong>隐含假设：</strong> 知识付费天然可疑。</li>
+<li><strong>大白话改写：</strong> 我收的钱和我能交付的结果是否匹配？</li>
+<li><strong>真正该做的事：</strong> 写清楚适合谁、不适合谁、能得到什么、不能保证什么。</li>
+<li><strong>一句话：</strong> 割不割韭菜，不看品类，看你有没有用假承诺收真钱。</li>
+</ul>
+<h3>032. 我的课应该卖多少钱？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的课应该卖多少钱？</li>
+<li><strong>错在哪里：</strong> 价格不能凭感觉定，定价就是产品设计。</li>
+<li><strong>隐含假设：</strong> 价格是内容成本加一点利润。</li>
+<li><strong>大白话改写：</strong> 这个课解决的问题，对用户值多少钱？</li>
+<li><strong>真正该做的事：</strong> 看对标、测预售、区分引流款和利润款，设计不同交付层级。</li>
+<li><strong>一句话：</strong> 价格不是数字，是筛选客户和定义产品的工具。</li>
+</ul>
+<h3>033. 我没有很厉害，可以卖课吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我没有很厉害，可以卖课吗？</li>
+<li><strong>错在哪里：</strong> 把"厉害"当资格，但用户买的是比自己更清楚的一段路径。</li>
+<li><strong>隐含假设：</strong> 只有顶级专家才有资格收费。</li>
+<li><strong>大白话改写：</strong> 我能不能帮某类人解决一个比我低一阶的问题？</li>
+<li><strong>真正该做的事：</strong> 只卖自己验证过、能交付、边界清楚的内容。</li>
+<li><strong>一句话：</strong> 不是你够不够厉害，是你有没有资格承诺这个结果。</li>
+</ul>
+<h3>034. 我应该做训练营还是录播课？</h3>
+<ul>
+<li><strong>原问题：</strong> 我应该做训练营还是录播课？</li>
+<li><strong>错在哪里：</strong> 形式选择不能脱离用户任务。不同问题需要不同交付密度。</li>
+<li><strong>隐含假设：</strong> 产品形态有天然优劣。</li>
+<li><strong>大白话改写：</strong> 用户完成这件事，需要信息、反馈、陪跑，还是监督？</li>
+<li><strong>真正该做的事：</strong> 简单知识做录播，需要反馈和行为改变的做训练营。</li>
+<li><strong>一句话：</strong> 交付形式由用户改变难度决定，不由你的制作偏好决定。</li>
+</ul>
+<h3>035. 我的知识很零散，怎么做成产品？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的知识很零散，怎么做成产品？</li>
+<li><strong>错在哪里：</strong> 知识不是产品，解决路径才是产品。</li>
+<li><strong>隐含假设：</strong> 把知识整理好就能卖。</li>
+<li><strong>大白话改写：</strong> 用户从 A 状态到 B 状态，中间需要哪些判断和动作？</li>
+<li><strong>真正该做的事：</strong> 按用户任务重组知识，设计输入、步骤、练习、反馈和验收。</li>
+<li><strong>一句话：</strong> 知识产品卖的不是知识，是一条更少踩坑的路径。</li>
+</ul>
+<h3>036. 我怕学员没结果怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我怕学员没结果怎么办？</li>
+<li><strong>错在哪里：</strong> 结果不是单方控制。你能承诺的是交付、反馈、边界和筛选。</li>
+<li><strong>隐含假设：</strong> 卖课必须保证所有人成功。</li>
+<li><strong>大白话改写：</strong> 哪些结果由我负责，哪些结果由学员行动负责？</li>
+<li><strong>真正该做的事：</strong> 设置报名门槛、作业机制、适用人群和不适用人群。</li>
+<li><strong>一句话：</strong> 你不能替学员行动，但你必须对自己的承诺负责。</li>
+</ul>
+<h3>037. 我应该先免费分享还是直接收费？</h3>
+<ul>
+<li><strong>原问题：</strong> 我应该先免费分享还是直接收费？</li>
+<li><strong>错在哪里：</strong> 免费和收费不是道德选择，是信任和产品阶段选择。</li>
+<li><strong>隐含假设：</strong> 免费会自动带来付费，或者收费会吓跑用户。</li>
+<li><strong>大白话改写：</strong> 用户现在对我有多少信任，对这个问题有多强付费意愿？</li>
+<li><strong>真正该做的事：</strong> 免费内容负责证明判断力，付费产品负责交付完整路径。</li>
+<li><strong>一句话：</strong> 免费不是慈善，收费不是冒犯，它们都是交易设计。</li>
+</ul>
+<h3>038. 我的知识付费怎么做复购？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的知识付费怎么做复购？</li>
+<li><strong>错在哪里：</strong> 复购不是运营技巧，是用户完成一个问题后自然出现下一个问题。</li>
+<li><strong>隐含假设：</strong> 复购可以靠社群活跃和话术制造。</li>
+<li><strong>大白话改写：</strong> 用户解决当前问题后，还会遇到什么更高阶问题？</li>
+<li><strong>真正该做的事：</strong> 设计问题阶梯：入门、执行、反馈、进阶、陪跑。</li>
+<li><strong>一句话：</strong> 复购来自真实进阶，不来自群里热闹。</li>
+</ul>
+<h3>039. 我可以教别人赚钱吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我可以教别人赚钱吗？</li>
+<li><strong>错在哪里：</strong> "教赚钱"太大，也最容易变成假承诺。</li>
+<li><strong>隐含假设：</strong> 赚钱可以被抽象方法直接传授。</li>
+<li><strong>大白话改写：</strong> 我能不能教某类人在某个场景下完成某个赚钱动作？</li>
+<li><strong>真正该做的事：</strong> 把承诺缩小到可验证动作：找对标、设计产品、写销售页、做成交。</li>
+<li><strong>一句话：</strong> 不要教赚钱，教一个具体赚钱动作。</li>
+</ul>
+<h3>040. 我卖课没人买，是不是需求不够？</h3>
+<ul>
+<li><strong>原问题：</strong> 我卖课没人买，是不是需求不够？</li>
+<li><strong>错在哪里：</strong> 没人买可能是需求、信任、定价、表达、客群、时机、渠道任何一环的问题。</li>
+<li><strong>隐含假设：</strong> 成交失败可以直接归因于需求。</li>
+<li><strong>大白话改写：</strong> 用户不买，是不需要、不相信、不着急，还是看不懂？</li>
+<li><strong>真正该做的事：</strong> 逐环检查：流量来源、痛点表达、承诺、证据、价格、支付路径。</li>
+<li><strong>一句话：</strong> 没人买不是一个原因，是一条链上某个环节断了。</li>
+</ul>
+<h2>六、执行力 / 心理</h2>
+<h3>051. 我知道该做什么，但就是不做怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我知道该做什么，但就是不做怎么办？</li>
+<li><strong>错在哪里：</strong> 这不是方法问题，是行动意愿和失败风险的问题。</li>
+<li><strong>隐含假设：</strong> 我缺一个更好的方法来启动。</li>
+<li><strong>大白话改写：</strong> 我是不是在用"准备"保护自己不被结果评价？</li>
+<li><strong>真正该做的事：</strong> 把任务缩小到今天必须完成、能被外界看见的一步。</li>
+<li><strong>一句话：</strong> 你不是不知道怎么做，你是不想面对做了也可能不行。</li>
+</ul>
+<h3>052. 我总是拖延怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我总是拖延怎么办？</li>
+<li><strong>错在哪里：</strong> 拖延不是原因，是结果。它通常有目的：保护自我评价。</li>
+<li><strong>隐含假设：</strong> 拖延是一种坏习惯，只要改习惯就行。</li>
+<li><strong>大白话改写：</strong> 拖延帮我逃避了什么评价、失败或责任？</li>
+<li><strong>真正该做的事：</strong> 公开一个小承诺，设定截止时间，让结果进入现实。</li>
+<li><strong>一句话：</strong> 拖延不是时间管理问题，是自尊保护机制。</li>
+</ul>
+<h3>053. 我想赚钱但没有动力怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我想赚钱但没有动力怎么办？</li>
+<li><strong>错在哪里：</strong> "想赚钱"不能用语言定义，要用行动定义。</li>
+<li><strong>隐含假设：</strong> 我确实想赚钱，只是动力不够。</li>
+<li><strong>大白话改写：</strong> 我今天有没有做任何能直接带来收入的动作？</li>
+<li><strong>真正该做的事：</strong> 每天做一个离钱最近的动作：报价、销售、成交、交付、复购。</li>
+<li><strong>一句话：</strong> 想赚钱的意思就是不想赚钱，正在赚钱才是想赚钱。</li>
+</ul>
+<h3>054. 我怕失败，所以不敢开始怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我怕失败，所以不敢开始怎么办？</li>
+<li><strong>错在哪里：</strong> 怕失败不是问题，所有人都怕。问题是你把怕失败当成不行动的许可。</li>
+<li><strong>隐含假设：</strong> 不害怕了才能开始。</li>
+<li><strong>大白话改写：</strong> 我能不能在害怕的同时完成一个低成本测试？</li>
+<li><strong>真正该做的事：</strong> 把失败成本降到可承受，然后立刻测试。</li>
+<li><strong>一句话：</strong> 勇敢不是不怕，是害怕也把付款链接发出去。</li>
+</ul>
+<h3>055. 我总想换方向怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我总想换方向怎么办？</li>
+<li><strong>错在哪里：</strong> 可能不是方向错，是你每次快进入真实摩擦就逃走。</li>
+<li><strong>隐含假设：</strong> 下一个方向会更适合我。</li>
+<li><strong>大白话改写：</strong> 我是在寻找方向，还是在逃避深入？</li>
+<li><strong>真正该做的事：</strong> 给当前方向设定一个不可提前退出的验证周期和指标。</li>
+<li><strong>一句话：</strong> 频繁换方向的人，不是在找路，是在躲坡。</li>
+</ul>
+<h3>056. 我准备好了再开始可以吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我准备好了再开始可以吗？</li>
+<li><strong>错在哪里：</strong> "准备好"没有终点，常常是延迟行动的体面说法。</li>
+<li><strong>隐含假设：</strong> 充分准备可以消除失败。</li>
+<li><strong>大白话改写：</strong> 我现在缺的准备，是否真的会影响第一次测试？</li>
+<li><strong>真正该做的事：</strong> 区分必要准备和心理准备，只完成必要准备。</li>
+<li><strong>一句话：</strong> 准备如果不通向行动，就是拖延的精装修。</li>
+</ul>
+<h3>057. 我执行力差，是不是不适合创业？</h3>
+<ul>
+<li><strong>原问题：</strong> 我执行力差，是不是不适合创业？</li>
+<li><strong>错在哪里：</strong> 执行力差可能是商业模式太差、任务太虚、反馈太远，也可能是心理逃避。</li>
+<li><strong>隐含假设：</strong> 执行力是固定人格属性。</li>
+<li><strong>大白话改写：</strong> 我为什么不执行：看不到钱、不会做、怕失败，还是不相信这事？</li>
+<li><strong>真正该做的事：</strong> 把任务改成明确、短周期、有反馈、离钱近的动作。</li>
+<li><strong>一句话：</strong> 执行力不是人格光环，是任务设计和风险承受的结果。</li>
+</ul>
+<h3>058. 我太焦虑了，怎么缓解？</h3>
+<ul>
+<li><strong>原问题：</strong> 我太焦虑了，怎么缓解？</li>
+<li><strong>错在哪里：</strong> 如果焦虑来自业务不确定性，缓解情绪不能替代处理现实。</li>
+<li><strong>隐含假设：</strong> 情绪好了，问题就能解决。</li>
+<li><strong>大白话改写：</strong> 我的焦虑对应哪个未处理的现实问题？</li>
+<li><strong>真正该做的事：</strong> 列出最小可控动作，今天完成一个现实推进。</li>
+<li><strong>一句话：</strong> 能用行动处理的焦虑，不要全交给情绪管理。</li>
+</ul>
+<h3>059. 我想做但家人不支持怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我想做但家人不支持怎么办？</li>
+<li><strong>错在哪里：</strong> 把家人不支持当成不能做的原因，可能是在外包责任。</li>
+<li><strong>隐含假设：</strong> 得到支持才有资格开始。</li>
+<li><strong>大白话改写：</strong> 在不影响基本责任的前提下，我能不能小成本验证？</li>
+<li><strong>真正该做的事：</strong> 用业余时间做低风险测试，用结果而不是争论换取空间。</li>
+<li><strong>一句话：</strong> 家人不支持不是商业障碍，除非你的商业计划需要他们付款。</li>
+</ul>
+<h3>060. 我是不是应该先学习一段时间？</h3>
+<ul>
+<li><strong>原问题：</strong> 我是不是应该先学习一段时间？</li>
+<li><strong>错在哪里：</strong> 学习可能是必要动作，也可能是行动替代品。</li>
+<li><strong>隐含假设：</strong> 学得更多就更容易开始。</li>
+<li><strong>大白话改写：</strong> 我学的东西有没有立刻用于一个真实任务？</li>
+<li><strong>真正该做的事：</strong> 学习和行动绑定：学 1 小时，马上产出一个可发布、可销售、可验证的东西。</li>
+<li><strong>一句话：</strong> 不能进入行动的学习，只是在购买进步幻觉。</li>
+</ul>
+<h2>八、产品 / 定价</h2>
+<h3>071. 我的产品很好，为什么卖不出去？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的产品很好，为什么卖不出去？</li>
+<li><strong>错在哪里：</strong> "好"是你的评价，买家不付款就说明好没有被交易验证。</li>
+<li><strong>隐含假设：</strong> 产品好应该自动卖得出去。</li>
+<li><strong>大白话改写：</strong> 买家是否理解它、相信它、急需它、愿意为它付这个价格？</li>
+<li><strong>真正该做的事：</strong> 访谈未购买用户，检查需求、表达、信任、价格和购买路径。</li>
+<li><strong>一句话：</strong> 卖不出去的"好产品"，至少在交易意义上还不够好。</li>
+</ul>
+<h3>072. 我要不要做免费版？</h3>
+<ul>
+<li><strong>原问题：</strong> 我要不要做免费版？</li>
+<li><strong>错在哪里：</strong> 免费版不是善意，是获客、筛选、教育或试用策略。</li>
+<li><strong>隐含假设：</strong> 免费能降低用户决策门槛，所以一定有利。</li>
+<li><strong>大白话改写：</strong> 免费版会带来付费转化，还是只会吸引不付费用户？</li>
+<li><strong>真正该做的事：</strong> 明确免费版的边界、升级理由和转化路径。</li>
+<li><strong>一句话：</strong> 免费的东西如果不能通向付费，就是成本中心。</li>
+</ul>
+<h3>073. 我的产品应该做多功能还是单功能？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的产品应该做多功能还是单功能？</li>
+<li><strong>错在哪里：</strong> 功能多少不是问题，用户任务完成度才是问题。</li>
+<li><strong>隐含假设：</strong> 功能越多，价值越高。</li>
+<li><strong>大白话改写：</strong> 用户购买这个产品最想完成的一个关键任务是什么？</li>
+<li><strong>真正该做的事：</strong> 先把核心任务做到可验证，再增加辅助功能。</li>
+<li><strong>一句话：</strong> 功能不是价值，完成任务才是价值。</li>
+</ul>
+<h3>074. 我该不该降价？</h3>
+<ul>
+<li><strong>原问题：</strong> 我该不该降价？</li>
+<li><strong>错在哪里：</strong> 降价不能解决价值表达、信任和客群不匹配的问题。</li>
+<li><strong>隐含假设：</strong> 用户不买主要是嫌贵。</li>
+<li><strong>大白话改写：</strong> 用户觉得贵，是价格高，还是价值没被证明？</li>
+<li><strong>真正该做的事：</strong> 先检查证据、承诺、痛点和竞品价格，再决定是否改产品层级。</li>
+<li><strong>一句话：</strong> 客户说贵，很多时候是在说"不信"。</li>
+</ul>
+<h3>075. 我想做低价引流款，可以吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我想做低价引流款，可以吗？</li>
+<li><strong>错在哪里：</strong> 低价引流款必须服务利润款，否则只是卖便宜货。</li>
+<li><strong>隐含假设：</strong> 低价可以自然带来后续成交。</li>
+<li><strong>大白话改写：</strong> 买完低价产品的人，为什么会继续买高价产品？</li>
+<li><strong>真正该做的事：</strong> 设计引流款和利润款的 10 倍价差、同一问题链和自然升级路径。</li>
+<li><strong>一句话：</strong> 引流款不是低价产品，是利润款的入口。</li>
+</ul>
+<h3>076. 我应该按成本定价还是按价值定价？</h3>
+<ul>
+<li><strong>原问题：</strong> 我应该按成本定价还是按价值定价？</li>
+<li><strong>错在哪里：</strong> 成本决定你能不能活，价值决定用户愿不愿意买，竞品决定市场参照。</li>
+<li><strong>隐含假设：</strong> 存在一种单一正确的定价方法。</li>
+<li><strong>大白话改写：</strong> 这个价格能不能覆盖成本、匹配用户价值感，并在竞品中有位置？</li>
+<li><strong>真正该做的事：</strong> 同时看成本底线、用户收益、竞品价格和转化数据。</li>
+<li><strong>一句话：</strong> 定价不是算术题，是交易结构题。</li>
+</ul>
+<h3>077. 我的产品要不要做会员制？</h3>
+<ul>
+<li><strong>原问题：</strong> 我的产品要不要做会员制？</li>
+<li><strong>错在哪里：</strong> 会员制不是收费形式，是持续价值交付能力。</li>
+<li><strong>隐含假设：</strong> 订阅能让收入更稳定。</li>
+<li><strong>大白话改写：</strong> 用户每个月为什么还愿意继续付钱？</li>
+<li><strong>真正该做的事：</strong> 明确持续内容、服务、工具、社群或权益的真实价值。</li>
+<li><strong>一句话：</strong> 不能持续创造价值的会员制，只是分期收割。</li>
+</ul>
+<h3>078. 我需要先做 MVP 吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我需要先做 MVP 吗？</li>
+<li><strong>错在哪里：</strong> 很多人把 MVP 理解成粗糙产品，但 MVP 是最小验证，不是最小敷衍。</li>
+<li><strong>隐含假设：</strong> 做一个简陋版本就算验证。</li>
+<li><strong>大白话改写：</strong> 我最需要验证的核心风险是什么？</li>
+<li><strong>真正该做的事：</strong> 只做能验证付款、使用或留存的最小交付。</li>
+<li><strong>一句话：</strong> MVP 不是少做功能，是精准验证最大风险。</li>
+</ul>
+<h3>079. 用户说想要，我要不要做？</h3>
+<ul>
+<li><strong>原问题：</strong> 用户说想要，我要不要做？</li>
+<li><strong>错在哪里：</strong> 用户说想要不等于愿意付款、愿意使用、愿意迁移。</li>
+<li><strong>隐含假设：</strong> 口头需求等于真实需求。</li>
+<li><strong>大白话改写：</strong> 用户愿不愿意现在付钱、付时间或付迁移成本？</li>
+<li><strong>真正该做的事：</strong> 用预售、排队、定金、试用行为验证需求。</li>
+<li><strong>一句话：</strong> 嘴上的需求很便宜，付款的需求才有重量。</li>
+</ul>
+<h3>080. 我该不该做定制化？</h3>
+<ul>
+<li><strong>原问题：</strong> 我该不该做定制化？</li>
+<li><strong>错在哪里：</strong> 定制化可能是高利润入口，也可能毁掉标准化和交付效率。</li>
+<li><strong>隐含假设：</strong> 客户愿意付钱，定制就值得做。</li>
+<li><strong>大白话改写：</strong> 这次定制能不能沉淀成 SOP、案例或更高价格产品？</li>
+<li><strong>真正该做的事：</strong> 只接能赚钱、能学习、能沉淀的定制，不能沉淀就高价。</li>
+<li><strong>一句话：</strong> 定制化可以接，但不要用团队生命给客户做手工艺。</li>
+</ul>
+<h2>十、综合判断</h2>
+<h3>091. 我该辞职创业吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我该辞职创业吗？</li>
+<li><strong>错在哪里：</strong> 辞职不是创业的前提，收入验证才是。</li>
+<li><strong>隐含假设：</strong> 只有辞职才能认真创业。</li>
+<li><strong>大白话改写：</strong> 我的副业收入、现金流和验证程度是否支持我承担全职风险？</li>
+<li><strong>真正该做的事：</strong> 先用业余时间做到稳定成交，准备现金流，再决定是否辞职。</li>
+<li><strong>一句话：</strong> 辞职不是创业按钮，是风险放大器。</li>
+</ul>
+<h3>092. 我该找合伙人吗？</h3>
+<ul>
+<li><strong>原问题：</strong> 我该找合伙人吗？</li>
+<li><strong>错在哪里：</strong> 很多人找合伙人不是因为需要互补，是因为自己不敢承担。</li>
+<li><strong>隐含假设：</strong> 有人一起做，成功概率更高。</li>
+<li><strong>大白话改写：</strong> 这个人能补上我无法补的关键能力，并承担明确责任吗？</li>
+<li><strong>真正该做的事：</strong> 先定义股权、权责、投入、退出机制和不可替代贡献。</li>
+<li><strong>一句话：</strong> 合伙不是找人壮胆，是交换不可替代能力。</li>
+</ul>
+<h3>093. 我要不要融资？</h3>
+<ul>
+<li><strong>原问题：</strong> 我要不要融资？</li>
+<li><strong>错在哪里：</strong> 融资不是成功，是一种增长工具和约束。</li>
+<li><strong>隐含假设：</strong> 融到钱代表项目更有价值。</li>
+<li><strong>大白话改写：</strong> 我的业务是否已经证明钱能有效放大增长？</li>
+<li><strong>真正该做的事：</strong> 先验证单位经济模型，再判断外部资金是否能加速。</li>
+<li><strong>一句话：</strong> 不能用小钱赚钱，就不要急着拿大钱烧。</li>
+</ul>
+<h3>094. 我该不该转型？</h3>
+<ul>
+<li><strong>原问题：</strong> 我该不该转型？</li>
+<li><strong>错在哪里：</strong> "转型"太大。可能只是换产品、换客户、换渠道、换定价。</li>
+<li><strong>隐含假设：</strong> 当前问题需要整体推倒重来。</li>
+<li><strong>大白话改写：</strong> 现有业务到底是哪一环不成立？</li>
+<li><strong>真正该做的事：</strong> 拆获客、转化、交付、利润、复购，找到断点再改。</li>
+<li><strong>一句话：</strong> 不要用转型掩盖你没拆清楚的问题。</li>
+</ul>
+<h3>095. 我是不是认知不够？</h3>
+<ul>
+<li><strong>原问题：</strong> 我是不是认知不够？</li>
+<li><strong>错在哪里：</strong> "认知"经常是一个高级垃圾桶，什么解释不了都往里面倒。</li>
+<li><strong>隐含假设：</strong> 赚不到钱是因为认知低。</li>
+<li><strong>大白话改写：</strong> 我具体缺哪个判断、信息、技能或行动？</li>
+<li><strong>真正该做的事：</strong> 把认知问题翻译成可补的信息、可练的技能、可做的动作。</li>
+<li><strong>一句话：</strong> 别拿认知当烟雾弹，缺什么就说什么。</li>
+</ul>
+<h3>096. 我现在太迷茫了怎么办？</h3>
+<ul>
+<li><strong>原问题：</strong> 我现在太迷茫了怎么办？</li>
+<li><strong>错在哪里：</strong> 迷茫通常不是信息不足，而是选项太多、标准不清、行动太少。</li>
+<li><strong>隐含假设：</strong> 想清楚以后才能开始。</li>
+<li><strong>大白话改写：</strong> 我当前最小的可验证选择是什么？</li>
+<li><strong>真正该做的事：</strong> 选一个低成本方向，设定 14 天验证指标，用行动减少迷雾。</li>
+<li><strong>一句话：</strong> 迷茫不是靠想消失的，是被现实反馈冲淡的。</li>
+</ul>
+<h3>097. 我该相信直觉还是数据？</h3>
+<ul>
+<li><strong>原问题：</strong> 我该相信直觉还是数据？</li>
+<li><strong>错在哪里：</strong> 直觉和数据不是二选一。直觉提出假设，数据校验假设。</li>
+<li><strong>隐含假设：</strong> 两者必然冲突。</li>
+<li><strong>大白话改写：</strong> 我的直觉能不能被低成本测试验证？</li>
+<li><strong>真正该做的事：</strong> 把直觉写成可测试命题，收集真实行为数据。</li>
+<li><strong>一句话：</strong> 未经验证的直觉叫猜，能设计验证的直觉叫判断。</li>
+</ul>
+<h3>098. 我应该坚持还是放弃？</h3>
+<ul>
+<li><strong>原问题：</strong> 我应该坚持还是放弃？</li>
+<li><strong>错在哪里：</strong> 坚持和放弃都太抽象。关键是指标有没有改善，假设有没有被证伪。</li>
+<li><strong>隐含假设：</strong> 坚持本身有价值，或者放弃本身是失败。</li>
+<li><strong>大白话改写：</strong> 我继续做下去，是因为数据在变好，还是因为不甘心？</li>
+<li><strong>真正该做的事：</strong> 设定退出标准：时间、投入、关键指标、验证结果。</li>
+<li><strong>一句话：</strong> 没有指标的坚持，是情绪；有证据的放弃，是理性。</li>
+</ul>
+<h3>099. 我怎么找到自己的优势？</h3>
+<ul>
+<li><strong>原问题：</strong> 我怎么找到自己的优势？</li>
+<li><strong>错在哪里：</strong> 优势不是自我想象，是在竞争和交易中被证明的相对能力。</li>
+<li><strong>隐含假设：</strong> 优势可以通过内省找到。</li>
+<li><strong>大白话改写：</strong> 别人在哪些事情上愿意持续找我、信我、付钱给我？</li>
+<li><strong>真正该做的事：</strong> 做 10 个真实交付，观察哪类问题你解决得更快、更稳、更被认可。</li>
+<li><strong>一句话：</strong> 优势不是你觉得自己擅长什么，是市场反复把什么交给你。</li>
+</ul>
+<h3>100. 我下一步该做什么？</h3>
+<ul>
+<li><strong>原问题：</strong> 我下一步该做什么？</li>
+<li><strong>错在哪里：</strong> 如果没有目标、现状和约束，下一步无法被判断。</li>
+<li><strong>隐含假设：</strong> 别人可以脱离上下文告诉我一个正确动作。</li>
+<li><strong>大白话改写：</strong> 我现在最接近钱、反馈或关键验证的一步是什么？</li>
+<li><strong>真正该做的事：</strong> 列出当前目标、已有资源、最大风险，然后选择能验证最大风险的最小动作。</li>
+<li><strong>一句话：</strong> 下一步不是最舒服的一步，是最能让现实回答你的一步。</li>
+</ul><a href="index.html" class="back-link">← 返回首页</a>
+<div class="footer">
+  <p>来源：@dontbesilent | 抓取时间：2026-04-27</p>
+  <p>Pages.zhangyun.xyz — 运哥知识库</p>
+</div>
+</body>
+</html>
